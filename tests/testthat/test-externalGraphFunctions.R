@@ -127,3 +127,35 @@ test_that("plotPermutationSamplesDistribution() must return a ggplot object when
 
     expect_true(inherits(resultGraph, "ggplot"))
 })
+
+
+#############################################################################
+### Tests plotPermutationSamplesNormal() 
+#############################################################################
+
+test_that("plotPermutationSamplesNormal() must return an error when x is a list", {
+    
+    error_message <- "The x object must be of class \'SplitTypeRdata\'."
+    
+    gList <- list()
+    gList[["test"]] <- c("ABC1", "ABC2")
+    
+    expect_error(plotPermutationSamplesNormal(x=gList, signature="test"), 
+                 error_message)
+})
+
+
+test_that("plotPermutationSamplesNormal() must return an error when signature is not in object", {
+    
+    error_message <- paste0("The signature \'DO_NOT_TEST\' must be present ", 
+                            "in the 'SplitTypeRdata\' object.")
+    
+    set.seed(1221)
+    
+    results <- runSubtypingBimodal(geneLists=signaturesDemo, 
+                expectedCountsMatrix=log2(expNormalCountsDemo+1), 
+                permRatio=0.75, permNbr=10, upscaleNbr=5)
+    
+    expect_error(plotPermutationSamplesNormal(x=results, 
+                        signature="DO_NOT_TEST"), error_message)
+})

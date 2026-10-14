@@ -280,7 +280,7 @@ plotPermutationSamplesDistribution <- function(x, signature, samples,
 #' ## Run classification on the 30 patients using 20 permutations on 75% of 
 #' ## the dataset, and 10 points per patient for the up-scaling step
 #' results <- runSubtypingBimodal(geneLists=signaturesDemo, 
-#'     expectedCountsMatrix=expNormalCountsDemo, 
+#'     expectedCountsMatrix=log2(expNormalCountsDemo + 1), 
 #'     permRatio=0.75, permNbr=30, upscaleNbr=5)
 #'     
 #' ## Graph the enrichment results from the permutation for 3 samples
@@ -298,25 +298,25 @@ plotPermutationSamplesDistribution <- function(x, signature, samples,
 plotPermutationSamplesNormal <- function(x, signature, samples, 
     pointColor="darkred") {
 
-    if (!inherits(x, "splitTypeResults")) {
-        stop("The x object must be of class \'splitTypeResults\'.")
+    if (!inherits(x, "SplitTypeRdata")) {
+        stop("The x object must be of class \'SplitTypeRdata\'.")
     }
 
-    if (!signature %in% names(x$UPSCALING)) {
+    if (!signature %in% names(upscaling(x))) {
         stop("The signature \'", signature, "\' must be present in the ", 
-                "\'splitTypeResults\' object.")
+                "\'SplitTypeRdata\' object.")
     }
     
     if (!is.vector(samples) || !is.character(samples) || 
             length(samples) == 0 || 
-            !all(samples %in% rownames(x$UPSCALING[[signature]]))) { ## || 
+            !all(samples %in% rownames(upscaling(x)[[signature]]))) { ## || 
          ##   !all(samples %in% colnames(x$GSVA_RESULTS))) {                                                        ) {
         stop("All the samples must all be present in the ", 
-                "\'splitTypeResults\' object.")
+                "\'SplitTypeRdata\' object.")
     }
 
     samples <- unique(samples) 
-    upscaleRes <- x$UPSCALING[[signature]]
+    upscaleRes <- upscaling(x)[[signature]]
     nPerm <- ncol(upscaleRes)
     nSample <- length(samples)
 
@@ -328,7 +328,7 @@ plotPermutationSamplesNormal <- function(x, signature, samples,
     allPoints <- do.call(rbind, allPoints)
 
     realGSEA <- data.frame(sample=samples,
-                    score=x$GSVA_RESULTS[signature, samples])
+                    score=gsvaResults(x)[signature, samples])
 
     seqPos <- seq(from=-1, to=1, by=0.005)
     nbPositions <- length(seqPos)
@@ -337,8 +337,8 @@ plotPermutationSamplesNormal <- function(x, signature, samples,
     
     for (i in samples) {
         dataTmp$density[dataTmp$sample == i] <- 
-            dnorm(seqPos, mean=x$GSVA_RESULTS[signature, i],
-                    sd=x$SD[[signature]][i]) 
+            dnorm(seqPos, mean=gsvaResults(x)[signature, i],
+                    sd=standardDeviation(x)[[signature]][i]) 
     }
   
     maxValue <- max(dataTmp$density)
