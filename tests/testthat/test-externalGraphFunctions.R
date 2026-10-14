@@ -144,7 +144,6 @@ test_that("plotPermutationSamplesNormal() must return an error when x is a list"
                  error_message)
 })
 
-
 test_that("plotPermutationSamplesNormal() must return an error when signature is not in object", {
     
     error_message <- paste0("The signature \'DO_NOT_TEST\' must be present ", 
@@ -158,4 +157,35 @@ test_that("plotPermutationSamplesNormal() must return an error when signature is
     
     expect_error(plotPermutationSamplesNormal(x=results, 
                         signature="DO_NOT_TEST"), error_message)
+})
+
+test_that("plotPermutationSamplesNormal() must return an error when one sample is not in the object", {
+    
+    error_message <- paste0("All the samples must all be present in ", 
+                                "the \'SplitTypeRdata\' object")
+    
+    set.seed(1221)
+    
+    results <- runSubtypingBimodal(geneLists=signaturesDemo, 
+                                   expectedCountsMatrix=expNormalCountsDemo, 
+                                   permRatio=0.75, permNbr=10, upscaleNbr=5)
+    
+    expect_error(plotPermutationSamplesNormal(x=results, 
+            signature="2018_Tiriac_PDAC_PDO_basal-like_signature", 
+            samples=c("sample_154", "sample_2")), error_message)
+})
+
+test_that("plotPermutationSamplesNormal() must return a ggplot object when successful", {
+    
+    set.seed(1241)
+    
+    results <- runSubtypingBimodal(geneLists=signaturesDemo, 
+                expectedCountsMatrix=log2(expNormalCountsDemo+1), 
+                permRatio=0.75, permNbr=10, upscaleNbr=5)
+    
+    resultGraph <- plotPermutationSamplesNormal(x=results, 
+            signature="2018_Tiriac_PDAC_PDO_basal-like_signature", 
+        samples=c("Patient_3", "Patient_13", "Patient_29"))
+    
+    expect_true(inherits(resultGraph, "ggplot"))
 })
