@@ -21,8 +21,11 @@
 #' @param geneLists a \code{list} containing signature gene lists. At least 
 #' two signature gene lists must be present.
 #'
-#' @param expectedCountsMatrix a normalized gene expression data 
+#' @param expectedCountsMatrixLog  a log2-normalized gene expression data 
 #' \code{matrix} with rows corresponding to genes and columns to samples. 
+#' Other data that also be used as long as it conforms with the Gaussian 
+#' behavior. As examples, log2(TPM + 1), log2(CPM + 1), or vst(counts) would 
+#' be acceptable.
 #'
 #' @param permRatio a \code{numeric} between 0 and 1 representing the
 #' number of samples that are retained for the permutation step. The 
@@ -59,66 +62,62 @@
 #' ## Run classification on the 30 patients using 20 permutations on 75% of 
 #' ## the dataset, and 10 points per patient for the up-scaling step
 #' results <- runSubtypingBimodal(geneLists=signaturesDemo, 
-#'     expectedCountsMatrix=expNormalCountsDemo, 
+#'     expectedCountsMatrixLog=expNormalCountsDemo, 
 #'     permRatio=0.75, permNbr=20, upscaleNbr=10)
 #'
 #' @author Astrid Deschênes
 #' @importFrom GSVA gsvaParam gsva
 #' @encoding UTF-8
 #' @export
-runSubtypingBimodal <- function(geneLists, expectedCountsMatrix, permRatio=0.75, 
-    permNbr=20, upscaleNbr=10) {
+runSubtypingBimodal <- function(geneLists, expectedCountsMatrixLog, 
+    permRatio=0.75, permNbr=20, upscaleNbr=10) {
 
     ## Validate parameters
     validateRunSubtyping(geneLists=geneLists,
-        expectedCountsMatrix=expectedCountsMatrix, permRatio=permRatio, 
+        expectedCountsMatrixLog=expectedCountsMatrixLog, permRatio=permRatio, 
         permNbr=permNbr, upscaleNbr=upscaleNbr)
 
     ## If fewer than 10 samples, a warning
-    if (ncol(expectedCountsMatrix) < 10) {
+    if (ncol(expectedCountsMatrixLog) < 10) {
         warning("! A minimum of 10 samples is recommended to run a GSVA ", 
             "analysis.")
     }
     
     ## Retain genes present in the expression matrix
     genes <- unique(unlist(geneLists, use.names=FALSE))
-    genes <- genes[genes %in% rownames(expectedCountsMatrix)]
+    genes <- genes[genes %in% rownames(expectedCountsMatrixLog)]
 
     ## Subset matrix to retained genes
-    retained <- expectedCountsMatrix[genes, ]
+    retained <- expectedCountsMatrixLog[genes, ]
 
-    ## Object will all results
-    finalSaveData <- list()
+    ## Object that will contain all results
+    finalSaveData <- SplitTypeRdata(signatures=geneLists)
     
     ## GSVA on the real dataset
     gsvaParameter <- gsvaParam(exprData=as.matrix(retained),
         geneSets=geneLists)
     resGSVA <- gsva(param=gsvaParameter, verbose=FALSE)
-    finalSaveData[["GSVA_RESULTS"]] <- resGSVA
+    gsvaResults(finalSaveData) <- resGSVA
 
     ## Permutation step
     permResult <- permuteGSVA(geneLists=geneLists, countMatrix=retained, 
         permRatio=permRatio, permNbr=permNbr)
-    finalSaveData[["PERMUTATIONS"]] <- permResult$PERMUTATIONS
-    finalSaveData[["SD"]] <- permResult$SD
+    permutations(finalSaveData) <- permResult$PERMUTATIONS
+    standardDeviation(finalSaveData) <- permResult$SD
 
     ## Up-scaling step
     normResult <- extractFromNormalDist(geneLists=geneLists, gsvaRes=resGSVA, 
         gsvaSD=permResult$SD, nbValues=upscaleNbr)
-    finalSaveData[["UPSCALING"]] <- normResult
+    upscaling(finalSaveData) <- normResult
 
     ## Mixture of normal distributions step
     resMix <- normalMix(geneLists=geneLists, resultNorm=normResult)
-    finalSaveData[["MODEL"]] <- resMix
+    model(finalSaveData) <- resMix
     
     ## Classification step
-    resClass <- classification(geneLists=geneLists, gsvaRes=resGSVA, 
+    resClass <- sampleClassification(geneLists=geneLists, gsvaRes=resGSVA, 
             modelMix=resMix)
-    finalSaveData[["CLASSIFICATION"]] <- resClass
-    
-    ## The returned list is of class "splitTypeResults"
-    class(finalSaveData) <- "splitTypeResults"
-    attr(finalSaveData, "mode") <- "bimodal"
+    classification(finalSaveData) <- resClass
     
     return(finalSaveData)
 }
@@ -148,8 +147,9 @@ runSubtypingBimodal <- function(geneLists, expectedCountsMatrix, permRatio=0.75,
 #' @encoding UTF-8
 #' @export
 getGeneSignaturesNames <- function() {
-    return(names(signaturesDemo))
+    return(names(internalSignatures))
 }
+
 
 #' @title Return the selected gene list signatures
 #'
@@ -188,13 +188,13 @@ getGeneSignatures <- function(nameList=NULL) {
             "representing the selected signature names or \'NULL\'.")
     }
 
-    if (!is.null(nameList) && !all(nameList %in% names(signaturesDemo))) {
+    if (!is.null(nameList) && !all(nameList %in% names(internalSignatures))) {
         stop("At least one signature is not available.")
     }
 
-    res <- signaturesDemo
+    res <- internalSignatures
     if (!is.null(nameList)) {
-        res <- signaturesDemo[nameList]
+        res <- internalSignatures[nameList]
     }
 
     return(res)

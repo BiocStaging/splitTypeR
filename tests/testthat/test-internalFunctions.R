@@ -295,10 +295,10 @@ test_that("normalMix() must generate a NA value when a distribution cannot be ca
 })
 
 #############################################################################
-### Tests classification() results
+### Tests sampleClassification() results
 #############################################################################
 
-test_that("classification() must return expected results", {
+test_that("sampleClassification() must return expected results", {
     
     ## Basal and classical gene list signatures
     gList <- list()
@@ -335,8 +335,8 @@ test_that("classification() must return expected results", {
     
     modelRes <- splitTypeR:::normalMix(geneLists=gList, resultNorm=normRes)
     
-    results <- splitTypeR:::classification(geneLists=gList, gsvaRes=gsvaRes, 
-                                           modelMix=modelRes)
+    results <- splitTypeR:::sampleClassification(geneLists=gList, 
+                    gsvaRes=gsvaRes, modelMix=modelRes)
     
     expect_true(is.list(results))
     expect_equal(names(results), c("classical", "basal"))
@@ -359,7 +359,7 @@ test_that("classification() must return expected results", {
                     tolerance=1e-5)
 })
 
-test_that("classification() must return expected results when mixture model is not present", {
+test_that("sampleClassification() must return expected results when mixture model is not present", {
     
     ## Basal and classical gene list signatures
     gList <- list()
@@ -389,8 +389,8 @@ test_that("classification() must return expected results when mixture model is n
     captions <- capture.output(modelRes <- suppressWarnings(
         splitTypeR:::normalMix(geneLists=gList, resultNorm=normRes)))
     
-    results <- splitTypeR:::classification(geneLists=gList, gsvaRes=gsvaRes, 
-                                           modelMix=modelRes)
+    results <- splitTypeR:::sampleClassification(geneLists=gList, 
+        gsvaRes=gsvaRes, modelMix=modelRes)
     
     expect_true(is.list(results))
     expect_equal(names(results), c("classical", "basal"))

@@ -7,8 +7,11 @@
 #' @param geneLists a \code{list} containing signature gene lists. At least 
 #' two signature gene lists must be present.
 #' 
-#' @param expectedCountsMatrix a normalized gene expression data 
+#' @param expectedCountsMatrixLog a log2-normalized gene expression data 
 #' \code{matrix} with rows corresponding to genes and columns to samples. 
+#' Other data that also be used as long as it conforms with the Gaussian 
+#' behavior. As examples, log2(TPM + 1), log2(CPM + 1), or vst(counts) would 
+#' be acceptable.
 #' 
 #' @param permRatio a \code{numeric} between 0 and 1 representing the
 #' number of samples that are retained for the permutation step. The 
@@ -36,16 +39,17 @@
 #' expCounts <- matrix(data=rep(22:25, 15), nrow=4)
 #' rownames(expCounts) <- c("ABC1", "RAS", "FYN", "SMAD3")
 #' colnames(expCounts) <- c(paste0("Sample_", 1:15))
+#' expCountsLog <- log2(expCounts + 1)
 #' 
 #' ## The function returns TRUE when all parameters are valid
 #' splitTypeR:::validateRunSubtyping(geneLists=gList, 
-#'      expectedCountsMatrix=expCounts, permRatio=0.8, permNbr=10, 
+#'      expectedCountsMatrixLog=expCountsLog, permRatio=0.8, permNbr=10, 
 #'      upscaleNbr=20)
 #' 
 #' @author Astrid Deschênes
 #' @encoding UTF-8
 #' @keywords internal
-validateRunSubtyping <- function(geneLists, expectedCountsMatrix, 
+validateRunSubtyping <- function(geneLists, expectedCountsMatrixLog, 
         permRatio, permNbr, upscaleNbr) {
     
     if (!(inherits(geneLists, "list") && length(geneLists) > 1)) {
@@ -53,34 +57,34 @@ validateRunSubtyping <- function(geneLists, expectedCountsMatrix,
             "at least 2 entries.")
     }
 
-    if (!(inherits(expectedCountsMatrix, "matrix"))) {
-        stop("The \'expectedCountsMatrix\' object must be a matrix.")
+    if (!(inherits(expectedCountsMatrixLog, "matrix"))) {
+        stop("The \'expectedCountsMatrixLog\' object must be a matrix.")
     }
 
     genes <- unique(unlist(geneLists, use.names=FALSE))
 
-    if (sum(genes %in% rownames(expectedCountsMatrix)) < 1) {
+    if (sum(genes %in% rownames(expectedCountsMatrixLog)) < 1) {
         stop("None of the genes in the signatures are present in the row ", 
-            "names of the \'expectedCountsMatrix\' matrix.")
+            "names of the \'expectedCountsMatrixLog\' matrix.")
     }
     
     test01 <- lapply(geneLists, FUN=function(x) 
-                    {sum(x %in% rownames(expectedCountsMatrix)) > 0})
+                    {sum(x %in% rownames(expectedCountsMatrixLog)) > 0})
 
     if (!all(unlist(test01))){
         stop("For at least one gene signature, none of the genes are present ", 
-            "in the row names of the \'expectedCountsMatrix\' matrix.")
+            "in the row names of the \'expectedCountsMatrixLog\' matrix.")
     }
 
     test02 <- lapply(geneLists, FUN=function(x) 
-                    {sum(x %in% rownames(expectedCountsMatrix)) > 1})
+                    {sum(x %in% rownames(expectedCountsMatrixLog)) > 1})
 
     if (!all(unlist(test02))){
         stop("For at least one gene signature, only one gene is present ", 
-            "in the row names of the \'expectedCountsMatrix\' matrix.")
+            "in the row names of the \'expectedCountsMatrixLog\' matrix.")
     }
 
-    return(validateRunSubtypingSubSection(nbAll=ncol(expectedCountsMatrix), 
+    return(validateRunSubtypingSubSection(nbAll=ncol(expectedCountsMatrixLog), 
         permRatio=permRatio, permNbr=permNbr, upscaleNbr=upscaleNbr))
 }
 

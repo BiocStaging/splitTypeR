@@ -29,13 +29,13 @@ test_that("runSubtypingBimodal() must return error when geneLists is a character
     gList <- "test001"
     
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=matrix(data=rep(3, 6), nrow = 2), 
+        expectedCountsMatrixLog=matrix(data=rep(3, 6), nrow = 2), 
         permRatio=0.8, permNbr=10, upscaleNbr=4), error_message)
 })
 
 test_that("runSubtypingBimodal() must return error when geneLists is a character vector", {
     
-    error_message <- "The \'expectedCountsMatrix\' object must be a matrix."
+    error_message <- "The \'expectedCountsMatrixLog\' object must be a matrix."
     
     gList <- list()
     gList[["test1"]] <- c("ABC1", "ABC2")
@@ -44,14 +44,14 @@ test_that("runSubtypingBimodal() must return error when geneLists is a character
     exCounts <- data.frame(P1=c(2, 3, 4), P2=c(3, 4, 5))
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio=0.8, permNbr=10, 
+        expectedCountsMatrixLog=exCounts, permRatio=0.8, permNbr=10, 
         upscaleNbr=4), error_message)
 })
 
 test_that("runSubtypingBimodal() must return error when geneLists is a character vector", {
     
     error_message <- paste0("None of the genes in the signatures are present", 
-        " in the row names of the \'expectedCountsMatrix\' matrix.")
+        " in the row names of the \'expectedCountsMatrixLog\' matrix.")
     gList <- list()
     gList[["test1"]] <- c("ABC1", "ABC2")
     gList[["test2"]] <- c("KRAS", "FYN")
@@ -61,15 +61,16 @@ test_that("runSubtypingBimodal() must return error when geneLists is a character
     colnames(exCounts) <- c("P1", "P2")
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, 
+        expectedCountsMatrixLog=exCounts, 
         permRatio=0.8, permNbr=10), error_message)
 })
 
 test_that("runSubtypingBimodal() must return error when geneLists is a character vector", {
     
     error_message <- paste0("For at least one gene signature, none of the ", 
-        "genes are present in the row names of the \'expectedCountsMatrix\' ", 
-        "matrix.")
+        "genes are present in the row names of the", 
+        " \'expectedCountsMatrixLog\' matrix.")
+    
     gList <- list()
     gList[["test1"]] <- c("ABC1", "ABC2")
     gList[["test2"]] <- c("KRAS", "FYN")
@@ -79,7 +80,7 @@ test_that("runSubtypingBimodal() must return error when geneLists is a character
     colnames(exCounts) <- c("P1", "P2")
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio=0.8, permNbr=10, 
+        expectedCountsMatrixLog=exCounts, permRatio=0.8, permNbr=10, 
         upscaleNbr=3), error_message)
 })
 
@@ -87,8 +88,9 @@ test_that("runSubtypingBimodal() must return error when geneLists is a character
 test_that("runSubtypingBimodal() must return error when geneLists is a character vector", {
     
     error_message <- paste0("For at least one gene signature, none of the ", 
-        "genes are present in the row names of the \'expectedCountsMatrix\' ", 
-        "matrix.")
+        "genes are present in the row names of ", 
+        "the \'expectedCountsMatrixLog\' matrix.")
+    
     gList <- list()
     gList[["test1"]] <- c("ABC1", "ABC2")
     gList[["test2"]] <- c("KRAS", "FYN")
@@ -98,15 +100,15 @@ test_that("runSubtypingBimodal() must return error when geneLists is a character
     colnames(exCounts) <- c("P1", "P2")
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio=0.8, permNbr=10), 
+        expectedCountsMatrixLog=exCounts, permRatio=0.8, permNbr=10), 
         error_message)
 })
 
 test_that("runSubtypingBimodal() must return error when genes not present for one signatures", {
     
     error_message <- paste0("For at least one gene signature, none of the ", 
-        "genes are present in the row names of the \'expectedCountsMatrix\' ", 
-            "matrix.")
+        "genes are present in the row names of ", 
+        "the \'expectedCountsMatrixLog\' matrix.")
 
     gList <- list()
     gList[["test1"]] <- c("ABC1", "ABC2")
@@ -117,7 +119,7 @@ test_that("runSubtypingBimodal() must return error when genes not present for on
     colnames(exCounts) <- c(paste0("P", 1:12))
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio=-0.8, permNbr=10, 
+        expectedCountsMatrixLog=exCounts, permRatio=-0.8, permNbr=10, 
         upscaleNbr=5), error_message)
 })
 
@@ -125,7 +127,7 @@ test_that("runSubtypingBimodal() must return error when genes not present for on
 test_that("runSubtypingBimodal() must return error when 1 gene present for one signatures", {
     
     error_message <- paste0("For at least one gene signature, only one gene ", 
-        "is present in the row names of the 'expectedCountsMatrix' ", 
+        "is present in the row names of the 'expectedCountsMatrixLog' ", 
         "matrix.")
 
     gList <- list()
@@ -137,7 +139,7 @@ test_that("runSubtypingBimodal() must return error when 1 gene present for one s
     colnames(exCounts) <- c(paste0("P", 1:12))
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, 
+        expectedCountsMatrixLog=exCounts, 
         permRatio=-0.8, permNbr=10, upscaleNbr=3), error_message)
 })
 
@@ -154,7 +156,7 @@ test_that("runSubtypingBimodal() must return error when permRatio is a numeric v
     colnames(exCounts) <- c(paste0("P", 1:12))
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, 
+        expectedCountsMatrixLog=exCounts, 
         permRatio=c(0.3, 0.4), permNbr=10, upscaleNbr=3), error_message)
 })
 
@@ -171,7 +173,7 @@ test_that("runSubtypingBimodal() must return error when permNbr is a character v
     colnames(exCounts) <- c("P1", "P2")
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, 
+        expectedCountsMatrixLog=exCounts, 
         permRatio=0.8, permNbr="toto", upscaleNbr=3), error_message)
 })
 
@@ -188,8 +190,8 @@ test_that("runSubtypingBimodal() must return error when permNbr is 4", {
     colnames(exCounts) <- c("P1", "P2")
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio=0.8, permNbr=4, upscaleNbr=5), 
-        error_message)
+        expectedCountsMatrixLog=exCounts, permRatio=0.8, permNbr=4, 
+        upscaleNbr=5), error_message)
 })
 
 test_that("runSubtypingBimodal() must return error when permRatio is a character vector", {
@@ -205,7 +207,7 @@ test_that("runSubtypingBimodal() must return error when permRatio is a character
     colnames(exCounts) <- c(paste0("P", 1:12))
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio="TEST", permNbr=10, 
+        expectedCountsMatrixLog=exCounts, permRatio="TEST", permNbr=10, 
         upscaleNbr=10), error_message)
 })
 
@@ -222,7 +224,7 @@ test_that("runSubtypingBimodal() must return error when permRatio is too close t
     colnames(exCounts) <- c(paste0("P", 1:10))
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio=0.99, permNbr=10), 
+        expectedCountsMatrixLog=exCounts, permRatio=0.99, permNbr=10), 
         error_message)
 })
 
@@ -241,7 +243,7 @@ test_that("runSubtypingBimodal() must return error when permNbr is too high for 
     colnames(exCounts) <- c(paste0("P", 1:10))
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio=0.8, permNbr=200), 
+        expectedCountsMatrixLog=exCounts, permRatio=0.8, permNbr=200), 
         error_message)
 })
 
@@ -260,7 +262,7 @@ test_that("runSubtypingBimodal() must return a warning when not enough samples",
     set.seed(1211)
 
     expect_warning(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio=0.8, permNbr=5, 
+        expectedCountsMatrixLog=exCounts, permRatio=0.8, permNbr=5, 
         upscaleNbr=10), message)
 })
 
@@ -277,7 +279,7 @@ test_that("runSubtypingBimodal() must return an error when upscaleNbr is string"
     colnames(exCounts) <- c(paste0("P", 1:12))
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio=0.8, permNbr=5, 
+        expectedCountsMatrixLog=exCounts, permRatio=0.8, permNbr=5, 
         upscaleNbr="info"), message)
 })
 
@@ -294,7 +296,7 @@ test_that("runSubtypingBimodal() must return an error when upscaleNbr is 1", {
     colnames(exCounts) <- c(paste0("P", 1:12))
 
     expect_error(runSubtypingBimodal(geneLists=gList, 
-        expectedCountsMatrix=exCounts, permRatio=0.8, permNbr=5, 
+        expectedCountsMatrixLog=exCounts, permRatio=0.8, permNbr=5, 
         upscaleNbr=1), regexp=message)
 })
 
@@ -311,43 +313,40 @@ test_that("runSubtypingBimodal() must return expected results", {
     set.seed(12221)
     
     res <- runSubtypingBimodal(geneLists=gList, 
-                    expectedCountsMatrix=expNormalCountsDemo, permNbr=6, 
-                    permRatio=0.75, upscaleNbr=10)
+            expectedCountsMatrixLog=log2(expNormalCountsDemo + 1), permNbr=6, 
+            permRatio=0.75, upscaleNbr=10)
     
-    expect_equal(class(res), "splitTypeResults")
-    expect_true(is.list(res))
-    expect_equal(names(res), c("GSVA_RESULTS", "PERMUTATIONS", "SD", 
-                "UPSCALING", "MODEL", "CLASSIFICATION"))
-    expect_equal(rownames(res$GSVA_RESULTS), c("classical", "basal"))
-    expect_equal(colnames(res$GSVA_RESULTS), paste0("Patient_", 1:30))
-    expect_equal(unname(res$GSVA_RESULTS[1, 2:3]), c(0.4274225, -0.7532768), 
+    expect_true(inherits(res, "SplitTypeRdata"))
+    expect_equal(rownames(gsvaResults(res)), c("classical", "basal"))
+    expect_equal(colnames(gsvaResults(res)), paste0("Patient_", 1:30))
+    expect_equal(unname(gsvaResults(res)[1, 2:3]), c(0.3662256, -0.7589744), 
                     tolerance=1e-5)
-    expect_equal(unname(res$GSVA_RESULTS[1, 12:14]), c(-0.2002262, 0.2448591, 
-                    0.3249211), tolerance=1e-5)
-    expect_equal(unname(res$GSVA_RESULTS[2, 24:27]), c(-0.4255245, 0.9387755, 
-                    0.6288557, -0.7916667), tolerance=1e-5)
-    expect_equal(unname(res$GSVA_RESULTS[2, 5:7]), c(0.8175287, -0.6076389, 
-                    0.1209839), tolerance=1e-5)
+    expect_equal(unname(gsvaResults(res)[1, 12:14]), c(-0.1877486, 0.3554295, 
+                    0.2706283), tolerance=1e-5)
+    expect_equal(unname(gsvaResults(res)[2, 24:27]), c(-0.4008772, 0.9533679, 
+                    0.6351190, -0.8144757), tolerance=1e-5)
+    expect_equal(unname(gsvaResults(res)[2, 5:7]), c(0.8258160, -0.6158120, 
+                    0.1218935), tolerance=1e-5)
     
-    expect_equal(names(res$PERMUTATIONS), c("classical", "basal"))
-    expect_true(is.matrix(res$PERMUTATIONS$basal))
-    expect_true(is.matrix(res$PERMUTATIONS$classical))
-    expect_equal(res$PERMUTATIONS$basal[4, ], c(-0.2769297, -0.5514667, 
-            NA, -0.1722816, NA, NA), tolerance=1e-5)
-    expect_equal(res$PERMUTATIONS$basal[23, ], c(NA, -0.6540043, -0.5772831, 
-            -0.3796117, -0.4266846, -0.7001045), tolerance=1e-5)
-    expect_equal(res$PERMUTATIONS$classical[14, ], c(0.2802591, NA, NA, 
-            0.2105685, 0.2259964, NA), tolerance=1e-5)
-    expect_equal(res$PERMUTATIONS$classical[25, ], c(NA, -0.8864572, 
-            -0.9043328,NA, -0.8846154, -0.9041733), tolerance=1e-5)
+    expect_equal(names(permutations(res)), c("classical", "basal"))
+    expect_true(is.matrix(permutations(res)$basal))
+    expect_true(is.matrix(permutations(res)$classical))
+    expect_equal(permutations(res)$basal[4, ], c(-0.2704338, -0.5520513, 
+            NA, -0.1547619, NA, NA), tolerance=1e-5)
+    expect_equal(permutations(res)$basal[23, ], c(NA, -0.6482759, -0.5258528, 
+            -0.4140927, -0.3792350, -0.6996835), tolerance=1e-5)
+    expect_equal(permutations(res)$classical[14, ], c(0.2266473, NA, NA, 
+            0.1748530, 0.2382375, NA), tolerance=1e-5)
+    expect_equal(permutations(res)$classical[25, ], c(NA, -0.8651168, 
+            -0.8868652, NA, -0.8846154, -0.8859022), tolerance=1e-5)
     ## TODO more validations
-    expect_equal(names(res$CLASSIFICATION), c("classical", "basal"))
-    expect_equal(colnames(res$CLASSIFICATION$basal), c("GSVA_score", 
+    expect_equal(names(classification(res)), c("classical", "basal"))
+    expect_equal(colnames(classification(res)$basal), c("GSVA_score", 
                                                         "classification"))
-    expect_equal(colnames(res$CLASSIFICATION$classical), c("GSVA_score", 
+    expect_equal(colnames(classification(res)$classical), c("GSVA_score", 
                                                        "classification"))
-    expect_equal(rownames(res$CLASSIFICATION$basal), paste0("Patient_", 1:30))
-    expect_equal(rownames(res$CLASSIFICATION$classical), 
+    expect_equal(rownames(classification(res)$basal), paste0("Patient_", 1:30))
+    expect_equal(rownames(classification(res)$classical), 
                  paste0("Patient_", 1:30))
     
 })
@@ -358,8 +357,8 @@ test_that("runSubtypingBimodal() must return expected results", {
 
 test_that("getGeneSignaturesNames() must return the expected signature names", {
     
-    expResults <- c("2018_Tiriac_PDAC_PDO_classical_signature",
-                     "2018_Tiriac_PDAC_PDO_basal-like_signature")
+    expResults <- c("2018_Tiriac_PDAC_PDO_basal-like_signature", 
+                        "2018_Tiriac_PDAC_PDO_classical_signature")
 
     results <- getGeneSignaturesNames()
 
@@ -372,20 +371,20 @@ test_that("getGeneSignaturesNames() must return the expected signature names", {
 
 test_that("getGeneSignatures() must return the expected signatures", {
     
-    expNames <- c("2018_Tiriac_PDAC_PDO_classical_signature",
-                     "2018_Tiriac_PDAC_PDO_basal-like_signature")
+    expNames <- c("2018_Tiriac_PDAC_PDO_basal-like_signature",
+                    "2018_Tiriac_PDAC_PDO_classical_signature")
     results <- getGeneSignatures()
 
     expect_equal(names(results), expNames)
-    expect_equal(length(results[[expNames[1]]]), 62L)
-    expect_equal(results[[expNames[1]]][1:5], 
-            c("MUC13", "GPR35", "USH1C", "BAIAP2L2", "GAL3ST1"))
-    expect_equal(results[[expNames[1]]][46:49], 
-            c("GATA6", "GPX2", "CA2", "ST6GALNAC1"))
-    expect_equal(length(results[[expNames[2]]]), 26L)
+    expect_equal(length(results[[expNames[2]]]), 62L)
     expect_equal(results[[expNames[2]]][1:5], 
+            c("MUC13", "GPR35", "USH1C", "BAIAP2L2", "GAL3ST1"))
+    expect_equal(results[[expNames[2]]][46:49], 
+            c("GATA6", "GPX2", "CA2", "ST6GALNAC1"))
+    expect_equal(length(results[[expNames[1]]]), 26L)
+    expect_equal(results[[expNames[1]]][1:5], 
             c("ANO1", "ADORA2B", "S100A2", "CSF2", "ANXA1"))
-    expect_equal(results[[expNames[2]]][21:24], 
+    expect_equal(results[[expNames[1]]][21:24], 
             c("SPRR1B",  "BCAR3", "TTC9", "PTGES"))
 })
 

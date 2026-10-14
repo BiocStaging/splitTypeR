@@ -13,7 +13,7 @@ data("signaturesDemo")
 
 test_that("plotDensityWithUpscalingSamplesBimodal() must return an error when x is a list", {
     
-    error_message <- "The x object must be of class \'splitTypeResults\'."
+    error_message <- "The x object must be of class \'SplitTypeRdata\'."
     
     gList <- list()
     gList[["test"]] <- c("ABC1", "ABC2")
@@ -25,7 +25,7 @@ test_that("plotDensityWithUpscalingSamplesBimodal() must return an error when x 
 test_that("plotDensityWithUpscalingSamplesBimodal() must return an error when signature is not in object", {
 
     error_message <- paste0("The signature \'DO_NOT_TEST\' must be present ", 
-        "in the 'splitTypeResults\' object.")
+        "in the 'SplitTypeRdata\' object.")
     
     set.seed(1221)
 
@@ -39,7 +39,7 @@ test_that("plotDensityWithUpscalingSamplesBimodal() must return an error when si
 
 test_that("plotDensityWithUpscalingSamplesBimodal() must return an error when x is not bimodal", {
     
-    error_message <- "The x object must be for a bimodal distribution."
+    error_message <- "The x object must contain a distribution model (model slot)."
     
     set.seed(121)
 
@@ -47,10 +47,11 @@ test_that("plotDensityWithUpscalingSamplesBimodal() must return an error when x 
         expectedCountsMatrix=expNormalCountsDemo, 
         permRatio=0.75, permNbr=5, upscaleNbr=3)
     
-    attr(results, "mode") <- "TEST"
+    model(results) <- NULL
 
     expect_error(plotDensityWithUpscalingSamplesBimodal(x=results, 
-        signature="2018_Tiriac_PDAC_PDO_basal-like_signature"), error_message)
+        signature="2018_Tiriac_PDAC_PDO_basal-like_signature"), error_message, 
+        fixed=TRUE)
 })
 
 test_that("plotDensityWithUpscalingSamplesBimodal() must return a list when all parameters valid", {
@@ -71,7 +72,7 @@ test_that("plotDensityWithUpscalingSamplesBimodal() must return a list when all 
 
 test_that("plotPermutationSamplesDistribution() must return an error when x is a list", {
     
-    error_message <- "The x object must be of class \'splitTypeResults\'."
+    error_message <- "The x object must be of class \'SplitTypeRdata\'."
     
     gList <- list()
     gList[["test"]] <- c("ABC1", "ABC2")
@@ -83,12 +84,12 @@ test_that("plotPermutationSamplesDistribution() must return an error when x is a
 test_that("plotPermutationSamplesDistribution() must return an error when the signature is not in the object", {
     
     error_message <- paste0("The signature \'DO_NOT_TEST\' must be present ", 
-        "in the 'splitTypeResults\' object.")
+        "in the 'SplitTypeRdata\' object.")
     
     set.seed(1221)
 
     results <- runSubtypingBimodal(geneLists=signaturesDemo, 
-        expectedCountsMatrix=expNormalCountsDemo, 
+        expectedCountsMatrix=log2(expNormalCountsDemo + 1), 
         permRatio=0.75, permNbr=10, upscaleNbr=5)
     
     expect_error(plotPermutationSamplesDistribution(x=results, 
@@ -99,7 +100,7 @@ test_that("plotPermutationSamplesDistribution() must return an error when the si
 test_that("plotPermutationSamplesDistribution() must return an error when one sample is not in the object", {
     
     error_message <- paste0("All the samples must all be present in ", 
-                    "the \'splitTypeResults\' object")
+                    "the \'SplitTypeRdata\' object")
     
     set.seed(1221)
 

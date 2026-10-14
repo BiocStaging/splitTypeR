@@ -7,7 +7,7 @@
 #' selected signature. The graph also contains the histogram of the 
 #' enriched scores for the upscaled dataset (not the original dataset).
 #' 
-#' @param x a \code{list} of class "splitTypeResults", the output object 
+#' @param x a "SplitTypeRdata" object, the output object 
 #' from \code{runSubtyping}function, to be graphed.
 #'
 #' @param signature a \code{character} string representing the signature 
@@ -62,25 +62,26 @@ plotDensityWithUpscalingSamplesBimodal <- function(x, signature, breaks=22L,
     colorSignature="black", colorAlternative="#A9A9AD", 
     colorBorderSamples="azure4", colorFillingSamples="azure3") {
     
-    if (!inherits(x, "splitTypeResults")) {
-        stop("The x object must be of class \'splitTypeResults\'.")
+    if (!inherits(x, "SplitTypeRdata")) {
+        stop("The x object must be of class \'SplitTypeRdata\'.")
     }
 
-    if (!"mode" %in% names(attributes(x)) || attr(x, "mode") != "bimodal") {
-        stop("The x object must be for a bimodal distribution.")
+    if (is.null(model(x))) {
+        stop("The x object must contain a distribution model (model slot).")
     }
 
-    if (!signature %in% names(x$MODEL) || !signature %in% names(x$UPSCALING)) {
+    if (!signature %in% names(model(x)) || 
+            !signature %in% names(upscaling(x))) {
         stop("The signature \'", signature, "\' must be present in the ", 
-                "\'splitTypeResults\' object.")
+                "\'SplitTypeRdata\' object.")
     }
 
-    model <- x$MODEL[[signature]]
+    model <- model(x)[[signature]]
 
     posMin <- which.min(model$mu)
     posMax <- which.max(model$mu)
 
-    upscalingResults <- x$UPSCALING[[signature]]
+    upscalingResults <-upscaling(x)[[signature]]
     
     curveMin <- density(c(rnorm(n=1000000, mean = model$mu[posMin], 
                             sd=model$sigma[posMin])))
@@ -115,6 +116,7 @@ plotDensityWithUpscalingSamplesBimodal <- function(x, signature, breaks=22L,
         box.lty=0, lty=c(4,4,1), cex=0.9)
 }
 
+
 #' @title Graph showing both the alternative and the signature distributions 
 #' obtained for a specific signature
 #'
@@ -123,7 +125,7 @@ plotDensityWithUpscalingSamplesBimodal <- function(x, signature, breaks=22L,
 #' specified samples. The graph also includes a compact display of the 
 #' continuous distribution of the values for each sample. 
 #'
-#' @param x a \code{list} of class "splitTypeResults", the output object 
+#' @param x a \code{list} of class "SplitTypeRdata", the output object 
 #' from \code{runSubtyping}function, to be graphed.
 #'
 #' @param signature a \code{character} string representing the signature 
@@ -195,22 +197,22 @@ plotPermutationSamplesDistribution <- function(x, signature, samples,
     violinColor="black", pointColor="black", positionJitter=0.20, alpha=0.25, 
     size=0.95, seed=NA) {
 
-    if (!inherits(x, "splitTypeResults")) {
-        stop("The x object must be of class \'splitTypeResults\'.")
+    if (!inherits(x, "SplitTypeRdata")) {
+        stop("The x object must be of class \'SplitTypeRdata\'.")
     }
 
-    if (!signature %in% names(x$PERMUTATIONS)) {
+    if (!signature %in% names(permutations(x))) {
         stop("The signature \'", signature, "\' must be present in the ", 
-                "\'splitTypeResults\' object.")
+                "\'SplitTypeRdata\' object.")
     }
     
     if (!is.vector(samples) || !is.character(samples) || length(samples) == 0 || 
-            !all(samples %in% rownames(x$PERMUTATIONS[[signature]]))) {
+            !all(samples %in% rownames(permutations(x)[[signature]]))) {
         stop("All the samples must all be present in the ", 
-                "\'splitTypeResults\' object.")
+                "\'SplitTypeRdata\' object.")
     }
 
-    permutRes <- x$PERMUTATIONS[[signature]]
+    permutRes <- permutations(x)[[signature]]
     nPerm <- ncol(permutRes)
 
     allRes <- list()
@@ -235,6 +237,7 @@ plotPermutationSamplesDistribution <- function(x, signature, samples,
 
     return(g1)
 }
+
 
 #' @title Graph TODO
 #'

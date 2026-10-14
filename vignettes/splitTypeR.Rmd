@@ -213,6 +213,8 @@ se <- readRDS(path)
 normCounts <- assays(se)[["normalizedCounts"]]
 rownames(normCounts) <- rowRanges(se)$gene_name
 
+## Log2 transform the data dds a small pseudo-count to prevent log2(0) errors 
+log2normCounts <- log2(normCounts + 1)
 
 ```
 
@@ -222,20 +224,29 @@ The _runSubtypingBimodal_ function runs all the steps.
 
 ```{r toto2}
 
+## The 2 retained signatures, basal-like and classical from Tiriac et al.
+signaturesList <- list(
+    "Classical"=unname(unlist(getGeneSignatures("2018_Tiriac_PDAC_PDO_classical_signature"))),
+    "Basal-like"=unname(unlist(getGeneSignatures("2018_Tiriac_PDAC_PDO_basal-like_signature"))))
+
 ## Fix seed for reproducible results
 set.seed(121)
 result <- runSubtypingBimodal(geneLists=signaturesList, 
-  expectedCountsMatrix=normCounts,
-  permRatio = 0.75,
-  permNbr = 15,
-  upscaleNbr = 25)
+  expectedCountsMatrixLog=log2normCounts,
+  permRatio=0.75,
+  permNbr=20,
+  upscaleNbr=20)
+
+print(result)
 
 
-
-ee<- splitTypeR::plotDensityWithUpscalingSamplesBimodal(breaks = 32L,
+splitTypeR::plotDensityWithUpscalingSamplesBimodal(breaks = 26L,
     signature="Basal-like", result)
- splitTypeR::plotDensityWithUpscalingSamplesBimodal(breaks = 14L,
+
+splitTypeR::plotDensityWithUpscalingSamplesBimodal(breaks = 26L,
     signature="Classical", result)
+
+
 ```
 
 

@@ -421,6 +421,58 @@ setMethod("model", "SplitTypeRdata", function(x) {
 })
 
 
+#' Generic function for getting the classification slot in a class
+#' 
+#' @description A generic function for getting the classification slot in a 
+#' class. The function is implemented for the \code{SplitTypeRdata} class.
+#' 
+#' @param x an object.
+#' 
+#' @return an object.
+#' 
+#' @examples
+#' 
+#' # Define a dummy class to show usage
+#' setClass("MyClass", slots = list(classification="character"))
+#' 
+#' # Create an instance
+#' obj <- new("MyClass", classification="123")
+#' 
+#' # Call the generic (assuming a method is implemented)
+#' # classification(obj)
+#' 
+#' @author Astrid Deschênes
+#' @encoding UTF-8
+#' @export
+setGeneric("classification", function(x) 
+    standardGeneric("classification"))
+
+
+#' Getter for the classification slot in a SplitTypeRdata class
+#' 
+#' @description A function for getting the classification slot in a 
+#' \code{SplitTypeRdata} class. 
+#' 
+#' @param x a \code{SplitTypeRdata} object.
+#' 
+#' @return \code{NULL} or a \code{list} NULL or a list of the classification 
+#' for each signature. The list should be have one entry per signature. 
+#' 
+#' @examples
+#' 
+#' ## Create a SplitTypeRdata object
+#' splitData <- SplitTypeRdata()
+#' 
+#' ## Extract the model slot for the object
+#' classification(splitData)
+#' 
+#' @author Astrid Deschênes
+#' @encoding UTF-8
+#' @export
+setMethod("classification", "SplitTypeRdata", function(x) {
+    return(x@classification)
+})
+
 ###########################################################################
 ## All the setter functions for the SplitTypeRdata class
 ###########################################################################
@@ -866,6 +918,76 @@ setGeneric("upscaling<-", function(x, value)
 #' @export
 setMethod("upscaling<-", "SplitTypeRdata", function(x, value) {
     x@upscaling <- value
+    
+    # Validate and return the modified object
+    validObject(x) 
+    return(x)
+})
+
+
+
+#' Generic function for replacement of the classification slot in a class
+#' 
+#' @description A generic function for replacement of the classification slot 
+#' in a S4 object.
+#' 
+#' @param x a S4 object.
+#' 
+#' @param value the new value to assign or update.
+#' 
+#' @return the modified S4 object when the new value is valid.
+#' 
+#' @examples
+#'  
+#' # Define a dummy class to show usage
+#' setClass("MyClass", slots = list(classification="character"))
+#' 
+#' # Create an instance
+#' obj <- new("MyClass", classification="123")
+#' 
+#' # Call the generic (assuming a method is implemented)
+#' # classification(obj) <- "333"
+#' 
+#' @author Astrid Deschênes
+#' @encoding UTF-8
+#' @export
+setGeneric("classification<-", function(x, value) 
+    standardGeneric("classification<-"))
+
+
+#' Replacement of the classification slot in a \code{SplitTypeRdata} object
+#' 
+#' @description A function for replacement of the classification slot in a 
+#' \code{SplitTypeRdata} class.
+#' 
+#' @param x a \code{SplitTypeRdata} object.
+#' 
+#' @param value \code{NULL} or a \code{list} of the classification data for 
+#' each signature. The \code{list} should be have one entry per signature.
+#' 
+#' @return the modified \code{SplitTypeRdata} object when the new value is 
+#' valid.
+#' 
+#' @examples
+#' 
+#' ## Load required library
+#' library(mixtools)
+#' 
+#' ## Two demo signatures
+#' sign <- list("SignatureA"=c("EGFR", "CTTN", "ACTB"), 
+#'     "SignatureB"=c("ACTR2", "AKT1"))
+#'     
+#' ## Create a SplitTypeRdata object with the signatures
+#' demo <- new("SplitTypeRdata", signatures=sign)
+#' 
+#' ## TODO
+#' 
+#' @author Astrid Deschênes
+#' @encoding UTF-8
+#' @importFrom methods validObject
+#' @export
+setMethod("classification<-", "SplitTypeRdata", function(x, value) {
+    x@classification <- value
     
     # Validate and return the modified object
     validObject(x) 

@@ -371,7 +371,7 @@ normalMix <- function(geneLists, resultNorm) {
 #' @importFrom stats qnorm
 #' @encoding UTF-8
 #' @keywords internal
-classification <- function(geneLists, gsvaRes, modelMix) {
+sampleClassification <- function(geneLists, gsvaRes, modelMix) {
 
     ## Storage for the results of the mixed model
     result <- list()

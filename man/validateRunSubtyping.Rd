@@ -7,7 +7,7 @@
 \usage{
 validateRunSubtyping(
   geneLists,
-  expectedCountsMatrix,
+  expectedCountsMatrixLog,
   permRatio,
   permNbr,
   upscaleNbr
@@ -17,8 +17,11 @@ validateRunSubtyping(
 \item{geneLists}{a \code{list} containing signature gene lists. At least 
 two signature gene lists must be present.}
 
-\item{expectedCountsMatrix}{a normalized gene expression data 
-\code{matrix} with rows corresponding to genes and columns to samples.}
+\item{expectedCountsMatrixLog}{a log2-normalized gene expression data 
+\code{matrix} with rows corresponding to genes and columns to samples. 
+Other data that also be used as long as it conforms with the Gaussian 
+behavior. As examples, log2(TPM + 1), log2(CPM + 1), or vst(counts) would 
+be acceptable.}
 
 \item{permRatio}{a \code{numeric} between 0 and 1 representing the
 number of samples that are retained for the permutation step. The 
