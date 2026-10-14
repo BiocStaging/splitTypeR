@@ -19,7 +19,7 @@ plotPermutationSamplesDistribution(
 )
 }
 \arguments{
-\item{x}{a \code{list} of class "splitTypeResults", the output object 
+\item{x}{a \code{list} of class "SplitTypeRdata", the output object 
 from \code{runSubtyping}function, to be graphed.}
 
 \item{signature}{a \code{character} string representing the signature 

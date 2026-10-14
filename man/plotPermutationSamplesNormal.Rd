@@ -49,7 +49,7 @@ set.seed(1221)
 ## Run classification on the 30 patients using 20 permutations on 75\% of 
 ## the dataset, and 10 points per patient for the up-scaling step
 results <- runSubtypingBimodal(geneLists=signaturesDemo, 
-    expectedCountsMatrix=expNormalCountsDemo, 
+    expectedCountsMatrix=log2(expNormalCountsDemo + 1), 
     permRatio=0.75, permNbr=30, upscaleNbr=5)
     
 ## Graph the enrichment results from the permutation for 3 samples

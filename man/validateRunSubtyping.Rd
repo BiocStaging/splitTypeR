@@ -55,10 +55,11 @@ gList[["signature2"]] <- c("FYN", "RAS", "SMAD4")
 expCounts <- matrix(data=rep(22:25, 15), nrow=4)
 rownames(expCounts) <- c("ABC1", "RAS", "FYN", "SMAD3")
 colnames(expCounts) <- c(paste0("Sample_", 1:15))
+expCountsLog <- log2(expCounts + 1)
 
 ## The function returns TRUE when all parameters are valid
 splitTypeR:::validateRunSubtyping(geneLists=gList, 
-     expectedCountsMatrix=expCounts, permRatio=0.8, permNbr=10, 
+     expectedCountsMatrixLog=expCountsLog, permRatio=0.8, permNbr=10, 
      upscaleNbr=20)
 
 }

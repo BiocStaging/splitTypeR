@@ -76,8 +76,9 @@ normResult <- splitTypeR:::extractFromNormalDist(geneLists=geneLists,
 model <- splitTypeR:::normalMix(geneLists=geneLists, resultNorm=normResult)
 
 ## Obtain the assignment of each sample for each signature
-result <- splitTypeR:::classification(geneLists=geneLists, gsvaRes=resClass, 
-    modelMix=model)
+result <- splitTypeR:::sampleClassification(geneLists=geneLists, 
+    gsvaRes=resClass, modelMix=model)
+    
 ## Assignment for the classical signature
 head(result$classical)
 ## Assignment for the basal signature
