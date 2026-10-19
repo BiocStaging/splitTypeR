@@ -390,6 +390,56 @@ plotDensityWithUpscalingSamplesBimodal(breaks = 26L,
 
 </br>
 
+## Classification of the samples
+
+Let's compare the classification obtained here with the one from 
+Tiriac et al. [@Tiriac2018].
+
+
+```{r classifcationTiriac, echo=TRUE}
+
+## Assignation from Tiriac et al
+tiriacAssign <- read.table("Moffitt_Tiriac_Assignation.txt", sep="\t",
+                                    header=TRUE)
+
+## Assignation from the mixture model are extracted from the result
+## Be default, the samples are considered unclassified
+## The samples are classified only if they are assign to one of the signatures
+## When assigned to both signatures, the samples remain unclassified
+assignation <- data.frame(Samples=rownames(classification(result)[['Classical']]), 
+                            newAssignation="unclassified")
+assignation$Classical <- classification(result)[['Classical']]$classification
+assignation$Basal <- classification(result)[['Basal-like']]$classification
+assignation$newAssignation[which(assignation$Classical == "Classical" & 
+                    assignation$Basal == "unclassified")] <- "Classical"
+assignation$newAssignation[which(assignation$Basal == "Basal-like" & 
+                    assignation$Classical == "unclassified")] <- "Basal-like"
+
+## Merge the current assignations with the Tiriac et al. assignations into 
+## one data frame
+assignation <- merge(assignation[, c("Samples", "newAssignation")], 
+                     tiriacAssign, by.x="Samples", 
+                     by.y="Line", all.y=FALSE, all.x=FALSE)
+
+table(assignation$newAssignation, assignation$Moffitt)
+```
+
+</br>
+
+More than 85% of the samples (32 out of 37) are assigned the same subtype.
+
+```{r compared, echo=TRUE}
+
+gsva <- data.frame(Classical=classification(result)[['Classical']]$GSVA_score, 
+                   Basal=classification(result)[['Basal-like']]$GSVA_score, 
+                   row.names=rownames(classification(result)[['Basal-like']]))
+
+retained <- assignation$Samples[which(assignation$newAssignation != 
+                                            assignation$Moffitt)]
+
+```
+
+</br>
 
 # Acknowledgment
 
