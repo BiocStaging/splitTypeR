@@ -199,3 +199,46 @@ getGeneSignatures <- function(nameList=NULL) {
 
     return(res)
 }
+
+
+
+#' @title Return the genes for a specific signature
+#'
+#' @description The function returns the genes for the selected signature.
+#'
+#' @param name a \code{character} string representing the name of the 
+#' signature names. The signature name must all be present in the gene list 
+#' signatures. 
+#' 
+#' @return a \code{list} of genes associated to a specific signature. 
+#' 
+#' @details
+#' 
+#' The PDAC PDO classical and basal-like signatures are 
+#' associated with this publication:
+#' 
+#' Tiriac et al. Organoid Profiling Identifies Common Responders to 
+#' Chemotherapy in Pancreatic Cancer. Cancer Discov. 2018 Sep;8(9):1112-1129. 
+#' doi: 10.1158/2159-8290.CD-18-0349. Epub 2018 May 31. PMID: 29853643; 
+#' PMCID: PMC6125219.
+#' 
+#' @examples
+#'
+#' ## Extract the genes for the basal-like signature from Tiriac et al 2018
+#' getGenesInSignature(name="2018_Tiriac_PDAC_PDO_basal-like_signature")
+#'
+#' @author Astrid Deschênes
+#' @encoding UTF-8
+#' @export
+getGenesInSignature <- function(name) {
+    if (!(is.character(name) && length(name) == 1)) {
+        stop("The \'name\' parameter must be one string of characters ", 
+             "representing the selected signature name.")
+    }
+    
+    if (!(name %in% names(internalSignatures))) {
+        stop("The signature is not available.")
+    }
+    
+    return(internalSignatures[[name]])
+}

@@ -15,6 +15,7 @@ vignette: >
 BiocStyle::markdown()
 suppressPackageStartupMessages({
   library(knitr)
+  library(SummarizedExperiment)
 })
 ```
 
@@ -140,18 +141,24 @@ be used in the next step.
 The synthetic values across all samples are pooled to fit two overlapping 
 normal distributions to them. The two normal distributions are extracted using 
 a mixture model approach implemented in the mixtools package [@JSSv032i06]. 
-The idea being that the whole cohort is actually a blend of two underlying populations (a "low enrichment" group and a "high enrichment" group). 
+The idea being that the whole cohort is actually a blend of two underlying 
+populations (a "low enrichment" group and a "high enrichment" group). 
  
 
 ## Step 5. Classification
 
-For each sample, a hypothesis testing whether its real score is more consistent with belonging to the low-enrichment distribution or the high-enrichment one, and assign it accordingly.
+For each sample, a hypothesis testing whether its real score is  
+consistent with belonging to the low-enrichment distribution.
 
 For each sample, the pipeline runs a hypothesis test where the Null 
-hypothesis (H₀) is that the sample actually belongs to the lower-enrichment distribution. The sample's real enrichment score (from Step 1) is checked 
-against that null distribution. If the real score is implausible under the low-enrichment distribution (i.e., it falls somewhere that distribution would rarely produce), the null hypothesis is rejected. In that situation, the sample 
-is classified as belonging to the higher-enrichment group which implies it is 
-assigned to the tested signature. Otherwise, the samples is not classified. 
+hypothesis (H₀) is that the sample actually belongs to the lower-enrichment 
+distribution. The sample's real enrichment score (from Step 1) is checked 
+against that null distribution. If the real score is implausible under the 
+low-enrichment distribution (i.e., it falls somewhere that distribution 
+would rarely produce), the null hypothesis is rejected. In that situation, the 
+sample is classified as belonging to the higher-enrichment group which implies 
+it is assigned to the tested signature. Otherwise, the samples is not 
+classified. 
 
 <br />
 
@@ -162,8 +169,8 @@ For this demonstration, we are going to use the published RNA-seq dataset of
 pancreatic ductal adenocarcinoma (PDAC) patients-derived organoids (PDOs) 
 published in Tiriac et al. [@Tiriac2018]. The RNA-seq has been aligned with 
 GENCODE v48 on GRCh38.p14 genome with STAR v2.7.9a [@Dobin2013]. Only one
-PDO per patient was retained. The expected 
-counts were processed with DESeq2 v1.50.2 [@Love2014] on genes expressed in at 
+PDO per patient was retained. The expected counts were processed with 
+DESeq2 v1.50.2 [@Love2014] on genes expressed in at 
 least 20% of the PDOs. The normalized expression is available in a 
 _SummarizedExperiment_ object. 
 
@@ -173,34 +180,47 @@ classical signature is associated to better prognosis and better response to
 standard chemotherapy while the basal-like subtype is associated 
 with worse overall prognosis [@Moffitt2015, @OKane2020].
 
+</br>
+
 ## Prepare the signatures
 
 The basal-like and classical gene signatures are the one defined for 
 PDOs in Tiriac et al. [@Tiriac2018]. 
 
-```{r geneSignatures}
+```{r geneSignatures, echo=TRUE}
+
+## Require package
+library(splitTypeR)
 
 ## Prepare the PDOs basal-like and classical signatures
 signaturesList <- list()
 signaturesList[["Basal-like"]] <- 
-        getGeneSignatures("2018_Tiriac_PDAC_PDO_basal-like_signature")[[1]]
+        getGenesInSignature("2018_Tiriac_PDAC_PDO_basal-like_signature")
 signaturesList[["Classical"]] <- 
-        getGeneSignatures("2018_Tiriac_PDAC_PDO_classical_signature")[[1]]
+        getGenesInSignature("2018_Tiriac_PDAC_PDO_classical_signature")
 
 ```
 
+</br>
 
-## Prepare the normalized expected counts
+## Prepare the log2-transformed normalized expected counts
 
 A matrix of normalized expected counts is required. The row are the genes while 
 the patients (samples) are the columns.
 
 The row annotation must correspond to the signature format. As an example, if 
 the signatures are composed of gene names, the row annotation for the 
-normalized expected counts must also be gene names. 
+normalized expected counts must also be gene names.
 
-```{r expCount}
+For GSVA analysis, the normalized expect counts should be log-transform to 
+enable the use of the Gaussian distribution function. The current 
+behavior of GSVA is to automatically choose one of the available distribution 
+functions. 
 
+
+```{r expCount, echo=TRUE}
+
+## Required package
 library(SummarizedExperiment)
 
 ## Load the SummarizedExperiment object
@@ -213,10 +233,13 @@ se <- readRDS(path)
 normCounts <- assays(se)[["normalizedCounts"]]
 rownames(normCounts) <- rowRanges(se)$gene_name
 
-## Log2 transform the data dds a small pseudo-count to prevent log2(0) errors 
+## Log2-transform the data, adding a small pseudo-count to 
+## prevent log2(0) errors 
 log2normCounts <- log2(normCounts + 1)
 
 ```
+
+</br>
 
 ## Run the subtyping method
 
@@ -224,38 +247,156 @@ The _runSubtypingBimodal_ function runs all the steps.
 
 ```{r toto2}
 
-## The 2 retained signatures, basal-like and classical from Tiriac et al.
-signaturesList <- list(
-    "Classical"=unname(unlist(getGeneSignatures("2018_Tiriac_PDAC_PDO_classical_signature"))),
-    "Basal-like"=unname(unlist(getGeneSignatures("2018_Tiriac_PDAC_PDO_basal-like_signature"))))
-
 ## Fix seed for reproducible results
-set.seed(121)
+set.seed(81)
+
+## Run the subtyping method using the log2-transformed data
 result <- runSubtypingBimodal(geneLists=signaturesList, 
   expectedCountsMatrixLog=log2normCounts,
   permRatio=0.75,
   permNbr=20,
-  upscaleNbr=20)
+  upscaleNbr=12)
 
+## Summary of the classification results
 print(result)
-
-
-splitTypeR::plotDensityWithUpscalingSamplesBimodal(breaks = 26L,
-    signature="Basal-like", result)
-
-splitTypeR::plotDensityWithUpscalingSamplesBimodal(breaks = 26L,
-    signature="Classical", result)
-
 
 ```
 
+</br>
 
+The resulting object contains information from each step of the process. 
+The information can be accessed using the appropriate getter function.
+
+</br>
+
+```{r signaturesGetter, echo=TRUE}
+
+## Get the list of genes in each signature
+signatures(result)
+```
+
+</br>
+
+```{r gsvaResultsGetter, echo=TRUE}
+## Get the GSVA scores for all samples in each signature
+gsvaResults(result)
+```
+
+</br>
+
+```{r permutationGetter, echo=TRUE}
+## Get the GSVA scores for the first 5 samples in the first 8 permutations done 
+## for the classical signature
+permutations(result)[['Classical']][seq_len(5), seq_len(8)]
+```
+
+</br>
+
+```{r standardDeviationGetter, echo=TRUE}
+## Get the standard deviation for the GSVA scores for all samples in each 
+## signature 
+## The standard deviation is inferred from the permutation step
+standardDeviation(result)
+```
+
+</br>
+
+```{r upscalingGetter, echo=TRUE}
+## Get the first 8 upscaling GSVA scores for the first 5 samples for the 
+## classical signature 
+upscaling(result)[['Classical']][seq_len(5), seq_len(8)]
+```
+
+</br>
+
+```{r modelGetter, echo=TRUE}
+## Get the mixture model for the classical signature
+## This is a mixEM object
+classicalModel <- model(result)[['Classical']]
+
+## Get the two distribution means
+classicalModel$mu
+```
+
+</br>
+
+```{r classificatonGetter, echo=TRUE}
+## Get the final classification of the samples for  the classical signature
+classification(result)[['Classical']]
+```
+
+
+</br>
+
+## Visual representation of the results at the permutation step
+
+The _plotPermutationSamplesDistribution()_ function enable the visualization 
+of the GSVA results obtained during the permutation step for a specific 
+signature and specific samples. 
+
+```{r graphPermutation, echo=TRUE}
+
+## The GSVA results obtained for three samples during the permutation step 
+## for the classical signature
+## The seed is fixed to ensure reproducibility
+plotPermutationSamplesDistribution(x=result, signature="Classical", 
+    pointColor="darkorange", alpha=1, samples=c("hF23", "hT82", "hT89"), 
+    seed=121)
+
+```
+
+</br>
+
+## Visual representation of the results at the upscaling step
+
+From the permutation step, the standard deviation is calculated for each 
+samples. The upscaling is done with the real GSVA score as mean and the 
+calculated standard deviation.
+
+The _plotPermutationSamplesNormal()_ function shown the GSVA scores sampled 
+during the upscaling step. The mean is shown as a vertical dotted line while 
+the normal distribution is shown as a dashed line. The samples GSVA scores 
+are shown as dots in this graph.
+
+```{r graphUp, echo=TRUE}
+
+## Fix seed for reproducibility
+set.seed(121)
+
+## The GSVA scores sampled for three samples during the upscaling step 
+## for the classical signature
+plotPermutationSamplesNormal(result, signature="Classical", 
+    samples=c("hF23", "hT82", "hT89"), pointColor="darkviolet")
+```
+
+</br>
+
+## Visual representation of the results at the mixture model step
+
+The _plotDensityWithUpscalingSamplesBimodal()_ function enables the 
+visualization of the two normal distributions obtained for a specific 
+signature. In this graph, the GSVA values are the one obtained from the 
+upscaling step.
+
+```{r graphDensity, echo=TRUE}
+
+plotDensityWithUpscalingSamplesBimodal(breaks = 26L,
+    signature="Basal-like", result)
+
+plotDensityWithUpscalingSamplesBimodal(breaks = 26L,
+    signature="Classical", result)
+
+```
+
+</br>
 
 
 # Acknowledgment
 
 Claude Sonnet 5 was used for improving the workflow figure. It was also use for 
 proofreading and copyediting sections of this text.
+
+</br>
 
 # Session info
 
@@ -266,3 +407,4 @@ compiled:
 sessionInfo()
 ```
 
+</br>

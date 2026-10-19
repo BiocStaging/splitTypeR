@@ -92,7 +92,7 @@ plotDensityWithUpscalingSamplesBimodal <- function(x, signature, breaks=22L,
     histTmp <- hist(upscalingResults, breaks=breaks, plot=FALSE) 
     
     yMax <- max(curveMax$y, curveMin$y, max(histTmp$density))
-    yMax <- yMax + 0.4
+    yMax <- yMax + 0.8
 
     par(new=FALSE)
     par(lwd=3)
@@ -347,11 +347,11 @@ plotPermutationSamplesNormal <- function(x, signature, samples,
                                     replace=TRUE)
   
     densityPlot <-  ggplot(dataTmp, aes(x=.data$x_value)) +
-        geom_line(aes(y=.data$density), size=1, linetype="longdash", 
+        geom_line(aes(y=.data$density), linewidth=1, linetype="longdash", 
                     show.legend=TRUE) + 
         xlim(-1, 1) + ylab("Density") +
         geom_vline(data=realGSEA, aes(xintercept=.data$score), 
-                    linetype="dotted",  color = "gray15", size=1) +
+                    linetype="dotted",  color = "gray15", linewidth=1) +
         geom_point(data=allPoints, aes(x=.data$score, y=.data$y_value), 
                     color=pointColor, show.legend=TRUE) +
         facet_grid(sample ~ .) + theme_bw() + xlab("Enrichment score") +
