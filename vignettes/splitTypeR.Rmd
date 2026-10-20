@@ -185,7 +185,7 @@ classical signature is associated to better prognosis and better response to
 standard chemotherapy while the basal-like subtype is associated 
 with worse overall prognosis [@Moffitt2015, @OKane2020].
 
-</br>
+<br />
 
 ## Prepare the signatures
 
@@ -206,7 +206,7 @@ signaturesList[["Classical"]] <-
 
 ```
 
-</br>
+<br />
 
 ## Prepare the log2-transformed normalized expected counts
 
@@ -245,7 +245,7 @@ log2normCounts <- log2(normCounts + 1)
 
 ```
 
-</br>
+<br />
 
 ## Run the subtyping method
 
@@ -268,26 +268,26 @@ print(result)
 
 ```
 
-</br>
+<br />
 
 The resulting object contains information from each step of the process. 
 The information can be accessed using the appropriate getter function.
 
-</br>
+<br />
 
 ```{r signaturesGetter, echo=TRUE}
 ## Get the list of genes in each signature
 signatures(result)
 ```
 
-</br>
+<br />
 
 ```{r gsvaResultsGetter, echo=TRUE}
 ## Get the GSVA scores for all samples in each signature
 gsvaResults(result)
 ```
 
-</br>
+<br />
 
 ```{r permutationGetter, echo=TRUE}
 ## Get the GSVA scores for the first 5 samples in the first 8 permutations done 
@@ -295,7 +295,7 @@ gsvaResults(result)
 permutations(result)[['Classical']][seq_len(5), seq_len(8)]
 ```
 
-</br>
+<br />
 
 ```{r standardDeviationGetter, echo=TRUE}
 ## Get the standard deviation for the GSVA scores for all samples in each 
@@ -304,7 +304,7 @@ permutations(result)[['Classical']][seq_len(5), seq_len(8)]
 standardDeviation(result)
 ```
 
-</br>
+<br />
 
 ```{r upscalingGetter, echo=TRUE}
 ## Get the first 8 upscaling GSVA scores for the first 5 samples for the 
@@ -312,7 +312,7 @@ standardDeviation(result)
 upscaling(result)[['Classical']][seq_len(5), seq_len(8)]
 ```
 
-</br>
+<br />
 
 ```{r modelGetter, echo=TRUE}
 ## Get the mixture model for the classical signature
@@ -323,7 +323,7 @@ classicalModel <- model(result)[['Classical']]
 classicalModel$mu
 ```
 
-</br>
+<br />
 
 ```{r classificatonGetter, echo=TRUE}
 ## Get the final classification of the samples for  the classical signature
@@ -331,7 +331,7 @@ classification(result)[['Classical']]
 ```
 
 
-</br>
+<br />
 
 ## Visual representation of the results at the permutation step
 
@@ -350,7 +350,7 @@ plotPermutationSamplesDistribution(x=result, signature="Classical",
 
 ```
 
-</br>
+<br />
 
 ## Visual representation of the results at the upscaling step
 
@@ -374,7 +374,7 @@ plotPermutationSamplesNormal(result, signature="Classical",
     samples=c("hF23", "hT82", "hT89"), pointColor="darkviolet")
 ```
 
-</br>
+<br />
 
 ## Visual representation of the results at the mixture model step
 
@@ -393,7 +393,7 @@ plotDensityWithUpscalingSamplesBimodal(breaks = 26L,
 
 ```
 
-</br>
+<br />
 
 ## Classification of the samples
 
@@ -430,7 +430,7 @@ assignation <- merge(assignation[, c("Samples", "newAssignation")],
 table(assignation$newAssignation, assignation$Moffitt)
 ```
 
-</br>
+<br />
 
 More than 85% of the samples (32 out of 37) are assigned the same subtype.
 
@@ -445,14 +445,14 @@ retained <- assignation$Samples[which(assignation$newAssignation !=
 
 ```
 
-</br>
+<br />
 
 # Acknowledgment
 
 Claude Sonnet 5 was used for improving the workflow figure. It was also use for 
 proofreading and copyediting sections of this text.
 
-</br>
+<br />
 
 # Session info
 
@@ -463,4 +463,4 @@ compiled:
 sessionInfo()
 ```
 
-</br>
+<br />
