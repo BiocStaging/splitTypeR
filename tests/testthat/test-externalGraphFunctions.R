@@ -61,9 +61,12 @@ test_that("plotDensityWithUpscalingSamplesBimodal() must return a list when all 
     results <- runSubtypingBimodal(geneLists=signaturesDemo, 
         expectedCountsMatrix=expNormalCountsDemo, 
         permRatio=0.75, permNbr=10, upscaleNbr=5)
-    
-    expect_true(is.list(plotDensityWithUpscalingSamplesBimodal(x=results, 
+
+    ## Use a null device to prevent the creation of a Rplots.pdf file
+    pdf(NULL)
+    expect_true(is.list(plotDensityWithUpscalingSamplesBimodal(x=results,
         signature="Tiriac_PDAC_PDO_Basal-like")))
+    dev.off()
 })
 
 #############################################################################
