@@ -36,7 +36,7 @@ redistribute this software.
 If you use this package for a publication, we would ask you to cite the 
 following:
 
->  Deschênes A, Belleau P (2026). _splitTypeR: Transcriptomic classification using mixture of normal distributions_. R package version 0.99.0,
+>  Deschênes A, Belleau P, Tuveson David A (2026). _splitTypeR: Transcriptomic classification using mixture of normal distributions_. R package version 0.99.0,
   <https://github.com/adeschen/splitTypeR>.
 
 <br />
@@ -97,7 +97,8 @@ library(splitTypeR)
 
 # Quick start
 
-The package includes a small demonstration dataset: two gene signatures
+The __`r Rpackage("splitTypeR")`__ package includes a small demonstration 
+dataset: two gene signatures
 (`signaturesDemo`) and a matrix of normalized expected counts for 30
 patients (`expNormalCountsDemo`). The whole subtyping method can be run
 on it in a few lines:
@@ -111,9 +112,11 @@ data(expNormalCountsDemo)
 set.seed(121)
 
 ## Run the subtyping method and print the classification of each sample
+## The normalized expected counts are log2-transformed 
 quickResult <- runSubtypingBimodal(geneLists=signaturesDemo,
-    expectedCountsMatrixLog=expNormalCountsDemo,
+    expectedCountsMatrixLog=log2(expNormalCountsDemo + 1),
     permRatio=0.75, permNbr=20, upscaleNbr=10)
+
 print(quickResult)
 ```
 

@@ -13,16 +13,18 @@ designed for bulk transcriptomic datasets.
 
 If you use this package for a publication, we would ask you to cite the following:
 
->  Deschênes A, Belleau P (2026). _splitTypeR: Transcriptomic subtyping 
+>  Deschênes A, Belleau P, Tuveson DA (2026). _splitTypeR: Transcriptomic subtyping 
   using  mixture of normal distributions_. R package version 0.99.0,
   <https://github.com/adeschen/splitTypeR>.
 
 ## Authors ##
 
 [Astrid Desch&ecirc;nes](http://ca.linkedin.com/in/astriddeschenes 
-"Astrid Desch&ecirc;nes") and
+"Astrid Desch&ecirc;nes"), 
 [Pascal Belleau](http://ca.linkedin.com/in/pascalbelleau 
-"Pascal Belleau") 
+"Pascal Belleau") and 
+[David A. Tuveson](https://tuvesonlab.cshl.edu  
+"David A. Tuveson")
 
 
 
