@@ -230,9 +230,9 @@ library(splitTypeR)
 ## Prepare the PDOs basal-like and classical signatures
 signaturesList <- list()
 signaturesList[["Basal-like"]] <- 
-        getGenesInSignature("2018_Tiriac_PDAC_PDO_basal-like_signature")
+        getGenesInSignature("Tiriac_PDAC_PDO_Basal_like")
 signaturesList[["Classical"]] <- 
-        getGenesInSignature("2018_Tiriac_PDAC_PDO_classical_signature")
+        getGenesInSignature("Tiriac_PDAC_PDO_Classical")
 
 ```
 
@@ -503,7 +503,7 @@ the available signatures.
 
 ```{r signaturesContent, echo=TRUE}
 ## Get the genes of the basal-like signature
-getGenesInSignature(name="2018_Tiriac_PDAC_PDO_basal-like_signature")
+getGenesInSignature(name="Tiriac_PDAC_PDO_Basal_like")
 
 ## Get all the available signatures and count the genes in each one
 allSignatures <- getGeneSignatures()
@@ -514,10 +514,10 @@ lengths(allSignatures)
 
 The current signatures are:
 
-* **2018_Tiriac_PDAC_PDO_basal-like_signature**: the basal-like signature 
+* **Tiriac_PDAC_PDO_Basal_like**: the basal-like signature 
 (26 genes) defined for pancreatic ductal adenocarcinoma (PDAC) 
 patient-derived organoids (PDOs) in Tiriac et al. [@Tiriac2018].
-* **2018_Tiriac_PDAC_PDO_classical_signature**: the classical signature 
+* **Tiriac_PDAC_PDO_Classical**: the classical signature 
 (62 genes) defined for PDAC PDOs in Tiriac et al. [@Tiriac2018].
 
 <br />

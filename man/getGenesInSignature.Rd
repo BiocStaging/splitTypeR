@@ -30,7 +30,7 @@ PMCID: PMC6125219.
 \examples{
 
 ## Extract the genes for the basal-like signature from Tiriac et al 2018
-getGenesInSignature(name="2018_Tiriac_PDAC_PDO_basal-like_signature")
+getGenesInSignature(name="Tiriac_PDAC_PDO_Basal_like")
 
 }
 \author{

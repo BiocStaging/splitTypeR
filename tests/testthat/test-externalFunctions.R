@@ -357,8 +357,8 @@ test_that("runSubtypingBimodal() must return expected results", {
 
 test_that("getGeneSignaturesNames() must return the expected signature names", {
     
-    expResults <- c("2018_Tiriac_PDAC_PDO_basal-like_signature", 
-                        "2018_Tiriac_PDAC_PDO_classical_signature")
+    expResults <- c("Tiriac_PDAC_PDO_Basal_like", 
+                        "Tiriac_PDAC_PDO_Classical")
 
     results <- getGeneSignaturesNames()
 
@@ -371,8 +371,8 @@ test_that("getGeneSignaturesNames() must return the expected signature names", {
 
 test_that("getGeneSignatures() must return the expected signatures", {
     
-    expNames <- c("2018_Tiriac_PDAC_PDO_basal-like_signature",
-                    "2018_Tiriac_PDAC_PDO_classical_signature")
+    expNames <- c("Tiriac_PDAC_PDO_Basal_like",
+                    "Tiriac_PDAC_PDO_Classical")
     results <- getGeneSignatures()
 
     expect_equal(names(results), expNames)
@@ -401,14 +401,14 @@ test_that("getGeneSignatures() must return error when not all names in nameList 
     error_message <- paste0("At least one signature is not available.")
 
     expect_error(getGeneSignatures(
-        nameList=c("2018_Tiriac_PDAC_PDO_classical_signature", "Chateau")), 
+        nameList=c("Tiriac_PDAC_PDO_Classical", "Chateau")), 
         regexp=error_message)
 })
 
 test_that("getGeneSignatures() must return expected results when nameList is one entry", {
     
     results <- getGeneSignatures(
-                nameList=c("2018_Tiriac_PDAC_PDO_classical_signature"))
+                nameList=c("Tiriac_PDAC_PDO_Classical"))
     
     expect_true(is.list(results))
     expect_equal(length(results), 1L)

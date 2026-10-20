@@ -176,7 +176,7 @@ getGeneSignaturesNames <- function() {
 #' @examples
 #'
 #' ## Extract the basal-like signature from Tiriac et al 2018
-#' getGeneSignatures(nameList=c("2018_Tiriac_PDAC_PDO_basal-like_signature"))
+#' getGeneSignatures(nameList=c("Tiriac_PDAC_PDO_Basal_like"))
 #'
 #' @author Astrid Deschênes
 #' @encoding UTF-8
@@ -225,7 +225,7 @@ getGeneSignatures <- function(nameList=NULL) {
 #' @examples
 #'
 #' ## Extract the genes for the basal-like signature from Tiriac et al 2018
-#' getGenesInSignature(name="2018_Tiriac_PDAC_PDO_basal-like_signature")
+#' getGenesInSignature(name="Tiriac_PDAC_PDO_Basal_like")
 #'
 #' @author Astrid Deschênes
 #' @encoding UTF-8
