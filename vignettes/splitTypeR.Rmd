@@ -95,6 +95,33 @@ library(splitTypeR)
 
 <br />
 
+# Quick start
+
+The package includes a small demonstration dataset: two gene signatures
+(`signaturesDemo`) and a matrix of normalized expected counts for 30
+patients (`expNormalCountsDemo`). The whole subtyping method can be run
+on it in a few lines:
+
+```{r quickStart, echo=TRUE}
+## Load the demo signatures and the demo normalized expected counts
+data(signaturesDemo)
+data(expNormalCountsDemo)
+
+## Fix seed for reproducible results
+set.seed(121)
+
+## Run the subtyping method and print the classification of each sample
+quickResult <- runSubtypingBimodal(geneLists=signaturesDemo,
+    expectedCountsMatrixLog=expNormalCountsDemo,
+    permRatio=0.75, permNbr=20, upscaleNbr=10)
+print(quickResult)
+```
+
+Each step of the method is detailed in the next section, followed by a
+complete demonstration on a published dataset.
+
+<br />
+
 # Method
   
 The following figure represents the statistical method employed to turn a noisy, 
