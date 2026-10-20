@@ -10,10 +10,10 @@ compiled for demonstration purposes.}
 \format{
 a \code{list} containing one entry per signature:
 \itemize{
-    \item{\code{"2018_Tiriac_PDAC_PDO_classical_signature"}: a 
+    \item{\code{"Tiriac_PDAC_PDO_Classical"}: a 
     \code{vector} of gene names associated to the PDAC Patient-derived 
     Organoid (PDO) Classical signature as published in Tiriac et al 2018 }
-    \item{\code{"2018_Tiriac_PDAC_PDO_basal-like_signature"}: a 
+    \item{\code{"Tiriac_PDAC_PDO_Basal-like"}: a 
     \code{vector} of gene names associated to the PDAC Patient-derived 
     Organoid (PDO) Basal-like signature as published in Tiriac et al 2018 }
 }
@@ -24,10 +24,10 @@ data(signaturesDemo)
 \value{
 a \code{list} containing one entry per signature:
 \itemize{
-    \item{\code{"2018_Tiriac_PDAC_PDO_classical_signature"}: a 
+    \item{\code{"Tiriac_PDAC_PDO_Classical"}: a 
     \code{vector} of gene names associated to the PDAC Patient-derived 
     Organoid (PDO) Classical signature as published in Tiriac et al 2018 }
-    \item{\code{"2018_Tiriac_PDAC_PDO_basal-like_signature"}: a 
+    \item{\code{"Tiriac_PDAC_PDO_Basal-like"}: a 
     \code{vector} of gene names associated to the PDAC Patient-derived 
     Organoid (PDO) Basal-like signature as published in Tiriac et al 2018 }
 }

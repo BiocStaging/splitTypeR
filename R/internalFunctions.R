@@ -37,9 +37,9 @@
 #' ## Create a list of two signatures
 #' geneLists <- list()
 #' geneLists[["classical"]] <- 
-#'     signaturesDemo$`2018_Tiriac_PDAC_PDO_classical_signature`
+#'     signaturesDemo$`Tiriac_PDAC_PDO_Classical`
 #' geneLists[["basal"]] <- 
-#'     signaturesDemo$`2018_Tiriac_PDAC_PDO_basal-like_signature`
+#'     signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
 #' 
 #' ## Load demo normalized expected counts
 #' data(expNormalCountsDemo)
@@ -141,9 +141,9 @@ permuteGSVA <- function(geneLists, countMatrix, permRatio, permNbr) {
 #' ## Create a list of two signatures
 #' geneLists <- list()
 #' geneLists[["classical"]] <- 
-#'     signaturesDemo$`2018_Tiriac_PDAC_PDO_classical_signature`
+#'     signaturesDemo$`Tiriac_PDAC_PDO_Classical`
 #' geneLists[["basal"]] <- 
-#'     signaturesDemo$`2018_Tiriac_PDAC_PDO_basal-like_signature`
+#'     signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
 #' 
 #' ## Load demo normalized expected counts
 #' data(expNormalCountsDemo)
@@ -228,9 +228,9 @@ extractFromNormalDist <- function(geneLists, gsvaRes, gsvaSD, nbValues) {
 #' ## Create a list of two signatures
 #' geneLists <- list()
 #' geneLists[["classical"]] <- 
-#'     signaturesDemo$`2018_Tiriac_PDAC_PDO_classical_signature`
+#'     signaturesDemo$`Tiriac_PDAC_PDO_Classical`
 #' geneLists[["basal"]] <- 
-#'     signaturesDemo$`2018_Tiriac_PDAC_PDO_basal-like_signature`
+#'     signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
 #' 
 #' ## Load demo normalized expected counts
 #' data(expNormalCountsDemo)
@@ -336,9 +336,9 @@ normalMix <- function(geneLists, resultNorm) {
 #' ## Create a list of two signatures
 #' geneLists <- list()
 #' geneLists[["classical"]] <- 
-#'     signaturesDemo$`2018_Tiriac_PDAC_PDO_classical_signature`
+#'     signaturesDemo$`Tiriac_PDAC_PDO_Classical`
 #' geneLists[["basal"]] <- 
-#'     signaturesDemo$`2018_Tiriac_PDAC_PDO_basal-like_signature`
+#'     signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
 #' 
 #' ## Load demo normalized expected counts
 #' data(expNormalCountsDemo)

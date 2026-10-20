@@ -42,9 +42,9 @@ data(signaturesDemo)
 ## Create a list of two signatures
 geneLists <- list()
 geneLists[["classical"]] <- 
-    signaturesDemo$`2018_Tiriac_PDAC_PDO_classical_signature`
+    signaturesDemo$`Tiriac_PDAC_PDO_Classical`
 geneLists[["basal"]] <- 
-    signaturesDemo$`2018_Tiriac_PDAC_PDO_basal-like_signature`
+    signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
 
 ## Load demo normalized expected counts
 data(expNormalCountsDemo)
