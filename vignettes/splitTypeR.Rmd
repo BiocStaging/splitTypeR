@@ -98,7 +98,8 @@ library(splitTypeR)
 # Method
   
 This following figure represent the statistical method employ to turn a noisy, 
-single-number enrichment score into a confident binary classification of each sample. In summary, the method builds a confidence interval around the 
+single-number enrichment score into a confident binary classification of 
+each sample. In summary, the method builds a confidence interval around the 
 enrichment score, models the cohort as a mixture of two biological states, and 
 then statistically tests each sample against that mixture.
 
@@ -109,15 +110,18 @@ knitr::include_graphics("enrichment_pipeline_300dpi_crop2.jpg")
 <br />
 
 The statistical method is split into 5 steps. Each of those steps are 
-performed for one specific signature at the time. A signature is typically a predefined set of features (transcriptomic expression in this situation) that is associated with some biological state, pathway, or phenotype.
+performed for one specific signature at the time. A signature is typically a 
+predefined set of features (transcriptomic expression in this situation) that 
+is associated with some biological state, pathway, or phenotype.
 
 
 ## Step 1. Enrichment score
 
 The enrichment scores are first computed for every single sample 
-with the Bioconductor GSVA package [@Hanzelmann2013]. Those scores represent 
-the real score for each sample. Later steps treats this real score as the 
-anchor point around which uncertainty gets modeled.
+with the Bioconductor `r BiocStyle::Biocpkg("GSVA")` 
+package [@Hanzelmann2013]. Those scores represent the real score for each 
+sample. Later steps treats this real score as the anchor point around which 
+uncertainty gets modeled.
 
 ## Step 2. Permutation
 
@@ -140,15 +144,16 @@ be used in the next step.
 
 The synthetic values across all samples are pooled to fit two overlapping 
 normal distributions to them. The two normal distributions are extracted using 
-a mixture model approach implemented in the mixtools package [@JSSv032i06]. 
-The idea being that the whole cohort is actually a blend of two underlying 
-populations (a "low enrichment" group and a "high enrichment" group). 
+a mixture model approach implemented in the `r BiocStyle::CRANpkg("mixtools")`
+package [@JSSv032i06]. The idea being that the whole cohort is actually a 
+blend of two underlying populations (a "low enrichment" group and a 
+"high enrichment" group). 
  
 
 ## Step 5. Classification
 
-For each sample, a hypothesis testing whether its real score is  
-consistent with belonging to the low-enrichment distribution.
+For each sample, a hypothesis testing whether its real score is consistent 
+with belonging to the low-enrichment distribution.
 
 For each sample, the pipeline runs a hypothesis test where the Null 
 hypothesis (H₀) is that the sample actually belongs to the lower-enrichment 
@@ -170,7 +175,7 @@ pancreatic ductal adenocarcinoma (PDAC) patients-derived organoids (PDOs)
 published in Tiriac et al. [@Tiriac2018]. The RNA-seq has been aligned with 
 GENCODE v48 on GRCh38.p14 genome with STAR v2.7.9a [@Dobin2013]. Only one
 PDO per patient was retained. The expected counts were processed with 
-DESeq2 v1.50.2 [@Love2014] on genes expressed in at 
+`r BiocStyle::Biocpkg("DESeq2")`  v1.50.2 [@Love2014] on genes expressed in at 
 least 20% of the PDOs. The normalized expression is available in a 
 _SummarizedExperiment_ object. 
 
@@ -224,7 +229,8 @@ functions.
 library(SummarizedExperiment)
 
 ## Load the SummarizedExperiment object
-path <- system.file("extdata", "Tiriac_NormExpCounts.RDS", package = "splitTypeR")
+path <- system.file("extdata", "Tiriac_NormExpCounts.RDS", 
+                        package="splitTypeR")
 se <- readRDS(path)
 
 ## Extract the normalized counts and assign the gene names as row names
@@ -245,7 +251,7 @@ log2normCounts <- log2(normCounts + 1)
 
 The _runSubtypingBimodal_ function runs all the steps.
 
-```{r toto2}
+```{r subtyping, echo=TRUE}
 
 ## Fix seed for reproducible results
 set.seed(81)
@@ -270,7 +276,6 @@ The information can be accessed using the appropriate getter function.
 </br>
 
 ```{r signaturesGetter, echo=TRUE}
-
 ## Get the list of genes in each signature
 signatures(result)
 ```
@@ -406,8 +411,9 @@ tiriacAssign <- read.table("Moffitt_Tiriac_Assignation.txt", sep="\t",
 ## Be default, the samples are considered unclassified
 ## The samples are classified only if they are assign to one of the signatures
 ## When assigned to both signatures, the samples remain unclassified
-assignation <- data.frame(Samples=rownames(classification(result)[['Classical']]), 
-                            newAssignation="unclassified")
+assignation <- data.frame(
+        Samples=rownames(classification(result)[['Classical']]), 
+        newAssignation="unclassified")
 assignation$Classical <- classification(result)[['Classical']]$classification
 assignation$Basal <- classification(result)[['Basal-like']]$classification
 assignation$newAssignation[which(assignation$Classical == "Classical" & 
