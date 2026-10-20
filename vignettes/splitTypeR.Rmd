@@ -52,7 +52,7 @@ common molecular subtype of breast cancer, making up to 60% of all breast
 cancer cases. It also is associated with good prognosis. While 
 Luminal-B tumors have a more aggressive phenotype and a worse 
 prognosis [@Yersal2014]. Once gene signatures for RNA subtyping become 
-widly accepted by major oncology organizations, they start to classify cancer 
+widely accepted by major oncology organizations, they start to classify cancer 
 subtypes, predict patient survival, and guide treatment.
 
 From a research aspect, the classification of new samples using their 
@@ -71,7 +71,7 @@ offers an instant visual support. However, this method has a few drawbacks:
 provide a statistical probability score for a sample's class assignment; it 
 mainly acts as a visual summary. 
 * _Metric sensitivity_: Changing the clustering metric (ex: from "Euclidean" to 
-"Pearson" distance) can alters the resulting clusters. 
+"Pearson" distance) can alter the resulting clusters. 
 * _Outlier distortion_: Extreme outliers can squash the color scale, and 
 artificially create skewed subsets.
 
@@ -97,7 +97,7 @@ library(splitTypeR)
 
 # Method
   
-This following figure represent the statistical method employ to turn a noisy, 
+The following figure represents the statistical method employed to turn a noisy, 
 single-number enrichment score into a confident binary classification of 
 each sample. In summary, the method builds a confidence interval around the 
 enrichment score, models the cohort as a mixture of two biological states, and 
@@ -120,7 +120,7 @@ is associated with some biological state, pathway, or phenotype.
 The enrichment scores are first computed for every single sample 
 with the Bioconductor `r BiocStyle::Biocpkg("GSVA")` 
 package [@Hanzelmann2013]. Those scores represent the real score for each 
-sample. Later steps treats this real score as the anchor point around which 
+sample. Later steps treat this real score as the anchor point around which 
 uncertainty gets modeled.
 
 ## Step 2. Permutation
@@ -162,7 +162,7 @@ against that null distribution. If the real score is implausible under the
 low-enrichment distribution (i.e., it falls somewhere that distribution 
 would rarely produce), the null hypothesis is rejected. In that situation, the 
 sample is classified as belonging to the higher-enrichment group which implies 
-it is assigned to the tested signature. Otherwise, the samples is not 
+it is assigned to the tested signature. Otherwise, the sample is not 
 classified. 
 
 <br />
@@ -217,7 +217,7 @@ The row annotation must correspond to the signature format. As an example, if
 the signatures are composed of gene names, the row annotation for the 
 normalized expected counts must also be gene names.
 
-For GSVA analysis, the normalized expect counts should be log-transform to 
+For GSVA analysis, the normalized expected counts should be log-transformed to 
 enable the use of the Gaussian distribution function. The current 
 behavior of GSVA is to automatically choose one of the available distribution 
 functions. 
@@ -335,7 +335,7 @@ classification(result)[['Classical']]
 
 ## Visual representation of the results at the permutation step
 
-The _plotPermutationSamplesDistribution()_ function enable the visualization 
+The _plotPermutationSamplesDistribution()_ function enables the visualization 
 of the GSVA results obtained during the permutation step for a specific 
 signature and specific samples. 
 
@@ -358,7 +358,7 @@ From the permutation step, the standard deviation is calculated for each
 samples. The upscaling is done with the real GSVA score as mean and the 
 calculated standard deviation.
 
-The _plotPermutationSamplesNormal()_ function shown the GSVA scores sampled 
+The _plotPermutationSamplesNormal()_ function shows the GSVA scores sampled 
 during the upscaling step. The mean is shown as a vertical dotted line while 
 the normal distribution is shown as a dashed line. The samples GSVA scores 
 are shown as dots in this graph.
@@ -403,12 +403,12 @@ Tiriac et al. [@Tiriac2018].
 
 ```{r classifcationTiriac, echo=TRUE}
 
-## Assignation from Tiriac et al
+## Assignments from Tiriac et al
 tiriacAssign <- read.table("Moffitt_Tiriac_Assignation.txt", sep="\t",
                                     header=TRUE)
 
-## Assignation from the mixture model are extracted from the result
-## Be default, the samples are considered unclassified
+## Assignments from the mixture model are extracted from the result
+## By default, the samples are considered unclassified
 ## The samples are classified only if they are assign to one of the signatures
 ## When assigned to both signatures, the samples remain unclassified
 assignation <- data.frame(
@@ -421,7 +421,7 @@ assignation$newAssignation[which(assignation$Classical == "Classical" &
 assignation$newAssignation[which(assignation$Basal == "Basal-like" & 
                     assignation$Classical == "unclassified")] <- "Basal-like"
 
-## Merge the current assignations with the Tiriac et al. assignations into 
+## Merge the current assignments with the Tiriac et al. assignments into 
 ## one data frame
 assignation <- merge(assignation[, c("Samples", "newAssignation")], 
                      tiriacAssign, by.x="Samples", 
