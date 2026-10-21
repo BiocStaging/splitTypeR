@@ -20,5 +20,13 @@ internalSignatures <- list(
         "SULT1C2", "AGR3", "ATP7B", "LYZ", "TESC", "TOX3", "SH3BGRL2", "GMDS",
         "GATA6", "GPX2", "CA2", "ST6GALNAC1", "FOXA3", "AKR1C3", "TMC5",
         "CYP2S1", "PAQR8", "HKDC1", "IYD", "DOK4", "CYP2C18", "KCNE3", 
-        "FZD5", "RASEF", "GKN1")
+        "FZD5", "RASEF", "GKN1"),
+    "Moffitt_Basal_like"=c("VGLL1", "UCA1", "S100A2", "LY6D", "SPRR3", 
+        "SPRR1B", "LEMD1", "KRT15", "CTSL2", "DHRS9", "AREG", "CST6", 
+        "SERPINB3", "KRT6C", "KRT6A", "SERPINB4", "FAM83A", "SCEL", "FGFBP1", 
+        "KRT7", "KRT17", "GPR87", "TNS4", "SLC2A1", "ANXA8L2"),
+    "Moffitt_Classical"=c("BTNL8", "FAM3D", "ATAD4", "AGR3", "CTSE", 
+        "LOC400573", "LYZ", "TFF2", "TFF1", "ANXA10", "LGALS4", "PLA2G10", 
+        "CEACAM6", "VSIG2", "TSPAN8", "ST6GALNAC1", "AGR2", "TFF3", "CYP3A7", 
+        "MYO1A", "CLRN3", "KRT20", "CDH17","SPINK4", "REG4")
 )

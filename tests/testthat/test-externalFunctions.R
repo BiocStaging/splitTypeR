@@ -358,7 +358,7 @@ test_that("runSubtypingBimodal() must return expected results", {
 test_that("getGeneSignaturesNames() must return the expected signature names", {
     
     expResults <- c("Tiriac_PDAC_PDO_Basal_like", 
-                        "Tiriac_PDAC_PDO_Classical")
+        "Tiriac_PDAC_PDO_Classical", "Moffitt_Basal_like", "Moffitt_Classical")
 
     results <- getGeneSignaturesNames()
 
@@ -372,7 +372,7 @@ test_that("getGeneSignaturesNames() must return the expected signature names", {
 test_that("getGeneSignatures() must return the expected signatures", {
     
     expNames <- c("Tiriac_PDAC_PDO_Basal_like",
-                    "Tiriac_PDAC_PDO_Classical")
+        "Tiriac_PDAC_PDO_Classical", "Moffitt_Basal_like", "Moffitt_Classical")
     results <- getGeneSignatures()
 
     expect_equal(names(results), expNames)

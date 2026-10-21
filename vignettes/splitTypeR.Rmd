@@ -484,7 +484,7 @@ retained <- assignation$Samples[which(assignation$newAssignation !=
 
 # Available signatures
 
-The *splitTypeR* package provides two transcriptomic signatures.
+The *splitTypeR* package provides transcriptomic signatures.
 
 The _getGeneSignaturesNames()_ function lists the names of all the 
 available signatures.
@@ -519,6 +519,10 @@ The current signatures are:
 patient-derived organoids (PDOs) in Tiriac et al. [@Tiriac2018].
 * **Tiriac_PDAC_PDO_Classical**: the classical signature 
 (62 genes) defined for PDAC PDOs in Tiriac et al. [@Tiriac2018].
+* **Moffitt_Basal_like**: the original basal-like signature 
+(25 genes) defined for PDAC in Moffitt et al. [@Moffitt2015].
+* **Moffitt_Classical**: the original classical signature 
+(25 genes) defined for PDAC in Moffitt et al. [@Moffitt2015].
 
 <br />
 
