@@ -182,7 +182,7 @@ blend of two underlying populations (a "low-mean" population and a
 
 ## Step 5. Classification
 
-For each sample, a hypothesis testing whether its real score is consistent 
+For each sample, a hypothesis test checks whether its real score is consistent 
 with belonging to the "low-mean" distribution.
 
 For each sample, the pipeline runs a hypothesis test where the Null 
@@ -457,8 +457,8 @@ sample. The upscaling is done with the real GSVA score as mean and the
 calculated standard deviation.
 
 The _plotPermutationSamplesNormal()_ function shows the GSVA scores sampled 
-during the upscaling step. The mean is shown as a vertical dotted line while 
-the normal distribution is shown as a dashed line. The samples GSVA scores 
+during the upscaling step. The mean is shown as a vertical dotted line, while 
+the normal distribution is shown as a dashed line. The sampled GSVA scores 
 are shown as dots in this graph.
 
 ```{r graphUp, echo=TRUE}
