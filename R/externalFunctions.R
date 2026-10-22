@@ -233,7 +233,7 @@ getGeneSignatures <- function(nameList=NULL) {
 getGenesInSignature <- function(name) {
     if (!(is.character(name) && length(name) == 1)) {
         stop("The \'name\' parameter must be one string of characters ", 
-             "representing the selected signature name.")
+                "representing the selected signature name.")
     }
     
     if (!(name %in% names(internalSignatures))) {

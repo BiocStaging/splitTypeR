@@ -3,7 +3,8 @@
 \encoding{UTF-8}
 \name{plotPermutationSamplesNormal}
 \alias{plotPermutationSamplesNormal}
-\title{Graph TODO}
+\title{Graph the enrichment results as violin plots from the permutation 
+step}
 \usage{
 plotPermutationSamplesNormal(x, signature, samples, pointColor = "darkred")
 }
@@ -33,7 +34,9 @@ permutation step. The enrichment scores values sampled at the upscaling
 step are shown as dots in the graph.
 }
 \description{
-TODO
+This function generates a graph showing the enrichment results, 
+as violin plots, as obtained from the permutation step, for the selected 
+samples.
 }
 \examples{
 

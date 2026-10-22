@@ -24,7 +24,8 @@ from \code{runSubtyping}function, to be graphed.}
 that will be used to create the graph. The signature must 
 be present in the object.}
 
-\item{breaks}{a single \code{integer} value TODO}
+\item{breaks}{a single \code{integer} value giving the number of cells 
+for the histogram,}
 
 \item{colorSignature}{a \code{character} string representing the color of 
 the signature distribution curve. Default: \code{"black"}.}

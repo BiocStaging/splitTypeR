@@ -283,9 +283,9 @@ normalMix <- function(geneLists, resultNorm) {
     ## Warning when not all signatures are successful
     if (any(success)) {
         i <- paste0(names(success)[which(success)], collapse = ", ")
-        warning(paste0("! The normal distributions could not be calculated ", 
-            "successfully for the signature(s): ", i), call.=FALSE, 
-            immediate.=TRUE)
+        message <- paste0("! The normal distributions could not be ", 
+                        "calculated successfully for the signature(s): ", i)
+        warning(message, call.=FALSE, immediate.=TRUE)
     }
     
     return(resModel)

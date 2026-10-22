@@ -14,7 +14,8 @@
 #' that will be used to create the graph. The signature must 
 #' be present in the object.
 #' 
-#' @param breaks a single \code{integer} value TODO
+#' @param breaks a single \code{integer} value giving the number of cells 
+#' for the histogram,
 #' 
 #' @param colorSignature a \code{character} string representing the color of 
 #' the signature distribution curve. Default: \code{"black"}.
@@ -62,19 +63,11 @@ plotDensityWithUpscalingSamplesBimodal <- function(x, signature, breaks=22L,
     colorSignature="black", colorAlternative="#A9A9AD", 
     colorBorderSamples="azure4", colorFillingSamples="azure3") {
     
-    if (!inherits(x, "SplitTypeRdata")) {
-        stop("The x object must be of class \'SplitTypeRdata\'.")
-    }
-
-    if (is.null(model(x))) {
-        stop("The x object must contain a distribution model (model slot).")
-    }
-
-    if (!signature %in% names(model(x)) || 
-            !signature %in% names(upscaling(x))) {
-        stop("The signature \'", signature, "\' must be present in the ", 
-                "\'SplitTypeRdata\' object.")
-    }
+    validatePlotDensityWithUpscalingSamplesBimodal(x=x, signature=signature, 
+        breaks=breaks, colorSignature=colorSignature, 
+        colorAlternative=colorAlternative, 
+        colorBorderSamples=colorBorderSamples, 
+        colorFillingSamples=colorFillingSamples)
 
     model <- model(x)[[signature]]
 
@@ -239,9 +232,12 @@ plotPermutationSamplesDistribution <- function(x, signature, samples,
 }
 
 
-#' @title Graph TODO
+#' @title Graph the enrichment results as violin plots from the permutation 
+#' step
 #'
-#' @description TODO
+#' @description This function generates a graph showing the enrichment results, 
+#' as violin plots, as obtained from the permutation step, for the selected 
+#' samples.
 #'
 #' @param x a \code{list} of class "splitTypeResults", the output object 
 #' from \code{runSubtyping}function, to be graphed.
@@ -298,22 +294,8 @@ plotPermutationSamplesDistribution <- function(x, signature, samples,
 plotPermutationSamplesNormal <- function(x, signature, samples, 
     pointColor="darkred") {
 
-    if (!inherits(x, "SplitTypeRdata")) {
-        stop("The x object must be of class \'SplitTypeRdata\'.")
-    }
-
-    if (!signature %in% names(upscaling(x))) {
-        stop("The signature \'", signature, "\' must be present in the ", 
-                "\'SplitTypeRdata\' object.")
-    }
-    
-    if (!is.vector(samples) || !is.character(samples) || 
-            length(samples) == 0 || 
-            !all(samples %in% rownames(upscaling(x)[[signature]]))) { ## || 
-         ##   !all(samples %in% colnames(x$GSVA_RESULTS))) {                                                        ) {
-        stop("All the samples must all be present in the ", 
-                "\'SplitTypeRdata\' object.")
-    }
+    validatePlotPermutationSamplesNormal(x=x, signature=signature, 
+            samples=samples, pointColor=pointColor)
 
     samples <- unique(samples) 
     upscaleRes <- upscaling(x)[[signature]]
@@ -326,7 +308,6 @@ plotPermutationSamplesNormal <- function(x, signature, samples,
         allPoints[[length(allPoints) + 1]] <- tmp
     }
     allPoints <- do.call(rbind, allPoints)
-
     realGSVA <- data.frame(sample=samples,
                     score=gsvaResults(x)[signature, samples])
 
@@ -340,16 +321,14 @@ plotPermutationSamplesNormal <- function(x, signature, samples,
             dnorm(seqPos, mean=gsvaResults(x)[signature, i],
                     sd=standardDeviation(x)[[signature]][i]) 
     }
-  
+    
     maxValue <- max(dataTmp$density)
     allPoints$y_value <- sample(seq(from=0.03, to=floor(maxValue-0.03), 
-                                    by=0.01), size=nrow(allPoints), 
-                                    replace=TRUE)
+            by=0.01), size=nrow(allPoints), replace=TRUE)
   
     densityPlot <-  ggplot(dataTmp, aes(x=.data$x_value)) +
         geom_line(aes(y=.data$density), linewidth=1, linetype="longdash", 
-                    show.legend=TRUE) + 
-        xlim(-1, 1) + ylab("Density") +
+                    show.legend=TRUE) + xlim(-1, 1) + ylab("Density") +
         geom_vline(data=realGSVA, aes(xintercept=.data$score), 
                     linetype="dotted",  color = "gray15", linewidth=1) +
         geom_point(data=allPoints, aes(x=.data$score, y=.data$y_value), 
