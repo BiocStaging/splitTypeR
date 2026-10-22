@@ -453,7 +453,7 @@ plotPermutationSamplesDistribution(x=result, signature="Classical",
 ## Visual representation of the results at the upscaling step
 
 From the permutation step, the standard deviation is calculated for each 
-samples. The upscaling is done with the real GSVA score as mean and the 
+sample. The upscaling is done with the real GSVA score as mean and the 
 calculated standard deviation.
 
 The _plotPermutationSamplesNormal()_ function shows the GSVA scores sampled 
@@ -478,7 +478,7 @@ plotPermutationSamplesNormal(result, signature="Classical",
 
 The _plotDensityWithUpscalingSamplesBimodal()_ function enables the 
 visualization of the two normal distributions obtained for a specific 
-signature. In this graph, the GSVA values are the one obtained from the 
+signature. In this graph, the GSVA values are those generated during the 
 upscaling step.
 
 ```{r graphDensity, echo=TRUE}
