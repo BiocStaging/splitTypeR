@@ -29,7 +29,7 @@ suppressPackageStartupMessages({
 
 # Licensing and citing
 
-This package and the underlying `r Rpackage("splitTypeR")` code are 
+This package and the underlying __`r Rpackage("splitTypeR")`__ code are 
 distributed under the Artistic license 2.0. You are free to use and 
 redistribute this software.
 
@@ -88,8 +88,8 @@ This classification method is designed for bulk transcriptomic datasets.
 
 # Installation
 
-As with any R package, the `r Rpackage("splitTypeR")` package should first be 
-loaded with the following command:
+As with any R package, the __`r Rpackage("splitTypeR")`__ package should first 
+be loaded with the following command:
 
 ```{r loadingPackage, warning=FALSE, message=FALSE}
 library(splitTypeR)
@@ -190,11 +190,11 @@ Each sample is classified with a one-sided hypothesis test based on the
 * **Null hypothesis (H₀)**: the sample belongs to the "low-mean" distribution
 * **Alternative hypothesis (H₁)**: the sample belongs to the "high-mean" population
 
-The sample's real enrichment score (from Step 1) is compared to the 
-"low-mean" distribution. The p-value is the probability that this 
-distribution produces a score at least as high as the real score. H₀ is 
-rejected when the real score is above the 95th percentile of the "low-mean" 
-distribution (equivalent to a p-value below 0.05).
+The 95th percentile of the "low-mean" distribution (equivalent to a p-value 
+below 0.05) is calculated and considered as the threshold. 
+H₀ is rejected when the real score is above this threshold. Each sample's 
+real enrichment score (from Step 1) is compared to this threshold to do the 
+classification.
 
 When H₀ is rejected (p-value < 0.05), the sample is assigned to the tested 
 signature. Otherwise, the sample is labeled as "unclassified" for that 
@@ -208,7 +208,7 @@ to one signature, to several signatures, or to none of them.
 
 # Available signatures
 
-The *splitTypeR* package provides transcriptomic signatures.
+The __`r Rpackage("splitTypeR")`__ package provides transcriptomic signatures.
 
 The _getGeneSignaturesNames()_ function lists the names of all the 
 available signatures.
@@ -252,7 +252,8 @@ patient-derived organoids (PDOs) in Tiriac et al. [@Tiriac2018].
 
 ## Using your own signatures
 
-The method is not limited to the signatures included in the *splitTypeR* 
+The method is not limited to the signatures included in the 
+__`r Rpackage("splitTypeR")`__
 package. Any named `list` of at least two gene vectors can be passed to the 
 _runSubtypingBimodal()_ function. The names of the list are used as the 
 signature names in the results. The gene identifiers must use the same 
