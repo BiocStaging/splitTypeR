@@ -183,19 +183,19 @@ blend of two underlying populations (a "low-mean" population and a
 ## Step 5. Classification
 
 Each sample is classified with a one-sided hypothesis test based on the 
-“low-mean” distribution of the mixture model (from Step 4):
+"low-mean" distribution of the mixture model (from Step 4):
 
-* **Null hypothesis (H₀)**: the sample belongs to the “low-mean” distribution
-* **Alternative hypothesis (H₁)**: the sample belongs to the “high-mean” population
+* **Null hypothesis (H₀)**: the sample belongs to the "low-mean" distribution
+* **Alternative hypothesis (H₁)**: the sample belongs to the "high-mean" population
 
-The sample’s real enrichment score (from Step 1) is compared to the 
-“low-mean” distribution. The p-value is the probability that this 
+The sample's real enrichment score (from Step 1) is compared to the 
+"low-mean" distribution. The p-value is the probability that this 
 distribution produces a score at least as high as the real score. H₀ is 
-rejected when the real score is above the 95th percentile of the “low-mean” 
+rejected when the real score is above the 95th percentile of the "low-mean" 
 distribution.
 
 When H₀ is rejected (p-value < 0.05), the sample is assigned to the tested 
-signature. Otherwise, the sample is labeled as “unclassified” for that 
+signature. Otherwise, the sample is labeled as "unclassified" for that 
 signature.
 
 Since each signature is tested independently, a sample can be assigned 
