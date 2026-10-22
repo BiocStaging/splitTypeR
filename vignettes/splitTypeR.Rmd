@@ -182,7 +182,6 @@ blend of two underlying populations (a "low-mean" population and a
 
 ## Step 5. Classification
 
-
 Each sample is classified with a one-sided hypothesis test based on the 
 “low-mean” distribution of the mixture model (from Step 4):
 
@@ -464,8 +463,8 @@ sample. The upscaling is done with the real GSVA score as mean and the
 calculated standard deviation.
 
 The _plotPermutationSamplesNormal()_ function shows the GSVA scores sampled 
-during the upscaling step. The mean is shown as a vertical dotted line while 
-the normal distribution is shown as a dashed line. The samples GSVA scores 
+during the upscaling step. The mean is shown as a vertical dotted line, while 
+the normal distribution is shown as a dashed line. The sampled GSVA scores 
 are shown as dots in this graph.
 
 ```{r graphUp, echo=TRUE}
