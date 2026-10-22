@@ -314,8 +314,8 @@ signaturesList[["Classical"]] <-
 
 ## Prepare the log2-transformed normalized expected counts
 
-A matrix of normalized expected counts is required. The rows are the genes, while 
-the patients (samples) are the columns.
+A matrix of normalized expected counts is required. The rows are the genes, 
+while the patients (samples) are the columns.
 
 The row annotation must correspond to the signature format. As an example, if 
 the signatures are composed of gene names, the row annotation for the 
