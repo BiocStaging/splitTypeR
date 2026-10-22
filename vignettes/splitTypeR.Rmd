@@ -544,16 +544,64 @@ of
 the samples (`r sum(assignation$newAssignation == assignation$Moffitt)` out of
 `r nrow(assignation)`) are assigned the same subtype.
 
-```{r compared, echo=TRUE}
+The following graph shows the GSVA scores of each sample for both
+signatures. The dashed lines represent the classification threshold of each
+signature (the 95th percentile of the "low-mean" distribution). A sample
+located to the right of the vertical line is assigned to the classical
+signature, while a sample located above the horizontal line is assigned to
+the basal-like signature. The samples for which the classification differs
+from Tiriac et al. [@Tiriac2018] are labeled.
 
-gsva <- data.frame(Classical=classification(result)[['Classical']]$GSVA_score, 
-                   Basal=classification(result)[['Basal-like']]$GSVA_score, 
-                   row.names=rownames(classification(result)[['Basal-like']]))
+```{r compared, echo=TRUE, fig.width=7, fig.height=5.5}
 
-retained <- assignation$Samples[which(assignation$newAssignation != 
-                                            assignation$Moffitt)]
+## Required package
+library(ggplot2)
+
+## Get the GSVA score of each sample for both signatures
+gsva <- data.frame(
+    Samples=rownames(classification(result)[['Classical']]),
+    Classical=classification(result)[['Classical']]$GSVA_score,
+    Basal=classification(result)[['Basal-like']]$GSVA_score)
+
+## Add the assignments and identify the samples with a different
+## classification than Tiriac et al.
+gsva <- merge(gsva, assignation, by="Samples")
+gsva$Agreement <- ifelse(gsva$newAssignation == gsva$Moffitt,
+    "Same classification", "Different classification")
+
+## Classification threshold of each signature: the 95th percentile of the
+## "low-mean" distribution of the mixture model
+getThreshold <- function(mixModel) {
+    posMin <- which.min(mixModel$mu)
+    qnorm(p=0.95, mean=mixModel$mu[posMin], sd=mixModel$sigma[posMin])
+}
+thresholdClassical <- getThreshold(model(result)[['Classical']])
+thresholdBasal <- getThreshold(model(result)[['Basal-like']])
+
+## Scatter plot of the GSVA scores with the classification thresholds
+## The vertical dashed line is the classical threshold and the horizontal
+## dashed line is the basal-like threshold
+ggplot(gsva, aes(x=Classical, y=Basal)) +
+    geom_vline(xintercept=thresholdClassical, linetype="dashed",
+        color="gray40") +
+    geom_hline(yintercept=thresholdBasal, linetype="dashed",
+        color="gray40") +
+    geom_point(aes(color=Agreement, shape=Moffitt), size=3) +
+    geom_text(data=gsva[gsva$Agreement == "Different classification", ],
+        aes(label=Samples), vjust=-1, size=3.5) +
+    scale_color_manual(values=c("Same classification"="gray60",
+        "Different classification"="firebrick")) +
+    labs(x="GSVA score - Classical signature",
+        y="GSVA score - Basal-like signature",
+        color="Compared to Tiriac et al.", shape="Tiriac et al.") +
+    theme_bw()
 
 ```
+
+Most samples that are not assigned to the same subtype have intermediate
+scores and are located where the classical and basal-like samples meet.
+Sample hF50 is located in the region where both signatures are assigned and
+therefore remains unclassified.
 
 <br />
 
