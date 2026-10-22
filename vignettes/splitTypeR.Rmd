@@ -188,13 +188,13 @@ Each sample is classified with a one-sided hypothesis test based on the
 "low-mean" distribution of the mixture model (from Step 4):
 
 * **Null hypothesis (H₀)**: the sample belongs to the "low-mean" distribution
-* **Alternative hypothesis (H₁)**: the sample belongs to the "high-mean" population
+* **Alternative hypothesis (H₁)**: the sample belongs to the "high-mean" distribution
 
-The 95th percentile of the "low-mean" distribution (equivalent to a p-value 
-below 0.05) is calculated and considered as the threshold. 
-H₀ is rejected when the real score is above this threshold. Each sample's 
-real enrichment score (from Step 1) is compared to this threshold to do the 
-classification.
+The 95th percentile of the "low-mean" distribution is used as the
+classification threshold. Each sample's real enrichment score (from Step 1)
+is compared to this threshold. A score above the threshold has less than a
+5% probability of being produced by the "low-mean" distribution (one-sided
+p-value < 0.05). In that case, H₀ is rejected.
 
 When H₀ is rejected (p-value < 0.05), the sample is assigned to the tested 
 signature. Otherwise, the sample is labeled as "unclassified" for that 
