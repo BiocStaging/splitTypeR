@@ -196,6 +196,39 @@ is compared to this threshold. A score above the threshold has less than a
 5% probability of being produced by the "low-mean" distribution (one-sided
 p-value < 0.05). In that case, H₀ is rejected.
 
+```{r step5Schematic, echo=FALSE, message=FALSE, fig.width=7, fig.height=4, fig.align='center', fig.cap="Classification of the samples (schematic). The curve represents the \"low-mean\" distribution of the mixture model. The dashed line is the classification threshold (95th percentile) and the shaded area represents the upper 5% of the distribution. Sample A, with a score below the threshold, remains unclassified while sample B, with a score above the threshold, is assigned to the signature."}
+library(ggplot2)
+
+## Illustrative "low-mean" distribution (values chosen for the schematic)
+lowMean <- -0.4
+lowSD <- 0.2
+threshold <- qnorm(p=0.95, mean=lowMean, sd=lowSD)
+
+curve <- data.frame(score=seq(-1, 0.6, length.out=500))
+curve$density <- dnorm(curve$score, mean=lowMean, sd=lowSD)
+
+## Two example samples, one on each side of the threshold
+examples <- data.frame(score=c(-0.3, 0.25),
+    label=c("Sample A\nunclassified", "Sample B\nassigned to\nthe signature"),
+    hjust=c(0.5, 0), nudgeX=c(0, -0.02))
+
+ggplot(curve, aes(x=score, y=density)) +
+    geom_area(data=curve[curve$score >= threshold, ], fill="firebrick",
+        alpha=0.4) +
+    geom_line(linewidth=1) +
+    geom_vline(xintercept=threshold, linetype="dashed", color="gray30") +
+    annotate("text", x=threshold + 0.02, y=max(curve$density) * 1.05,
+        label="Threshold\n(95th percentile)", hjust=0, vjust=1, size=3.5) +
+    annotate("text", x=threshold + 0.035, y=0.12, label="5%",
+        color="firebrick4", size=3.5, fontface="bold") +
+    geom_point(data=examples, aes(x=score, y=0), size=3.5, shape=17) +
+    geom_text(data=examples, aes(x=score + nudgeX, y=0.1, label=label,
+        hjust=hjust), vjust=0, size=3.2, lineheight=0.9) +
+    labs(x="Enrichment score", y="Density",
+        title="\"Low-mean\" distribution of the mixture model") +
+    theme_bw()
+```
+
 When H₀ is rejected (p-value < 0.05), the sample is assigned to the tested 
 signature. Otherwise, the sample is labeled as "unclassified" for that 
 signature.
