@@ -192,7 +192,7 @@ The sample's real enrichment score (from Step 1) is compared to the
 "low-mean" distribution. The p-value is the probability that this 
 distribution produces a score at least as high as the real score. H₀ is 
 rejected when the real score is above the 95th percentile of the "low-mean" 
-distribution.
+distribution (equivalent to a p-value below 0.05).
 
 When H₀ is rejected (p-value < 0.05), the sample is assigned to the tested 
 signature. Otherwise, the sample is labeled as "unclassified" for that 
