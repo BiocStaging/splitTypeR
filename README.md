@@ -4,14 +4,15 @@ Transcriptomic subtyping using mixture of normal distributions with **splitTypeR
 [![License: Artistic-2.0](https://img.shields.io/badge/License-Artistic%202.0-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)
 [![codecov](https://codecov.io/gh/adeschen/splitTypeR/branch/devel/graph/badge.svg?token=6H50IVH4JG)](https://codecov.io/gh/adeschen/splitTypeR)
 
-The  **splitTypeR** package provides an automated statistical framework to classify 
-heterogeneous biological samples based on gene signature lists, effectively 
-isolating the signature-positive samples. This classification method is 
-designed for bulk transcriptomic datasets.
+The  **splitTypeR** package provides an automated statistical framework to 
+classify heterogeneous biological samples based on gene signature lists, 
+effectively isolating the signature-positive samples. This classification 
+method is designed for bulk transcriptomic datasets.
 
 ## Citing ##
 
-If you use this package for a publication, we would ask you to cite the following:
+If you use this package for a publication, we would ask you to cite the 
+following:
 
 >  Deschênes A, Belleau P, Tuveson DA (2026). _splitTypeR: Transcriptomic Classification 
   using Mixture of Normal Distributions_. R package version 0.99.1,
