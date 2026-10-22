@@ -355,7 +355,18 @@ log2normCounts <- log2(normCounts + 1)
 
 ## Run the subtyping method
 
-The _runSubtypingBimodal_ function runs all the steps.
+The _runSubtypingBimodal_ function runs all the steps. Three parameters
+control the permutation and upscaling steps:
+
+| Parameter | Description | Default | Trade-off |
+|:----------|:------------|:-------:|:----------|
+| `permRatio` | Proportion of the samples randomly selected in each permutation (Step 2). Must be between 0 and 1, and must not select all the samples. | 0.75 | A lower value creates more variation between permutations, but each GSVA score is computed on fewer samples. |
+| `permNbr` | Number of permutations (Step 2). Must be 5 or higher. | 20 | More permutations give a more stable standard deviation for each sample, but take longer to run since GSVA is run once per permutation. |
+| `upscaleNbr` | Number of values drawn from the normal distribution of each sample (Step 3). Must be 2 or higher. | 10 | More values give more data to fit the mixture model (Step 4), with little impact on the run time. |
+
+Each sample is present, on average, in `permRatio` × `permNbr` permutations
+(15 with the default values), which is the number of values used to estimate
+its standard deviation.
 
 ```{r subtyping, echo=TRUE}
 
