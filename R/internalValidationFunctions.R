@@ -119,7 +119,6 @@ validateRunSubtyping <- function(geneLists, expectedCountsMatrixLog,
 #'     permNbr=10, upscaleNbr=10)
 #' 
 #' @author Astrid Deschênes
-#' @importFrom S4Vectors isSingleInteger 
 #' @importFrom S4Vectors isSingleNumber
 #' @encoding UTF-8
 #' @keywords internal
@@ -131,8 +130,8 @@ validateRunSubtypingSubSection <- function(nbAll, permRatio, permNbr,
         stop("The \'permRatio\' must be a numeric between 0 and 1.")
     }
 
-    if (!(isSingleInteger(permNbr) || isSingleNumber(permNbr) && 
-            permNbr > 4)) {
+    if (!(isSingleNumber(permNbr) && permNbr == round(permNbr) && 
+            permNbr >= 5)) {
         stop("The \'permNbr\' must be an integer higher than or equal to 5.")
     }
 
@@ -149,8 +148,8 @@ validateRunSubtypingSubSection <- function(nbAll, permRatio, permNbr,
             " out of ", nbAll, " samples is ", choose(nbAll, nb), ".")
     }  
 
-    if (!(isSingleInteger(upscaleNbr) || isSingleNumber(upscaleNbr) && 
-            upscaleNbr > 1)) {
+    if (!(isSingleNumber(upscaleNbr) && upscaleNbr == round(upscaleNbr) && 
+            upscaleNbr >= 2)) {
         stop("The \'upscaleNbr\' must be an integer equal to or ", 
             "higher than 2.")
     }

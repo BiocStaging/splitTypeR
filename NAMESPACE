@@ -44,10 +44,7 @@ importFrom(GSVA,
   gsva,
   gsvaParam
 )
-importFrom(S4Vectors,
-  isSingleInteger,
-  isSingleNumber
-)
+importFrom(S4Vectors,isSingleNumber)
 importFrom(ggplot2,
   aes,
   element_text,
