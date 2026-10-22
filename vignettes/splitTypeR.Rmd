@@ -1,11 +1,11 @@
 ---
-title: "Transcriptomic classification using mixture of normal distributions"
+title: "Transcriptomic Classification using Mixture of Normal Distributions"
 output:
   BiocStyle::html_document:
     toc: true
 bibliography: splitTypeR.bibtex
 vignette: >
-  %\VignetteIndexEntry{Transcriptomic classification using mixture of normal distributions}
+  %\VignetteIndexEntry{Transcriptomic Classification using Mixture of Normal Distributions}
   %\VignettePackage{splitTypeR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
