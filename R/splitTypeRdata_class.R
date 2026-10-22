@@ -68,33 +68,31 @@ setClassUnion("MatrixOrNULL", members = c("matrix", "NULL"))
 #' @exportClass SplitTypeRdata
 #' @export
 setClass("SplitTypeRdata",
-         slots = c(
-             signatures="ListOrNULL",
-             gsvaResults="MatrixOrNULL",
-             permutations="ListOrNULL",
-             standardDeviation="ListOrNULL",
-             upscaling="ListOrNULL",
-             model="ListOrNULL",
-             classification="ListOrNULL"
-         ),
-         prototype = list(
-             signatures=NULL,
-             gsvaResults=NULL,
-             permutations=NULL,
-             standardDeviation=NULL,
-             upscaling=NULL,
-             model=NULL,
-             classification=NULL
-         )
+        slots = c(
+            signatures="ListOrNULL",
+            gsvaResults="MatrixOrNULL",
+            permutations="ListOrNULL",
+            standardDeviation="ListOrNULL",
+            upscaling="ListOrNULL",
+            model="ListOrNULL",
+            classification="ListOrNULL"
+        ),
+        prototype = list(
+            signatures=NULL,
+            gsvaResults=NULL,
+            permutations=NULL,
+            standardDeviation=NULL,
+            upscaling=NULL,
+            model=NULL,
+            classification=NULL
+        )
 )
 
 ## Validation
 setValidity("SplitTypeRdata", function(object) {
- 
+
     if (!is.null(object@signatures)) {
         signTmp <- names(object@signatures)
-        
-        
     }
     
     TRUE

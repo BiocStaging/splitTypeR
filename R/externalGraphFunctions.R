@@ -325,7 +325,7 @@ plotPermutationSamplesNormal <- function(x, signature, samples,
     maxValue <- max(dataTmp$density)
     allPoints$y_value <- sample(seq(from=0.03, to=floor(maxValue-0.03), 
             by=0.01), size=nrow(allPoints), replace=TRUE)
-  
+    
     densityPlot <-  ggplot(dataTmp, aes(x=.data$x_value)) +
         geom_line(aes(y=.data$density), linewidth=1, linetype="longdash", 
                     show.legend=TRUE) + xlim(-1, 1) + ylab("Density") +

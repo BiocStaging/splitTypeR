@@ -14,8 +14,8 @@ vignette: >
 ```{r style, echo = FALSE, results = 'asis', message = FALSE}
 BiocStyle::markdown()
 suppressPackageStartupMessages({
-  library(knitr)
-  library(SummarizedExperiment)
+    library(knitr)
+    library(SummarizedExperiment)
 })
 ```
 
@@ -129,7 +129,7 @@ complete demonstration on a published dataset.
 <br />
 
 # Method
-  
+
 The following figure represents the statistical method employed to turn a noisy, 
 single-number enrichment score into a confident binary classification of 
 each sample. In summary, the method builds a confidence interval around the 
@@ -181,7 +181,7 @@ a mixture model approach implemented in the `r BiocStyle::CRANpkg("mixtools")`
 package [@JSSv032i06]. The assumption is that the whole cohort is a
 blend of two underlying populations (a "low-mean" population and a
 "high-mean" population).
- 
+
 
 ## Step 5. Classification
 
@@ -414,10 +414,10 @@ set.seed(81)
 
 ## Run the subtyping method using the log2-transformed data
 result <- runSubtypingBimodal(geneLists=signaturesList, 
-  expectedCountsMatrixLog=log2normCounts,
-  permRatio=0.75,
-  permNbr=20,
-  upscaleNbr=12)
+    expectedCountsMatrixLog=log2normCounts,
+    permRatio=0.75,
+    permNbr=20,
+    upscaleNbr=12)
 
 ## Summary of the classification results
 print(result)
@@ -580,8 +580,8 @@ assignation$newAssignation[which(assignation$Basal == "Basal-like" &
 ## Merge the current assignments with the Tiriac et al. assignments into 
 ## one data frame
 assignation <- merge(assignation[, c("Samples", "newAssignation")], 
-                     tiriacAssign, by.x="Samples", 
-                     by.y="Line", all.y=FALSE, all.x=FALSE)
+                        tiriacAssign, by.x="Samples", 
+                        by.y="Line", all.y=FALSE, all.x=FALSE)
 
 table(assignation$newAssignation, assignation$Moffitt)
 ```
