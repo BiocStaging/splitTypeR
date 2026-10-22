@@ -49,10 +49,10 @@ tumor aggressiveness and growth rates. For example, breast cancer subtypes
 (like Luminal-A, Luminal-B, HER2-enriched, or Basal-like) help forecast 
 patient outcomes [@Cascianelli2020]. The Luminal-A is the most 
 common molecular subtype of breast cancer, making up to 60% of all breast 
-cancer cases. It also is associated with good prognosis. While 
+cancer cases. It is also associated with good prognosis, while 
 Luminal-B tumors have a more aggressive phenotype and a worse 
-prognosis [@Yersal2014]. Once gene signatures for RNA subtyping become 
-widely accepted by major oncology organizations, they start to classify cancer 
+prognosis [@Yersal2014]. Once widely accepted by major oncology
+organizations, gene signatures for RNA subtyping are used to classify cancer
 subtypes, predict patient survival, and guide treatment.
 
 From a research aspect, the classification of new samples using their 
@@ -134,7 +134,7 @@ enrichment score, models the cohort as a mixture of two biological states, and
 then statistically tests each sample against that mixture.
 
 
-```{r piplineSchema, echo=FALSE, fig.align='center', out.width="100%", fig.cap="General workflow."}
+```{r pipelineSchema, echo=FALSE, fig.align='center', out.width="100%", fig.cap="General workflow."}
 knitr::include_graphics("enrichment_pipeline_300dpi_crop2.jpg")
 ```
 <br />
@@ -157,7 +157,7 @@ uncertainty gets modeled.
 
 Random subsets of samples, of fixed size, from the full dataset are 
 repetitively drawn. For each of these resampled subsets, the enrichment score 
-for the samples present are recomputed.
+for the samples present is recomputed.
 
 This step enables a per-sample uncertainty estimation (standard deviation).
 
@@ -498,7 +498,7 @@ Let's compare the classification obtained here with the one from
 Tiriac et al. [@Tiriac2018].
 
 
-```{r classifcationTiriac, echo=TRUE}
+```{r classificationTiriac, echo=TRUE}
 
 ## Assignments from Tiriac et al
 tiriacAssign <- read.table("Moffitt_Tiriac_Assignation.txt", sep="\t",
