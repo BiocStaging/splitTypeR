@@ -1,0 +1,14 @@
+## The information is extracted from the DESCRIPTION file
+## to keep the citation in sync with the package
+
+## Retain only the authors (role "aut")
+authors <- eval(parse(text=meta$`Authors@R`))
+authors <- authors[vapply(authors$role, function(x) "aut" %in% x, 
+    logical(1))]
+
+bibentry(bibtype="Manual",
+    title=sprintf("%s: %s", meta$Package, meta$Title),
+    author=authors,
+    year=format(as.Date(meta$Date), "%Y"),
+    note=sprintf("R package version %s", meta$Version),
+    url="https://github.com/adeschen/splitTypeR")

@@ -33,11 +33,13 @@ This package and the underlying `r Rpackage("splitTypeR")` code are
 distributed under the Artistic license 2.0. You are free to use and 
 redistribute this software.
 
-If you use this package for a publication, we would ask you to cite the 
+If you use this package for a publication, we would ask you to cite the
 following:
 
->  Deschênes A, Belleau P, Tuveson David A (2026). _splitTypeR: Transcriptomic classification using mixture of normal distributions_. R package version 0.99.0,
-  <https://github.com/adeschen/splitTypeR>.
+```{r citation, echo=TRUE}
+## Citation information for the splitTypeR package
+citation("splitTypeR")
+```
 
 <br />
 
