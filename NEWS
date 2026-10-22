@@ -1,3 +1,13 @@
+CHANGES IN VERSION 0.99.1
+-------------------------
+
+BUG FIXES
+
+    - The validation of the 'permNbr' and 'upscaleNbr' parameters now 
+    correctly rejects integer values below the minimum (ex: 2L, 0L) and 
+    non-whole numbers (ex: 5.5)
+
+
 CHANGES IN VERSION 0.99.0
 -------------------------
 
