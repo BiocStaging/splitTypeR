@@ -538,9 +538,9 @@ table(assignation$newAssignation, assignation$Moffitt)
 
 <br />
 
-More than 
-`r floor(sum(assignation$newAssignation == assignation$Moffitt)/nrow(assignation)*100)`% 
-of 
+About
+`r round(sum(assignation$newAssignation == assignation$Moffitt)/nrow(assignation)*100)`%
+of
 the samples (`r sum(assignation$newAssignation == assignation$Moffitt)` out of
 `r nrow(assignation)`) are assigned the same subtype.
 
