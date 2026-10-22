@@ -176,8 +176,8 @@ The synthetic values across all samples are pooled to fit two overlapping
 normal distributions to them. The two normal distributions are extracted using 
 a mixture model approach implemented in the `r BiocStyle::CRANpkg("mixtools")`
 package [@JSSv032i06]. The idea being that the whole cohort is actually a 
-blend of two underlying populations (a "low mean" group and a 
-"high mean" group). 
+blend of two underlying populations (a "low-mean" population and a 
+"high-mean" population). 
  
 
 ## Step 5. Classification
