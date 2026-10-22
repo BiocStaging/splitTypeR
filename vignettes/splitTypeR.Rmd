@@ -186,12 +186,12 @@ For each sample, a hypothesis testing whether its real score is consistent
 with belonging to the "low-mean" distribution.
 
 For each sample, the pipeline runs a hypothesis test where the Null 
-hypothesis (H₀) is that the sample actually belongs to the lower-mean 
+hypothesis (H₀) is that the sample actually belongs to the "low-mean" 
 distribution. The sample's real enrichment score (from Step 1) is checked 
 against that null distribution. If the real score is implausible under the 
 "low-mean" distribution (i.e., it falls somewhere that distribution 
 would rarely produce), the null hypothesis is rejected. In that situation, the 
-sample is classified as belonging to the higher-enrichment group which implies 
+sample is classified as belonging to the "high-mean" population, which implies 
 it is assigned to the tested signature. Otherwise, the sample is not 
 classified. 
 
