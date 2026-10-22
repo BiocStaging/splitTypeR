@@ -251,7 +251,7 @@ signature names in the results. The gene identifiers must use the same
 format as the row names of the expression matrix (e.g., gene names, Ensembl 
 IDs). Genes absent from the expression matrix are ignored. It is recommended 
 to use signatures with 10 genes or more to ensure statistical stability and 
-reliability of the enrichment scores
+reliability of the enrichment scores.
 
 ```{r ownSignatures, echo=TRUE, eval=FALSE}
 ## Example of custom signatures
@@ -422,7 +422,7 @@ classicalModel$mu
 
 <br />
 
-```{r classificatonGetter, echo=TRUE}
+```{r classificationGetter, echo=TRUE}
 ## Get the final classification of the samples for the classical signature
 classification(result)[['Classical']]
 ```
@@ -500,7 +500,7 @@ Tiriac et al. [@Tiriac2018].
 
 ```{r classificationTiriac, echo=TRUE}
 
-## Assignments from Tiriac et al
+## Assignments from Tiriac et al.
 tiriacAssign <- read.table("Moffitt_Tiriac_Assignation.txt", sep="\t",
                                     header=TRUE)
 
