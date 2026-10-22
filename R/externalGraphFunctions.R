@@ -108,7 +108,7 @@ plotDensityWithUpscalingSamplesBimodal <- function(x, signature, breaks=22L,
     plot(curveMax$x[which(curveMax$x>=-1 & curveMax$x<=1)], 
         curveMax$y[which(curveMax$x>=-1 & curveMax$x<=1)], 
         type="l", lty=4, lwd=3, col=colorSignature, 
-        xlab="GSEA score", ylab="Density", bty="n",
+        xlab="GSVA score", ylab="Density", bty="n",
         xlim = c(-1, 1), ylim=c(0, yMax), cex.lab=1.4)
     legend(x=-0.98, y=yMax+0.2, legend=c("Alternative distribution", 
         "Signature distribution", "Sampled values (upscaling step)"), 
@@ -327,7 +327,7 @@ plotPermutationSamplesNormal <- function(x, signature, samples,
     }
     allPoints <- do.call(rbind, allPoints)
 
-    realGSEA <- data.frame(sample=samples,
+    realGSVA <- data.frame(sample=samples,
                     score=gsvaResults(x)[signature, samples])
 
     seqPos <- seq(from=-1, to=1, by=0.005)
@@ -350,7 +350,7 @@ plotPermutationSamplesNormal <- function(x, signature, samples,
         geom_line(aes(y=.data$density), linewidth=1, linetype="longdash", 
                     show.legend=TRUE) + 
         xlim(-1, 1) + ylab("Density") +
-        geom_vline(data=realGSEA, aes(xintercept=.data$score), 
+        geom_vline(data=realGSVA, aes(xintercept=.data$score), 
                     linetype="dotted",  color = "gray15", linewidth=1) +
         geom_point(data=allPoints, aes(x=.data$score, y=.data$y_value), 
                     color=pointColor, show.legend=TRUE) +
