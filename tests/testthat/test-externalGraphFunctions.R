@@ -50,7 +50,7 @@ test_that("plotDensityWithUpscalingSamplesBimodal() must return an error when x 
     model(results) <- NULL
 
     expect_error(plotDensityWithUpscalingSamplesBimodal(x=results, 
-        signature="Tiriac_PDAC_PDO_Basal-like"), error_message, 
+        signature="Basal-like"), error_message, 
         fixed=TRUE)
 })
 
@@ -65,7 +65,7 @@ test_that("plotDensityWithUpscalingSamplesBimodal() must return a list when all 
     ## Use a null device to prevent the creation of a Rplots.pdf file
     pdf(NULL)
     expect_true(is.list(plotDensityWithUpscalingSamplesBimodal(x=results,
-        signature="Tiriac_PDAC_PDO_Basal-like")))
+        signature="Basal-like")))
     dev.off()
 })
 
@@ -112,7 +112,7 @@ test_that("plotPermutationSamplesDistribution() must return an error when one sa
         permRatio=0.75, permNbr=10, upscaleNbr=5)
     
     expect_error(plotPermutationSamplesDistribution(x=results, 
-        signature="Tiriac_PDAC_PDO_Basal-like", 
+        signature="Basal-like", 
         samples=c("sample_154", "sample_2")), error_message)
 })
 
@@ -125,7 +125,7 @@ test_that("plotPermutationSamplesDistribution() must return a ggplot object when
         permRatio=0.75, permNbr=10, upscaleNbr=5)
     
     resultGraph <- plotPermutationSamplesDistribution(x=results, 
-        signature="Tiriac_PDAC_PDO_Basal-like", 
+        signature="Basal-like", 
         samples=c("Patient_3", "Patient_13", "Patient_29"))
 
     expect_true(inherits(resultGraph, "ggplot"))
@@ -174,7 +174,7 @@ test_that("plotPermutationSamplesNormal() must return an error when one sample i
                                    permRatio=0.75, permNbr=10, upscaleNbr=5)
     
     expect_error(plotPermutationSamplesNormal(x=results, 
-            signature="Tiriac_PDAC_PDO_Basal-like", 
+            signature="Basal-like", 
             samples=c("sample_154", "sample_2")), error_message)
 })
 
@@ -187,7 +187,7 @@ test_that("plotPermutationSamplesNormal() must return a ggplot object when succe
                 permRatio=0.75, permNbr=10, upscaleNbr=5)
     
     resultGraph <- plotPermutationSamplesNormal(x=results, 
-            signature="Tiriac_PDAC_PDO_Basal-like", 
+            signature="Basal-like", 
         samples=c("Patient_3", "Patient_13", "Patient_29"))
     
     expect_true(inherits(resultGraph, "ggplot"))

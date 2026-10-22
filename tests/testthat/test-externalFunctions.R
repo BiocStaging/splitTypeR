@@ -305,9 +305,9 @@ test_that("runSubtypingBimodal() must return expected results", {
     ## Basal and classical gene list signatures
     gList <- list()
     gList[["classical"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Classical`
+        signaturesDemo$`Classical`
     gList[["basal"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
+        signaturesDemo$`Basal-like`
     
     ## Fix seed
     set.seed(12221)

@@ -51,7 +51,7 @@
 #'     
 #' ## Graph result
 #' plotDensityWithUpscalingSamplesBimodal(x=results, 
-#'     signature="Tiriac_PDAC_PDO_Classical")
+#'     signature="Classical")
 #'
 #' @author Astrid Deschênes
 #' @importFrom graphics hist legend par
@@ -182,7 +182,7 @@ plotDensityWithUpscalingSamplesBimodal <- function(x, signature, breaks=22L,
 #'     
 #' ## Graph the enrichment results from the permutation for 3 samples
 #' plotPermutationSamplesDistribution(x=results, 
-#'     signature="Tiriac_PDAC_PDO_Basal-like",
+#'     signature="Basal-like",
 #'     samples=c("Patient_9", "Patient_25", "Patient_29"), 
 #'     violinColor="darkred", pointColor="darkviolet", positionJitter=0.20, 
 #'     size=1.2, seed=121)
@@ -285,7 +285,7 @@ plotPermutationSamplesDistribution <- function(x, signature, samples,
 #'     
 #' ## Graph the enrichment results from the permutation for 3 samples
 #' plotPermutationSamplesNormal(x=results, 
-#'     signature="Tiriac_PDAC_PDO_Basal-like",
+#'     signature="Basal-like",
 #'     samples=c("Patient_9", "Patient_25", "Patient_29"))
 #'
 #' @author Astrid Deschênes

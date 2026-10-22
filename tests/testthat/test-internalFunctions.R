@@ -18,9 +18,9 @@ test_that("permuteGSVA() must return expected results", {
     ## Basal and classical gene list signatures
     gList <- list()
     gList[["classical"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Classical`
+        signaturesDemo$`Classical`
     gList[["basal"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
+        signaturesDemo$`Basal-like`
 
     ## Expected results
     expResults <- list()
@@ -104,9 +104,9 @@ test_that("extractFromNormalDist() must return expected results", {
     ## Basal and classical gene list signatures
     gList <- list()
     gList[["classical"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Classical`
+        signaturesDemo$`Classical`
     gList[["basal"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
+        signaturesDemo$`Basal-like`
 
     gsvaRes<- matrix(data=NA, nrow=2, ncol=12, byrow=FALSE)
     colnames(gsvaRes) <- paste0("Patient_", 1:12)
@@ -175,9 +175,9 @@ test_that("normalMix() must return expected results", {
     ## Basal and classical gene list signatures
     gList <- list()
     gList[["classical"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Classical`
+        signaturesDemo$`Classical`
     gList[["basal"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
+        signaturesDemo$`Basal-like`
 
     gsvaRes<- matrix(data=NA, nrow=2, ncol=12, byrow=FALSE)
     colnames(gsvaRes) <- paste0("Patient_", 1:12)
@@ -232,9 +232,9 @@ test_that("normalMix() must generate a warning when a distribution cannot be cal
     ## Basal and classical gene list signatures
     gList <- list()
     gList[["classical"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Classical`
+        signaturesDemo$`Classical`
     gList[["basal"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
+        signaturesDemo$`Basal-like`
 
     gsvaRes<- matrix(data=NA, nrow=2, ncol=4, byrow=FALSE)
     colnames(gsvaRes) <- paste0("Patient_", 1:4)
@@ -263,9 +263,9 @@ test_that("normalMix() must generate a NA value when a distribution cannot be ca
     ## Basal and classical gene list signatures
     gList <- list()
     gList[["classical"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Classical`
+        signaturesDemo$`Classical`
     gList[["basal"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
+        signaturesDemo$`Basal-like`
 
     gsvaRes<- matrix(data=NA, nrow=2, ncol=4, byrow=FALSE)
     colnames(gsvaRes) <- paste0("Patient_", 1:4)
@@ -303,9 +303,9 @@ test_that("sampleClassification() must return expected results", {
     ## Basal and classical gene list signatures
     gList <- list()
     gList[["classical"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Classical`
+        signaturesDemo$`Classical`
     gList[["basal"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
+        signaturesDemo$`Basal-like`
     
     gsvaRes<- matrix(data=NA, nrow=2, ncol=12, byrow=FALSE)
     colnames(gsvaRes) <- paste0("Patient_", 1:12)
@@ -364,9 +364,9 @@ test_that("sampleClassification() must return expected results when mixture mode
     ## Basal and classical gene list signatures
     gList <- list()
     gList[["classical"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Classical`
+        signaturesDemo$`Classical`
     gList[["basal"]] <- 
-        signaturesDemo$`Tiriac_PDAC_PDO_Basal-like`
+        signaturesDemo$`Basal-like`
     
     gsvaRes<- matrix(data=NA, nrow=2, ncol=4, byrow=FALSE)
     colnames(gsvaRes) <- paste0("Patient_", 1:4)

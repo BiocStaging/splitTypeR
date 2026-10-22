@@ -69,7 +69,7 @@ results <- runSubtypingBimodal(geneLists=signaturesDemo,
     
 ## Graph result
 plotDensityWithUpscalingSamplesBimodal(x=results, 
-    signature="Tiriac_PDAC_PDO_Classical")
+    signature="Classical")
 
 }
 \author{

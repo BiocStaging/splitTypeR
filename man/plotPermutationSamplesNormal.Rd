@@ -54,7 +54,7 @@ results <- runSubtypingBimodal(geneLists=signaturesDemo,
     
 ## Graph the enrichment results from the permutation for 3 samples
 plotPermutationSamplesNormal(x=results, 
-    signature="Tiriac_PDAC_PDO_Basal-like",
+    signature="Basal-like",
     samples=c("Patient_9", "Patient_25", "Patient_29"))
 
 }
