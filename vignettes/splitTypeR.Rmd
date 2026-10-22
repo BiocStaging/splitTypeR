@@ -198,6 +198,73 @@ classified.
 <br />
 
 
+# Available signatures
+
+The *splitTypeR* package provides transcriptomic signatures.
+
+The _getGeneSignaturesNames()_ function lists the names of all the 
+available signatures.
+
+```{r signaturesNames, echo=TRUE}
+## List the names of the available signatures
+getGeneSignaturesNames()
+```
+
+<br />
+
+The _getGenesInSignature()_ function returns the genes of one signature, 
+while the _getGeneSignatures()_ function returns a named list containing one 
+or more signatures. When no name is given,  _getGeneSignatures()_ returns all 
+the available signatures.
+
+```{r signaturesContent, echo=TRUE}
+## Get the genes of the basal-like signature
+getGenesInSignature(name="Tiriac_PDAC_PDO_Basal_like")
+
+## Get all the available signatures and count the genes in each one
+allSignatures <- getGeneSignatures()
+lengths(allSignatures)
+```
+
+<br />
+
+The current signatures are:
+
+* **Tiriac_PDAC_PDO_Basal_like**: the basal-like signature 
+(26 genes) defined for pancreatic ductal adenocarcinoma (PDAC) 
+patient-derived organoids (PDOs) in Tiriac et al. [@Tiriac2018].
+* **Tiriac_PDAC_PDO_Classical**: the classical signature 
+(62 genes) defined for PDAC PDOs in Tiriac et al. [@Tiriac2018].
+* **Moffitt_Basal_like**: the original basal-like signature 
+(25 genes) defined for PDAC in Moffitt et al. [@Moffitt2015].
+* **Moffitt_Classical**: the original classical signature 
+(25 genes) defined for PDAC in Moffitt et al. [@Moffitt2015].
+
+<br />
+
+## Using your own signatures
+
+The method is not limited to the signatures included in the  *splitTypeR* 
+package. Any named `list` of at least two gene vectors can be passed to the 
+_runSubtypingBimodal()_ function. The names of the list are used as the 
+signature names in the results. The gene identifiers must use the same 
+format as the row names of the expression matrix (ex: gene names, Ensembl 
+IDs). Genes absent from the expression matrix are ignored. It is recommended 
+to use signatures with 10 genes or more to ensure statistical stability and 
+reliability of the enrichment scores
+
+```{r ownSignatures, echo=TRUE, eval=FALSE}
+## Example of custom signatures
+mySignatures <- list(
+    SignatureA=c("GENE1", "GENE2", "GENE3", "GENE4", "GENE5", "GENE6",
+            "GENE7", "GENE8", "GENE9", "GENE10", "GENE11"),
+    SignatureB=c("GENE4", "GENE9", "GENE10", "GENE12", "GENE13", "GENE15",
+            "GENE16", "GENE17", "GENE18", "GENE19", "GENE20", "GENE21"))
+```
+
+<br />
+
+
 # Demonstration
 
 For this demonstration, we are going to use the published RNA-seq dataset of 
@@ -480,71 +547,6 @@ retained <- assignation$Samples[which(assignation$newAssignation !=
 ```
 
 <br />
-
-
-# Available signatures
-
-The *splitTypeR* package provides transcriptomic signatures.
-
-The _getGeneSignaturesNames()_ function lists the names of all the 
-available signatures.
-
-```{r signaturesNames, echo=TRUE}
-## List the names of the available signatures
-getGeneSignaturesNames()
-```
-
-<br />
-
-The _getGenesInSignature()_ function returns the genes of one signature, 
-while the _getGeneSignatures()_ function returns a named list containing one 
-or more signatures. When no name is given,  _getGeneSignatures()_ returns all 
-the available signatures.
-
-```{r signaturesContent, echo=TRUE}
-## Get the genes of the basal-like signature
-getGenesInSignature(name="Tiriac_PDAC_PDO_Basal_like")
-
-## Get all the available signatures and count the genes in each one
-allSignatures <- getGeneSignatures()
-lengths(allSignatures)
-```
-
-<br />
-
-The current signatures are:
-
-* **Tiriac_PDAC_PDO_Basal_like**: the basal-like signature 
-(26 genes) defined for pancreatic ductal adenocarcinoma (PDAC) 
-patient-derived organoids (PDOs) in Tiriac et al. [@Tiriac2018].
-* **Tiriac_PDAC_PDO_Classical**: the classical signature 
-(62 genes) defined for PDAC PDOs in Tiriac et al. [@Tiriac2018].
-* **Moffitt_Basal_like**: the original basal-like signature 
-(25 genes) defined for PDAC in Moffitt et al. [@Moffitt2015].
-* **Moffitt_Classical**: the original classical signature 
-(25 genes) defined for PDAC in Moffitt et al. [@Moffitt2015].
-
-<br />
-
-## Using your own signatures
-
-The method is not limited to the signatures included in the  *splitTypeR* 
-package. Any named `list` of at least two gene vectors can be passed to the 
-_runSubtypingBimodal()_ function. The names of the list are used as the 
-signature names in the results. The gene identifiers must use the same 
-format as the row names of the expression matrix (ex: gene names, Ensembl 
-IDs). Genes absent from the expression matrix are ignored. It is recommended 
-to use signatures with 10 genes or more to ensure statistical stability and 
-reliability of the enrichment scores
-
-```{r ownSignatures, echo=TRUE, eval=FALSE}
-## Example of custom signatures
-mySignatures <- list(
-    SignatureA=c("GENE1", "GENE2", "GENE3", "GENE4", "GENE5", "GENE6",
-            "GENE7", "GENE8", "GENE9", "GENE10", "GENE11"),
-    SignatureB=c("GENE4", "GENE9", "GENE10", "GENE12", "GENE13", "GENE15",
-            "GENE16", "GENE17", "GENE18", "GENE19", "GENE20", "GENE21"))
-```
 
 
 # Acknowledgment
