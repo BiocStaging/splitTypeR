@@ -40,7 +40,8 @@
 #'     
 #' ## Validation should return TRUE when all parameters are valid
 #' splitTypeR:::validatePlotPermutationSamplesNormal(x=results, 
-#'     signature="Basal-like", samples=c("Patient_9", "Patient_25"))
+#'     signature="Basal-like", samples=c("Patient_9", "Patient_25"), 
+#'     pointColor="black")
 #' 
 #' 
 #' @author Astrid Deschênes
