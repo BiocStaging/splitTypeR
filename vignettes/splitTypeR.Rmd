@@ -113,8 +113,9 @@ data(expNormalCountsDemo)
 ## Fix seed for reproducible results
 set.seed(121)
 
-## Run the subtyping method and print the classification of each sample
-## The normalized expected counts are log2-transformed 
+## Run the subtyping method and 
+## print the classification of each sample
+## The normalized expected counts used as input are log2-transformed 
 quickResult <- runSubtypingBimodal(geneLists=signaturesDemo,
     expectedCountsMatrixLog=log2(expNormalCountsDemo + 1),
     permRatio=0.75, permNbr=20, upscaleNbr=10)
@@ -646,6 +647,8 @@ ggplot(gsva, aes(x=Classical, y=Basal)) +
     theme_bw()
 
 ```
+
+<br />
 
 Most samples that are not assigned to the same subtype have intermediate
 scores and are located where the classical and basal-like samples meet.
