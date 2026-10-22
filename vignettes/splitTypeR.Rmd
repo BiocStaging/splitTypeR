@@ -139,8 +139,8 @@ knitr::include_graphics("enrichment_pipeline_300dpi_crop2.jpg")
 ```
 <br />
 
-The statistical method is split into 5 steps. Each of those steps are 
-performed for one specific signature at the time. A signature is typically a 
+The statistical method is split into 5 steps. Each of those steps is 
+performed for one specific signature at a time. A signature is typically a 
 predefined set of features (transcriptomic expression in this situation) that 
 is associated with some biological state, pathway, or phenotype.
 
@@ -214,7 +214,7 @@ getGeneSignaturesNames()
 
 The _getGenesInSignature()_ function returns the genes of one signature, 
 while the _getGeneSignatures()_ function returns a named list containing one 
-or more signatures. When no name is given,  _getGeneSignatures()_ returns all 
+or more signatures. When no name is given, _getGeneSignatures()_ returns all 
 the available signatures.
 
 ```{r signaturesContent, echo=TRUE}
@@ -244,7 +244,7 @@ patient-derived organoids (PDOs) in Tiriac et al. [@Tiriac2018].
 
 ## Using your own signatures
 
-The method is not limited to the signatures included in the  *splitTypeR* 
+The method is not limited to the signatures included in the *splitTypeR* 
 package. Any named `list` of at least two gene vectors can be passed to the 
 _runSubtypingBimodal()_ function. The names of the list are used as the 
 signature names in the results. The gene identifiers must use the same 
@@ -268,7 +268,7 @@ mySignatures <- list(
 # Demonstration
 
 For this demonstration, we are going to use the published RNA-seq dataset of 
-pancreatic ductal adenocarcinoma (PDAC) patients-derived organoids (PDOs) 
+pancreatic ductal adenocarcinoma (PDAC) patient-derived organoids (PDOs) 
 published in Tiriac et al. [@Tiriac2018]. The RNA-seq has been aligned with 
 GENCODE v48 on GRCh38.p14 genome with STAR v2.7.9a [@Dobin2013]. Only one
 PDO per patient was retained. The expected counts were processed with 
@@ -278,7 +278,7 @@ _SummarizedExperiment_ object.
 
 In PDAC, the basal-like and classical subtypes, as defined in Moffitt et 
 al [@Moffitt2015], are the two consistently employed molecular subtypes. The 
-classical signature is associated to better prognosis and better response to 
+classical signature is associated with better prognosis and better response to 
 standard chemotherapy while the basal-like subtype is associated 
 with worse overall prognosis [@Moffitt2015; @OKane2020].
 
@@ -291,7 +291,7 @@ PDOs in Tiriac et al. [@Tiriac2018].
 
 ```{r geneSignatures, echo=TRUE}
 
-## Require package
+## Required package
 library(splitTypeR)
 
 ## Prepare the PDOs basal-like and classical signatures
@@ -423,7 +423,7 @@ classicalModel$mu
 <br />
 
 ```{r classificatonGetter, echo=TRUE}
-## Get the final classification of the samples for  the classical signature
+## Get the final classification of the samples for the classical signature
 classification(result)[['Classical']]
 ```
 
@@ -506,7 +506,7 @@ tiriacAssign <- read.table("Moffitt_Tiriac_Assignation.txt", sep="\t",
 
 ## Assignments from the mixture model are extracted from the result
 ## By default, the samples are considered unclassified
-## The samples are classified only if they are assign to one of the signatures
+## The samples are classified only if they are assigned to one of the signatures
 ## When assigned to both signatures, the samples remain unclassified
 assignation <- data.frame(
         Samples=rownames(classification(result)[['Classical']]), 
@@ -551,7 +551,7 @@ retained <- assignation$Samples[which(assignation$newAssignation !=
 
 # Acknowledgment
 
-Claude Sonnet 5 was used for improving the workflow figure. It was also use for 
+Claude Sonnet 5 was used for improving the workflow figure. It was also used for 
 proofreading and copyediting sections of this text.
 
 Claude Opus 5.5, through Claude Code, was used to assist with code 
