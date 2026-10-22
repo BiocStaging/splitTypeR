@@ -364,9 +364,13 @@ control the permutation and upscaling steps:
 | `permNbr` | Number of permutations (Step 2). Must be 5 or higher. | 20 | More permutations give a more stable standard deviation for each sample, but take longer to run since GSVA is run once per permutation. |
 | `upscaleNbr` | Number of values drawn from the normal distribution of each sample (Step 3). Must be 2 or higher. | 10 | More values give more data to fit the mixture model (Step 4), with little impact on the run time. |
 
+<br />
+
 Each sample is present, on average, in `permRatio` × `permNbr` permutations
 (15 with the default values), which is the number of values used to estimate
 its standard deviation.
+
+<br />
 
 ```{r subtyping, echo=TRUE}
 
