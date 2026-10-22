@@ -657,8 +657,12 @@ therefore remains unclassified.
 
 # Acknowledgment
 
-Claude Sonnet 5 was used for improving the workflow figure. It was also used for 
-proofreading and copyediting sections of this text.
+D.A. Tuveson is a distinguished scholar of the Lustgarten Foundation and 
+Director of the Lustgarten Foundation-designated Laboratory of Pancreatic 
+Cancer Research. This project is supported by the Lustgarten Foundation,
+
+Claude Sonnet 5 was used for improving the workflow figure. It was also used 
+for proofreading and copyediting sections of this text.
 
 Claude Opus 5.5, through Claude Code, was used to assist with code 
 maintenance, including renaming the demonstration signatures, updating the 
