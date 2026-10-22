@@ -10,7 +10,8 @@ Authors@R: c(person("Astrid", "Deschênes", email = "adeschen@hotmail.com",
     person("Pascal", "Belleau", email = "pascal_belleau@hotmail.com",
     role=c("aut"), comment = c(ORCID = "0000-0002-0802-1071")),
     person(c("David", "A."), "Tuveson", email = "dtuveson@cshl.edu", 
-    role=c("aut"), comment = c(ORCID = "0000-0002-8017-2712")))
+    role=c("aut"), comment = c(ORCID = "0000-0002-8017-2712")), 
+    person("Lustgarten Foundation", role = "fnd"))
 Encoding: UTF-8
 License: Artistic-2.0
 Depends: R (>= 4.5.0)
