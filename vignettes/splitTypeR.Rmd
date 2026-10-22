@@ -55,7 +55,7 @@ prognosis [@Yersal2014]. Once widely accepted by major oncology
 organizations, gene signatures for RNA subtyping are used to classify cancer
 subtypes, predict patient survival, and guide treatment.
 
-From a research aspect, the classification of new samples using their 
+From a research perspective, the classification of new samples using their 
 transcriptional profiles can be done using different tools. For some cancers, 
 machine learning models and dedicated software are available such as 
 the Bioconductor Genefu package for breast cancer molecular 
@@ -65,12 +65,12 @@ colorectal cancer [@Eide2017].
 In the absence of dedicated software, unsupervised clustering with a 
 heatmap visualization to classify transcriptomic samples with a 
 gene signature is often employed. This method is relatively simple and 
-offers an instant visual support. However, this method has a few drawbacks:
+offers instant visual support. However, this method has a few drawbacks:
 
 * _Lack of statistical metrics_: It doesn't 
 provide a statistical probability score for a sample's class assignment; it 
 mainly acts as a visual summary. 
-* _Metric sensitivity_: Changing the clustering metric (ex: from "Euclidean" to 
+* _Metric sensitivity_: Changing the clustering metric (e.g., from "Euclidean" to 
 "Pearson" distance) can alter the resulting clusters. 
 * _Outlier distortion_: Extreme outliers can squash the color scale, and 
 artificially create skewed subsets.
@@ -156,7 +156,7 @@ uncertainty gets modeled.
 ## Step 2. Permutation
 
 Random subsets of samples, of fixed size, from the full dataset are 
-repetitively drawn. For each of these resampled subsets, the enrichment score 
+repeatedly drawn. For each of these resampled subsets, the enrichment score 
 for the samples present is recomputed.
 
 This step enables a per-sample uncertainty estimation (standard deviation).
@@ -175,9 +175,9 @@ be used in the next step.
 The synthetic values across all samples are pooled to fit two overlapping 
 normal distributions to them. The two normal distributions are extracted using 
 a mixture model approach implemented in the `r BiocStyle::CRANpkg("mixtools")`
-package [@JSSv032i06]. The idea being that the whole cohort is actually a 
-blend of two underlying populations (a "low-mean" population and a 
-"high-mean" population). 
+package [@JSSv032i06]. The assumption is that the whole cohort is a
+blend of two underlying populations (a "low-mean" population and a
+"high-mean" population).
  
 
 ## Step 5. Classification
@@ -248,7 +248,7 @@ The method is not limited to the signatures included in the *splitTypeR*
 package. Any named `list` of at least two gene vectors can be passed to the 
 _runSubtypingBimodal()_ function. The names of the list are used as the 
 signature names in the results. The gene identifiers must use the same 
-format as the row names of the expression matrix (ex: gene names, Ensembl 
+format as the row names of the expression matrix (e.g., gene names, Ensembl 
 IDs). Genes absent from the expression matrix are ignored. It is recommended 
 to use signatures with 10 genes or more to ensure statistical stability and 
 reliability of the enrichment scores
