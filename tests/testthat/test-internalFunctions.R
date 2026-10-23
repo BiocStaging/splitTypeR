@@ -306,8 +306,8 @@ test_that("calculateThreshold() must return the 95th percentile of the low-mean 
     ## Fix seed
     set.seed(121)
     
-    modelExp <- mixtools::normalmixEM(c(rnorm(50, mean=-0.4, sd=0.2), 
-                    rnorm(50, mean=0.4, sd=0.2)), k=2, verb=FALSE)
+    msg <- capture.output(modelExp <- mixtools::normalmixEM(c(rnorm(50, 
+        mean=-0.4, sd=0.2), rnorm(50, mean=0.4, sd=0.2)), k=2, verb=FALSE))
     modelRes <- list("SignatureA"=modelExp, "SignatureB"=modelExp)
     
     results <- splitTypeR:::calculateThreshold(geneLists=gList, 
@@ -331,8 +331,8 @@ test_that("calculateThreshold() must return NA when mixture model is not present
     ## Fix seed
     set.seed(121)
     
-    modelExp <- mixtools::normalmixEM(c(rnorm(50, mean=-0.4, sd=0.2), 
-                    rnorm(50, mean=0.4, sd=0.2)), k=2, verb=FALSE)
+    msg <- capture.output(modelExp <- mixtools::normalmixEM(c(rnorm(50, 
+        mean=-0.4, sd=0.2), rnorm(50, mean=0.4, sd=0.2)), k=2, verb=FALSE))
     modelRes <- list("SignatureA"=modelExp, "SignatureB"=NA)
     
     results <- splitTypeR:::calculateThreshold(geneLists=gList, 
@@ -447,4 +447,36 @@ test_that("sampleClassification() must return expected results when mixture mode
         "classical", "unclassified", "unclassified"))
     expect_equal(results$classical$GSVA_score, unname(gsvaRes["classical", ]), 
                  tolerance=1e-5)
+})
+test_that("normalMix() must not print the number of iterations of normalmixEM()", {
+    
+    gList <- list("SignatureA"=c("Gene1", "Gene2", "Gene3"))
+    
+    ## Fix seed
+    set.seed(121)
+    
+    resultNorm <- list("SignatureA"=as.list(c(rnorm(50, mean=-0.4, sd=0.2), 
+                    rnorm(50, mean=0.4, sd=0.2))))
+    
+    expect_silent(splitTypeR:::normalMix(geneLists=gList, 
+        resultNorm=resultNorm))
+})
+
+test_that("normalMix() must return a warning when the mixture model does not converge", {
+    
+    gList <- list("SignatureA"=c("Gene1", "Gene2", "Gene3"))
+    
+    ## Fix seed
+    set.seed(121)
+    
+    resultNorm <- list("SignatureA"=as.list(c(rnorm(50, mean=-0.4, sd=0.2), 
+                    rnorm(50, mean=0.4, sd=0.2))))
+    
+    ## Limit the number of iterations to force the lack of convergence
+    emFunction <- mixtools::normalmixEM
+    local_mocked_bindings(normalmixEM=function(...) emFunction(..., maxit=2))
+    
+    expect_warning(splitTypeR:::normalMix(geneLists=gList, 
+        resultNorm=resultNorm), 
+        "The mixture model did not converge for the signature: SignatureA")
 })

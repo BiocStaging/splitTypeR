@@ -90,3 +90,4 @@ importFrom(stats,
   sd
 )
 importFrom(stringr,str_replace_all)
+importFrom(utils,capture.output)

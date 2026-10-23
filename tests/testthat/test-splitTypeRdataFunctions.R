@@ -188,8 +188,8 @@ test_that("create a SplitTypeRdata class with model setter and getter should ret
     sign <- list("SignatureA"=c("Gene1", "Gene2", "Gene3"), 
                  "SignatureB"=c("Gene10", "Gene12"))
     set.seed(121)
-    modelExp <- normalmixEM(c(sample(1:25, size=12, replace=T), 
-                    sample(23:45, size=12, replace=T)), k=2, verb=FALSE)
+    msg <- capture.output(modelExp <- normalmixEM(c(sample(1:25, size=12, 
+        replace=T), sample(23:45, size=12, replace=T)), k=2, verb=FALSE))
     
     expResults <- list()
     expResults[[names(sign)[1]]] <- modelExp

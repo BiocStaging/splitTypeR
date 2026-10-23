@@ -261,6 +261,7 @@ extractFromNormalDist <- function(geneLists, gsvaRes, gsvaSD, nbValues) {
 #' 
 #' @author Astrid Deschênes
 #' @importFrom mixtools normalmixEM
+#' @importFrom utils capture.output
 #' @encoding UTF-8
 #' @keywords internal
 normalMix <- function(geneLists, resultNorm) {
@@ -272,7 +273,16 @@ normalMix <- function(geneLists, resultNorm) {
         allRes <- vapply(resultNorm[[i]], FUN=unlist, numeric(1))
         resModel[[i]] <- tryCatch({
             ## Remove NA values before calculating the normal distributions
-            normalmixEM(allRes[!is.na(allRes)], k=2, verb=FALSE)
+            ## The messages printed by normalmixEM() (number of iterations)
+            ## are captured to keep the console clean
+            msgEM <- capture.output(res <- normalmixEM(allRes[!is.na(allRes)],
+                k=2, verb=FALSE))
+            ## Report the lack of convergence as a warning
+            if (any(grepl("NOT CONVERGENT", msgEM))) {
+                warning("! The mixture model did not converge for the ",
+                    "signature: ", i, call.=FALSE, immediate.=TRUE)
+            }
+            res
         }, error = function(msg){
             return(NA)
         })
