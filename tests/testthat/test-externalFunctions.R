@@ -339,7 +339,7 @@ test_that("runSubtypingBimodal() must return expected results", {
             0.1748530, 0.2382375, NA), tolerance=1e-5)
     expect_equal(permutations(res)$classical[25, ], c(NA, -0.8651168, 
             -0.8868652, NA, -0.8846154, -0.8859022), tolerance=1e-5)
-    ## TODO more validations
+    
     expect_equal(names(threshold(res)), c("classical", "basal"))
     for (i in c("classical", "basal")) {
         posMin <- which.min(model(res)[[i]]$mu)
