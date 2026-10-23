@@ -1,3 +1,13 @@
+CHANGES IN VERSION 0.99.7
+-------------------------
+
+BUG FIXES
+
+    - The CITATION file can now be read with utils::readCitationFile() 
+    when the package metadata is not provided. In that case, the 
+    information is extracted from the installed package
+
+
 CHANGES IN VERSION 0.99.6
 -------------------------
 

@@ -15,7 +15,7 @@ If you use this package for a publication, we would ask you to cite the
 following:
 
 >  Deschênes A, Belleau P, Tuveson DA (2026). _splitTypeR: Transcriptomic Classification 
-  using Mixture of Normal Distributions_. R package version 0.99.6,
+  using Mixture of Normal Distributions_. R package version 0.99.7,
   <https://github.com/adeschen/splitTypeR>.
 
 ## Authors ##
