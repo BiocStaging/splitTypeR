@@ -11,7 +11,7 @@
 \item{x}{a \code{SplitTypeRdata} object.}
 
 \item{value}{\code{NULL} or a \code{matrix} of the GSVA results for each 
-signature. The \code{matrix} should be have one row per signature. 
+signature. The \code{matrix} should have one row per signature. 
 Default: \code{NULL}.}
 }
 \value{

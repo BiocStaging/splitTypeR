@@ -10,7 +10,11 @@
 \arguments{
 \item{x}{a \code{SplitTypeRdata} object.}
 
-\item{value}{\code{NULL} or a TODO}
+\item{value}{\code{NULL} or a \code{list} of the sample standard
+deviations for each signature. The \code{list} should have one entry
+per signature. Each entry is a named \code{numeric} \code{vector}
+containing the standard deviation of the GSVA scores obtained for each
+sample during the permutation step.}
 }
 \value{
 the modified \code{SplitTypeRdata} object when the new value is 

@@ -12,7 +12,7 @@
 }
 \value{
 \code{NULL} or a \code{matrix} of the GSVA results for each 
-signature. The \code{matrix} should be have one entry per signature.
+signature. The \code{matrix} should have one entry per signature.
 }
 \description{
 A function for getting the gsvaResults slot in a 

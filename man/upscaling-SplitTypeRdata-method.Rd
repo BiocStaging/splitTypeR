@@ -12,7 +12,7 @@
 }
 \value{
 \code{NULL} or a \code{list} of the upscaling data for each 
-signature. The \code{list} should be have one entry per signature.
+signature. The \code{list} should have one entry per signature.
 }
 \description{
 A function for getting the upscaling slot in a 

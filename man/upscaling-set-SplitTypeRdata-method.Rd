@@ -11,7 +11,7 @@
 \item{x}{a \code{SplitTypeRdata} object.}
 
 \item{value}{\code{NULL} or a \code{list} of the upscaling data for 
-each signature. The \code{list} should be have one entry per signature.}
+each signature. The \code{list} should have one entry per signature.}
 }
 \value{
 the modified \code{SplitTypeRdata} object when the new value is 

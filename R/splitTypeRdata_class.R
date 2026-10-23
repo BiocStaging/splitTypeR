@@ -29,7 +29,7 @@ setClassUnion("MatrixOrNULL", members = c("matrix", "NULL"))
 #' @title An S4 class to represent the splitTypeR data
 #'
 #' @slot signatures \code{NULL} or a \code{list} of the genes   
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @slot gsvaResults \code{NULL} or a  \code{numeric} \code{matrix} with 
@@ -38,30 +38,30 @@ setClassUnion("MatrixOrNULL", members = c("matrix", "NULL"))
 #' Default: \code{NULL}.
 #' 
 #' @slot permutations \code{NULL} or a \code{list} of the permutations results  
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @slot standardDeviation \code{NULL} or a \code{list} of the sample standard 
-#' deviation for each signature. The \code{list} should be have one entry 
+#' deviation for each signature. The \code{list} should have one entry 
 #' per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @slot upscaling \code{NULL} or a \code{list} of the upscaling data 
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @slot model \code{NULL} or a \code{list} of the mixture models calculated 
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @slot threshold \code{NULL} or a \code{list} of the classification 
 #' thresholds for each signature. The threshold corresponds to the 95th 
 #' percentile of the "low-mean" distribution of the mixture model. The 
-#' \code{list} should be have one entry per signature. 
+#' \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @slot classification \code{NULL} or a \code{list} of the classification for 
-#' each signature. The \code{list} should be have one entry per signature. 
+#' each signature. The \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @author Astrid Deschênes
@@ -197,7 +197,7 @@ setGeneric("gsvaResults", function(x) standardGeneric("gsvaResults"))
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @return \code{NULL} or a \code{matrix} of the GSVA results for each 
-#' signature. The \code{matrix} should be have one entry per signature. 
+#' signature. The \code{matrix} should have one entry per signature. 
 #' 
 #' @examples
 #' 
@@ -303,7 +303,7 @@ setGeneric("standardDeviation", function(x)
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @return \code{NULL} or a \code{list} of the sample standard deviation 
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' 
 #' @examples
 #' 
@@ -356,7 +356,7 @@ setGeneric("upscaling", function(x)
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @return \code{NULL} or a \code{list} of the upscaling data for each 
-#' signature. The \code{list} should be have one entry per signature. 
+#' signature. The \code{list} should have one entry per signature. 
 #' 
 #' @examples
 #' 
@@ -409,7 +409,7 @@ setGeneric("model", function(x)
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @return \code{NULL} or a \code{list} of the mixture models calculated  
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' 
 #' @examples
 #' 
@@ -517,7 +517,7 @@ setGeneric("classification", function(x)
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @return \code{NULL} or a \code{list} NULL or a list of the classification 
-#' for each signature. The list should be have one entry per signature. 
+#' for each signature. The list should have one entry per signature. 
 #' 
 #' @examples
 #' 
@@ -575,7 +575,7 @@ setGeneric("signatures<-", function(x, value) standardGeneric("signatures<-"))
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @param value \code{NULL} or a \code{list} of the genes   
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' 
 #' @return the modified \code{SplitTypeRdata} object when the new value is 
 #' valid.
@@ -642,7 +642,7 @@ setGeneric("gsvaResults<-", function(x, value)
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @param value \code{NULL} or a \code{matrix} of the GSVA results for each 
-#' signature. The \code{matrix} should be have one row per signature. 
+#' signature. The \code{matrix} should have one row per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @return the modified \code{SplitTypeRdata} object when the new value is 
@@ -715,7 +715,7 @@ setGeneric("permutations<-", function(x, value)
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @param value \code{NULL} or a \code{list} of the permutations results 
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' 
 #' @return the modified \code{SplitTypeRdata} object when the new value is 
 #' valid.
@@ -794,7 +794,7 @@ setGeneric("model<-", function(x, value)
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @param value \code{NULL} or a \code{list} of the mixture models calculated 
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' 
 #' @return the modified \code{SplitTypeRdata} object when the new value is 
 #' valid.
@@ -873,7 +873,7 @@ setGeneric("threshold<-", function(x, value)
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @param value \code{NULL} or a \code{list} of the classification thresholds 
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' 
 #' @return the modified \code{SplitTypeRdata} object when the new value is 
 #' valid.
@@ -939,8 +939,12 @@ setGeneric("standardDeviation<-", function(x, value)
 #' 
 #' @param x a \code{SplitTypeRdata} object.
 #' 
-#' @param value \code{NULL} or a TODO 
-#' 
+#' @param value \code{NULL} or a \code{list} of the sample standard
+#' deviations for each signature. The \code{list} should have one entry
+#' per signature. Each entry is a named \code{numeric} \code{vector}
+#' containing the standard deviation of the GSVA scores obtained for each
+#' sample during the permutation step.
+#'
 #' @return the modified \code{SplitTypeRdata} object when the new value is 
 #' valid.
 #' 
@@ -1013,7 +1017,7 @@ setGeneric("upscaling<-", function(x, value)
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @param value \code{NULL} or a \code{list} of the upscaling data for 
-#' each signature. The \code{list} should be have one entry per signature.
+#' each signature. The \code{list} should have one entry per signature.
 #' 
 #' @return the modified \code{SplitTypeRdata} object when the new value is 
 #' valid.
@@ -1091,7 +1095,7 @@ setGeneric("classification<-", function(x, value)
 #' @param x a \code{SplitTypeRdata} object.
 #' 
 #' @param value \code{NULL} or a \code{list} of the classification data for 
-#' each signature. The \code{list} should be have one entry per signature.
+#' each signature. The \code{list} should have one entry per signature.
 #' 
 #' @return the modified \code{SplitTypeRdata} object when the new value is 
 #' valid.
@@ -1129,37 +1133,37 @@ setMethod("classification<-", "SplitTypeRdata", function(x, value) {
 #' present in the parameters.
 #' 
 #' @param signatures \code{NULL} or a \code{list} of the genes   
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @param gsvaResults \code{NULL} or a \code{matrix} of the GSVA results  
-#' for each signature. The \code{matrix} should be have one row per signature. 
+#' for each signature. The \code{matrix} should have one row per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @param permutations \code{NULL} or a \code{list} of the permutations results  
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @param standardDeviation \code{NULL} or a \code{list} of the standard 
-#' deviation results  for each signature. The \code{list} should be have one 
+#' deviation results  for each signature. The \code{list} should have one 
 #' entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @param upscaling \code{NULL} or a \code{list} of the upscaling data 
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @param model \code{NULL} or a \code{list} of the mixture models calculated 
-#' for each signature. The \code{list} should be have one entry per signature. 
+#' for each signature. The \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @param threshold \code{NULL} or a \code{list} of the classification 
-#' thresholds for each signature. The \code{list} should be have one entry 
+#' thresholds for each signature. The \code{list} should have one entry 
 #' per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @param classification \code{NULL} or a \code{list} of the classification for 
-#' each signature. The \code{list} should be have one entry per signature. 
+#' each signature. The \code{list} should have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
 #' @return an object of class \code{SplitTypeRdata} that contains all the 

@@ -12,7 +12,7 @@
 }
 \value{
 \code{NULL} or a \code{list} of the sample standard deviation 
-for each signature. The \code{list} should be have one entry per signature.
+for each signature. The \code{list} should have one entry per signature.
 }
 \description{
 A function for getting the standardDeviation slot in a 

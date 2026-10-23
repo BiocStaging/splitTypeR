@@ -12,7 +12,7 @@ An S4 class to represent the splitTypeR data
 
 \describe{
 \item{\code{signatures}}{\code{NULL} or a \code{list} of the genes
-for each signature. The \code{list} should be have one entry per signature. 
+for each signature. The \code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 
 \item{\code{gsvaResults}}{\code{NULL} or a  \code{numeric} \code{matrix} with 
@@ -21,30 +21,30 @@ have one row per signature.
 Default: \code{NULL}.}
 
 \item{\code{permutations}}{\code{NULL} or a \code{list} of the permutations results
-for each signature. The \code{list} should be have one entry per signature. 
+for each signature. The \code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 
 \item{\code{standardDeviation}}{\code{NULL} or a \code{list} of the sample standard 
-deviation for each signature. The \code{list} should be have one entry 
+deviation for each signature. The \code{list} should have one entry 
 per signature. 
 Default: \code{NULL}.}
 
 \item{\code{upscaling}}{\code{NULL} or a \code{list} of the upscaling data 
-for each signature. The \code{list} should be have one entry per signature. 
+for each signature. The \code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 
 \item{\code{model}}{\code{NULL} or a \code{list} of the mixture models calculated 
-for each signature. The \code{list} should be have one entry per signature. 
+for each signature. The \code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 
 \item{\code{threshold}}{\code{NULL} or a \code{list} of the classification 
 thresholds for each signature. The threshold corresponds to the 95th 
 percentile of the "low-mean" distribution of the mixture model. The 
-\code{list} should be have one entry per signature. 
+\code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 
 \item{\code{classification}}{\code{NULL} or a \code{list} of the classification for 
-each signature. The \code{list} should be have one entry per signature. 
+each signature. The \code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 }}
 

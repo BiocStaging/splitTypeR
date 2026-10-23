@@ -25,37 +25,37 @@ SplitTypeRdata(
 function to be printed}
 
 \item{signatures}{\code{NULL} or a \code{list} of the genes
-for each signature. The \code{list} should be have one entry per signature. 
+for each signature. The \code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 
 \item{gsvaResults}{\code{NULL} or a \code{matrix} of the GSVA results
-for each signature. The \code{matrix} should be have one row per signature. 
+for each signature. The \code{matrix} should have one row per signature. 
 Default: \code{NULL}.}
 
 \item{permutations}{\code{NULL} or a \code{list} of the permutations results
-for each signature. The \code{list} should be have one entry per signature. 
+for each signature. The \code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 
 \item{standardDeviation}{\code{NULL} or a \code{list} of the standard 
-deviation results  for each signature. The \code{list} should be have one 
+deviation results  for each signature. The \code{list} should have one 
 entry per signature. 
 Default: \code{NULL}.}
 
 \item{upscaling}{\code{NULL} or a \code{list} of the upscaling data 
-for each signature. The \code{list} should be have one entry per signature. 
+for each signature. The \code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 
 \item{model}{\code{NULL} or a \code{list} of the mixture models calculated 
-for each signature. The \code{list} should be have one entry per signature. 
+for each signature. The \code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 
 \item{threshold}{\code{NULL} or a \code{list} of the classification 
-thresholds for each signature. The \code{list} should be have one entry 
+thresholds for each signature. The \code{list} should have one entry 
 per signature. 
 Default: \code{NULL}.}
 
 \item{classification}{\code{NULL} or a \code{list} of the classification for 
-each signature. The \code{list} should be have one entry per signature. 
+each signature. The \code{list} should have one entry per signature. 
 Default: \code{NULL}.}
 
 \item{\ldots}{arguments passed to or from other methods}

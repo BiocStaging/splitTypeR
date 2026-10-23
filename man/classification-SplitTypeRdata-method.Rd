@@ -12,7 +12,7 @@
 }
 \value{
 \code{NULL} or a \code{list} NULL or a list of the classification 
-for each signature. The list should be have one entry per signature.
+for each signature. The list should have one entry per signature.
 }
 \description{
 A function for getting the classification slot in a 
