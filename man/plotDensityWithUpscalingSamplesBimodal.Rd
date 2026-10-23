@@ -42,7 +42,10 @@ color of the histogram filling for the sample distribution.
 Default: \code{"azure3"}.}
 }
 \value{
-TODO
+\code{NULL}, invisibly. The function is called for its side 
+effect: a histogram of the values generated during the upscaling step, 
+with the two normal distributions of the mixture model, is drawn on the 
+current graphics device.
 }
 \description{
 The function generates a graph showing the signature and 

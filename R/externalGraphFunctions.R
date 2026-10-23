@@ -31,7 +31,10 @@
 #' color of the histogram filling for the sample distribution. 
 #' Default: \code{"azure3"}.
 #'
-#' @return TODO
+#' @return \code{NULL}, invisibly. The function is called for its side 
+#' effect: a histogram of the values generated during the upscaling step, 
+#' with the two normal distributions of the mixture model, is drawn on the 
+#' current graphics device.
 #' 
 #' @examples
 #'
@@ -87,6 +90,10 @@ plotDensityWithUpscalingSamplesBimodal <- function(x, signature, breaks=22L,
     yMax <- max(curveMax$y, curveMin$y, max(histTmp$density))
     yMax <- yMax + 0.8
 
+    ## Restore the user's graphical parameters when the function exits
+    oldPar <- par(no.readonly=TRUE)
+    on.exit(par(oldPar))
+
     par(new=FALSE)
     par(lwd=3)
     hist(upscalingResults, freq=FALSE, breaks=breaks, ylab="", xlab="", 
@@ -107,6 +114,8 @@ plotDensityWithUpscalingSamplesBimodal <- function(x, signature, breaks=22L,
         "Signature distribution", "Sampled values (upscaling step)"), 
         col=c(colorAlternative, colorSignature, colorBorderSamples), 
         box.lty=0, lty=c(4,4,1), cex=0.9)
+
+    return(invisible(NULL))
 }
 
 

@@ -13,6 +13,9 @@ BUG FIXES
     - The x-axis label of plotDensityWithUpscalingSamplesBimodal() is now 
     "GSVA score" instead of "GSEA score"
 
+    - plotDensityWithUpscalingSamplesBimodal() now restores the user's 
+    graphical parameters (par()) on exit and returns NULL invisibly
+
 
 CHANGES IN VERSION 0.99.1
 -------------------------

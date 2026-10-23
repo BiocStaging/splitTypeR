@@ -54,7 +54,7 @@ test_that("plotDensityWithUpscalingSamplesBimodal() must return an error when x 
         fixed=TRUE)
 })
 
-test_that("plotDensityWithUpscalingSamplesBimodal() must return a list when all parameters valid", {
+test_that("plotDensityWithUpscalingSamplesBimodal() must return NULL invisibly when all parameters valid", {
     
     set.seed(121)
 
@@ -64,9 +64,29 @@ test_that("plotDensityWithUpscalingSamplesBimodal() must return a list when all 
 
     ## Use a null device to prevent the creation of a Rplots.pdf file
     pdf(NULL)
-    expect_true(is.list(plotDensityWithUpscalingSamplesBimodal(x=results,
-        signature="Basal-like")))
+    expect_invisible(res <- plotDensityWithUpscalingSamplesBimodal(x=results,
+        signature="Basal-like"))
+    expect_null(res)
     dev.off()
+})
+
+test_that("plotDensityWithUpscalingSamplesBimodal() must restore the graphical parameters", {
+    
+    set.seed(121)
+
+    results <- runSubtypingBimodal(geneLists=signaturesDemo, 
+        expectedCountsMatrix=expNormalCountsDemo, 
+        permRatio=0.75, permNbr=10, upscaleNbr=5)
+
+    ## Use a null device to prevent the creation of a Rplots.pdf file
+    pdf(NULL)
+    parBefore <- par(no.readonly=TRUE)
+    plotDensityWithUpscalingSamplesBimodal(x=results, signature="Basal-like")
+    parAfter <- par(no.readonly=TRUE)
+    dev.off()
+    
+    expect_equal(parAfter$lwd, parBefore$lwd)
+    expect_equal(parAfter$new, parBefore$new)
 })
 
 #############################################################################
