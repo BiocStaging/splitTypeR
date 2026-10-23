@@ -438,8 +438,8 @@ The information can be accessed using the appropriate getter function.
 <br />
 
 ```{r signaturesGetter, echo=TRUE}
-## Get the list of genes in each signature
-signatures(result)
+## Get the list of genes in the classical signature
+signatures(result)[["Classical"]]
 ```
 
 <br />
