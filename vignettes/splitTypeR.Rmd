@@ -281,6 +281,10 @@ patient-derived organoids (PDOs) in Tiriac et al. [@Tiriac2018].
 (25 genes) defined for PDAC in Moffitt et al. [@Moffitt2015].
 * **Moffitt_Classical**: the original classical signature 
 (25 genes) defined for PDAC in Moffitt et al. [@Moffitt2015].
+* **Miyabayashi_Fast**: the updated fast signature (xx genes) defined 
+for PDAC xenografts in Miyabayashi et al. [@Miyabayashi2020].
+* **Miyabayashi_Slow**: the updated slow signature (xx genes) defined 
+for PDAC xenografts in Miyabayashi et al. [@Miyabayashi2020].
 
 <br />
 
