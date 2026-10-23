@@ -19,19 +19,18 @@ The RNA-seq data of the PDAC PDOs published in:
 > Responders to Chemotherapy in Pancreatic Cancer. Cancer Discov.
 > 2018;8(9):1112-1129. doi:10.1158/2159-8290.CD-18-0349
 
-The raw sequencing data are available from [TO COMPLETE: repository and
-accession number, e.g. dbGaP or GEO].
+The raw sequencing data are available from NCBI dbGaP archive under accession
+number phs001611.v1.p1.
 
 ### Processing
 
 1. The RNA-seq reads were aligned on the GRCh38.p14 human genome with the
    GENCODE v48 annotation using STAR v2.7.9a.
-2. The expected counts were obtained with [TO COMPLETE: quantification tool
-   and version, e.g. RSEM].
+2. The expected counts were obtained with RSEM v1.3.3.
 3. Only one PDO per patient was retained.
 4. The expected counts were processed with DESeq2 v1.50.2 on the genes
-   expressed in at least 20% of the PDOs. [TO COMPLETE: definition of
-   "expressed" (e.g. minimum count) and the normalization method used.]
+   expressed in at least 20% of the PDOs. Only genes expresssed in at least 
+   two samples were retained before processing.
 
 ### Content
 
@@ -57,5 +56,4 @@ vignette.
 ### Source
 
 The subtypes, as defined by Moffitt et al. (2015), assigned to the PDOs in
-Tiriac et al. (2018). [TO COMPLETE: location of the original assignment in
-the publication, e.g. supplementary table number.]
+Tiriac et al. (2018). 
