@@ -26,9 +26,6 @@ A function for replacement of the standardDeviation slot in a
 }
 \examples{
 
-## Load required library
-library(mixtools)
-
 ## Two demo signatures
 sign <- list("SignatureA"=c("EGFR", "CTTN", "ACTB"), 
     "SignatureB"=c("ACTR2", "AKT1"))

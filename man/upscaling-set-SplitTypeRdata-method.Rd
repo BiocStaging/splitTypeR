@@ -23,9 +23,6 @@ A function for replacement of the upscaling slot in a
 }
 \examples{
 
-## Load required library
-library(mixtools)
-
 ## Two demo signatures
 sign <- list("SignatureA"=c("EGFR", "CTTN", "ACTB"), 
     "SignatureB"=c("ACTR2", "AKT1"))
@@ -33,8 +30,7 @@ sign <- list("SignatureA"=c("EGFR", "CTTN", "ACTB"),
 ## Create a SplitTypeRdata object with the signatures
 demo <- new("SplitTypeRdata", signatures=sign)
 
-                
-## Create demo standard devitaions
+## Create demo upscaling data
 demoUp <- list()
 demoUp[[names(sign)[1]]] <- matrix(data=c(0.0174988, 0.0892500, 0.1178101, 
 0.0744401, 0.0654692, 0.2546492), nrow=2, ncol=3, byrow=FALSE)
