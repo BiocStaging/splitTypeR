@@ -272,3 +272,54 @@ test_that("create a SplitTypeRdata class with upscaling setter and getter should
     expect_error(upscaling(paramTest) <- 33L)
     expect_equal(upscaling(paramTest), expResults)
 })
+#############################################################################
+### Tests show() method
+#############################################################################
+
+test_that("show() must display a summary of an empty SplitTypeRdata object", {
+    
+    paramTest <- SplitTypeRdata()
+    
+    expect_output(show(paramTest), "A SplitTypeRdata object")
+    expect_output(show(paramTest), "Signatures: none")
+    expect_output(show(paramTest), "Completed steps: none")
+    expect_output(res <- withVisible(show(paramTest)))
+    expect_false(res$visible)
+    expect_null(res$value)
+})
+
+test_that("show() must display the signatures and the classification summary", {
+    
+    sign <- list("SignatureA"=c("Gene1", "Gene2", "Gene3"), 
+                 "SignatureB"=c("Gene10", "Gene12"))
+    
+    classRes <- list()
+    classRes[["SignatureA"]] <- data.frame(GSVA_score=c(0.45, -0.32, 0.12),
+        classification=c("SignatureA", "unclassified", "unclassified"),
+        row.names=c("Sample_1", "Sample_2", "Sample_3"))
+    classRes[["SignatureB"]] <- NA
+    
+    gsvaRes <- matrix(data=c(0.45, -0.32, 0.12, -0.51, 0.38, 0.29), nrow=2, 
+        byrow=TRUE, dimnames=list(c("SignatureA", "SignatureB"), 
+        c("Sample_1", "Sample_2", "Sample_3")))
+    
+    paramTest <- SplitTypeRdata(signatures=sign, gsvaResults=gsvaRes, 
+        classification=classRes)
+    
+    expect_output(show(paramTest), 
+        "Signatures \\(2\\): SignatureA \\(3 genes\\), SignatureB \\(2 genes\\)")
+    expect_output(show(paramTest), "Samples: 3")
+    expect_output(show(paramTest), 
+        "Completed steps: gsvaResults, classification")
+    expect_output(show(paramTest), "SignatureA: 1 assigned, 2 unclassified")
+    expect_output(show(paramTest), "SignatureB: mixture model not available")
+})
+
+test_that("show() must use the singular for a signature with one gene", {
+    
+    paramTest <- SplitTypeRdata(signatures=list("SignatureA"=c("Gene1"), 
+        "SignatureB"=c("Gene10", "Gene12")))
+    
+    expect_output(show(paramTest), 
+        "SignatureA \\(1 gene\\), SignatureB \\(2 genes\\)")
+})

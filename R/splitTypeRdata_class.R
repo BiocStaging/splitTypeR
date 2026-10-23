@@ -107,6 +107,85 @@ setValidity("SplitTypeRdata", function(object) {
 })
 
 
+#' Show a summary of a SplitTypeRdata object
+#'
+#' @description A function that displays a summary of a
+#' \code{SplitTypeRdata} object: the signatures with their number of genes,
+#' the number of samples, the steps of the method that have been run and,
+#' for each signature, the number of samples assigned to the signature. The
+#' function is called when the object is printed at the console.
+#'
+#' @param object a \code{SplitTypeRdata} object.
+#'
+#' @return \code{NULL}, invisibly. The function is called for its side
+#' effect: the summary of the object is displayed at the console.
+#'
+#' @examples
+#'
+#' ## Two demo signatures
+#' sign <- list("SignatureA"=c("EGFR", "CTTN", "ACTB"),
+#'     "SignatureB"=c("ACTR2", "AKT1"))
+#'
+#' ## Create a SplitTypeRdata object with the signatures
+#' demo <- SplitTypeRdata(signatures=sign)
+#'
+#' ## Show the summary of the object
+#' demo
+#'
+#' @author Astrid Deschênes
+#' @encoding UTF-8
+#' @importFrom methods show slot
+#' @export
+setMethod("show", "SplitTypeRdata", function(object) {
+
+    cat("A SplitTypeRdata object\n")
+
+    ## Signatures with their number of genes
+    sign <- object@signatures
+    if (is.null(sign)) {
+        cat("Signatures: none\n")
+    } else {
+        nbGenes <- lengths(sign)
+        cat("Signatures (", length(sign), "): ",
+            paste0(names(sign), " (", nbGenes, 
+                ifelse(nbGenes == 1, " gene)", " genes)"), collapse=", "), 
+            "\n", sep="")
+    }
+
+    ## Number of samples
+    if (!is.null(object@gsvaResults)) {
+        cat("Samples: ", ncol(object@gsvaResults), "\n", sep="")
+    }
+
+    ## Steps of the method that have been run
+    steps <- c("gsvaResults", "permutations", "standardDeviation",
+        "upscaling", "model", "threshold", "classification")
+    done <- vapply(steps, function(s) !is.null(slot(object, s)), logical(1))
+    cat("Completed steps: ", if (any(done))
+        paste(steps[done], collapse=", ") else "none", "\n", sep="")
+
+    ## Number of samples assigned to each signature
+    classRes <- object@classification
+    if (!is.null(classRes)) {
+        cat("Classification:\n")
+        for (i in names(classRes)) {
+            if (all(is.na(classRes[[i]]))) {
+                cat("  ", i, ": mixture model not available\n", sep="")
+            } else {
+                nbAssigned <- sum(classRes[[i]]$classification == i)
+                cat("  ", i, ": ", nbAssigned, " assigned, ",
+                    nrow(classRes[[i]]) - nbAssigned, " unclassified\n",
+                    sep="")
+            }
+        }
+        cat("Use classification() to get the classification of each",
+            "sample.\n")
+    }
+
+    invisible(NULL)
+})
+
+
 ###########################################################################
 ## All the getter functions for the SplitTypeRdata class
 ###########################################################################

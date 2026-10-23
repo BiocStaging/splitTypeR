@@ -1,3 +1,20 @@
+CHANGES IN VERSION 0.99.5
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    - Printing a SplitTypeRdata object, either by typing its name or with 
+    print(), now displays a summary of the object (signatures, number of 
+    samples, completed steps and number of samples assigned to each 
+    signature) instead of the classification of each sample. The 
+    classification of each sample is available with classification()
+
+NEW FEATURES
+
+    - New show() method for the SplitTypeRdata class, which replaces the 
+    print() method
+
+
 CHANGES IN VERSION 0.99.4
 -------------------------
 

@@ -113,14 +113,14 @@ data(expNormalCountsDemo)
 ## Fix seed for reproducible results
 set.seed(121)
 
-## Run the subtyping method and 
-## print the classification of each sample
+## Run the subtyping method
 ## The normalized expected counts used as input are log2-transformed 
 quickResult <- runSubtypingBimodal(geneLists=signaturesDemo,
     expectedCountsMatrixLog=log2(expNormalCountsDemo + 1),
     permRatio=0.75, permNbr=20, upscaleNbr=10)
 
-print(quickResult)
+## Display a summary of the results
+quickResult
 ```
 
 Each step of the method is detailed in the next section, followed by a
@@ -426,7 +426,7 @@ result <- runSubtypingBimodal(geneLists=signaturesList,
     upscaleNbr=12)
 
 ## Summary of the classification results
-print(result)
+result
 
 ```
 
@@ -452,9 +452,9 @@ gsvaResults(result)
 <br />
 
 ```{r permutationGetter, echo=TRUE}
-## Get the GSVA scores for the first 5 samples in the first 8 permutations done 
-## for the classical signature
-permutations(result)[['Classical']][seq_len(5), seq_len(8)]
+## Get the GSVA scores for the first 5 samples in the first 6 permutations 
+## (columns) done for the classical signature
+permutations(result)[['Classical']][seq_len(5), seq_len(6)]
 ```
 
 <br />
