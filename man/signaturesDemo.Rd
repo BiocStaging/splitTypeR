@@ -3,40 +3,31 @@
 \docType{data}
 \name{signaturesDemo}
 \alias{signaturesDemo}
-\title{A short collection of published gene signatures primarily focuses on PDAC 
-classification for patient-derived organoids (PDO). While the 
-signatures are accurate, this list is mainly 
-compiled for demonstration purposes.}
+\title{Demonstration gene signatures for PDAC subtyping}
 \format{
 a \code{list} containing one entry per signature:
 \itemize{
-    \item{\code{"Classical"}: a 
+    \item \code{"Classical"}: a 
     \code{vector} of gene names associated to the PDAC Patient-derived 
-    Organoid (PDO) Classical signature as published in Tiriac et al 2018 }
-    \item{\code{"Basal-like"}: a 
+    Organoid (PDO) Classical signature as published in Tiriac et al 2018
+    \item \code{"Basal-like"}: a 
     \code{vector} of gene names associated to the PDAC Patient-derived 
-    Organoid (PDO) Basal-like signature as published in Tiriac et al 2018 }
+    Organoid (PDO) Basal-like signature as published in Tiriac et al 2018
 }
+}
+\source{
+Tiriac H, Belleau P, Engle DD, et al. Organoid Profiling 
+Identifies Common Responders to Chemotherapy in Pancreatic Cancer. 
+Cancer Discov. 2018;8(9):1112-1129. doi:10.1158/2159-8290.CD-18-0349
 }
 \usage{
 data(signaturesDemo)
 }
-\value{
-a \code{list} containing one entry per signature:
-\itemize{
-    \item{\code{"Classical"}: a 
-    \code{vector} of gene names associated to the PDAC Patient-derived 
-    Organoid (PDO) Classical signature as published in Tiriac et al 2018 }
-    \item{\code{"Basal-like"}: a 
-    \code{vector} of gene names associated to the PDAC Patient-derived 
-    Organoid (PDO) Basal-like signature as published in Tiriac et al 2018 }
-}
-}
 \description{
-A short collection of published gene signatures primarily focuses on PDAC 
-classification for patient-derived organoids (PDO). While the 
-signatures are accurate, this list is mainly 
-compiled for demonstration purposes.
+A short collection of published gene signatures that primarily focuses on 
+PDAC classification for patient-derived organoids (PDO). While the 
+signatures are accurate, this list is mainly compiled for demonstration 
+purposes.
 }
 \details{
 The PDAC patient-derived organoids (PDO) classical and basal-like 
@@ -56,13 +47,13 @@ data(signaturesDemo)
 }
 \seealso{
 \itemize{
-    \item{\link{runSubtypingBimodal} for the classification of heterogeneous 
+    \item \link{runSubtypingBimodal} for the classification of heterogeneous 
     biological samples based on gene signature lists using a mixture of 
-    two normal distributions}
-    \item{\link{getGeneSignaturesNames} for the names of the available and 
-    ready-to-use gene signature lists}
-    \item{\link{getGeneSignatures} for the available and 
-    ready-to-use gene signature lists}
+    two normal distributions
+    \item \link{getGeneSignaturesNames} for the names of the available and 
+    ready-to-use gene signature lists
+    \item \link{getGeneSignatures} for the available and 
+    ready-to-use gene signature lists
 }
 }
 \keyword{datasets}

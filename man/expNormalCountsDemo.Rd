@@ -3,20 +3,19 @@
 \docType{data}
 \name{expNormalCountsDemo}
 \alias{expNormalCountsDemo}
-\title{A small normalized expected gene counts matrix for 30 patients generated to 
-be used as a demonstration set in this package.}
+\title{Simulated normalized expected counts for 30 demonstration samples}
 \format{
 a \code{matrix} containing normalized gene counts for 30 patients 
 (columns). Only genes related to 2018 Tiriac PDAC PDO classical and 
 basal-like signatures are present (row).
 }
+\source{
+Simulated values generated for demonstration purposes. The genes
+correspond to the genes of the PDAC patient-derived organoids (PDO)
+classical and basal-like signatures published in Tiriac et al. (2018).
+}
 \usage{
 data(expNormalCountsDemo)
-}
-\value{
-a \code{matrix} containing normalized gene counts for 30 patients 
-(columns). Only genes related to 2018 Tiriac PDAC PDO classical and 
-basal-like signatures are present (row).
 }
 \description{
 A small normalized expected gene counts matrix for 30 patients generated to 
@@ -42,13 +41,13 @@ results <- runSubtypingBimodal(geneLists=signaturesDemo,
 }
 \seealso{
 \itemize{
-    \item{\link{runSubtypingBimodal} for the classification of heterogeneous 
+    \item \link{runSubtypingBimodal} for the classification of heterogeneous 
     biological samples based on gene signature lists using a mixture of 
-    two normal distributions }
-    \item{\link{getGeneSignaturesNames} for the names of the available and 
-    ready-to-use gene signature lists}
-    \item{\link{getGeneSignatures} for the available and 
-    ready-to-use gene signature lists}
+    two normal distributions
+    \item \link{getGeneSignaturesNames} for the names of the available and 
+    ready-to-use gene signature lists
+    \item \link{getGeneSignatures} for the available and 
+    ready-to-use gene signature lists
 }
 }
 \keyword{datasets}
