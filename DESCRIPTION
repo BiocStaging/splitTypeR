@@ -3,8 +3,17 @@ Type: Package
 Version: 0.99.3
 Date: 2026-10-23
 Title: Transcriptomic Classification using Mixture of Normal Distributions
-Description: This package enables subtyping, based on transcriptomic data, 
-    using multimodal distribution with at least two gene signature lists. 
+Description: The splitTypeR package enables the classification of bulk 
+    transcriptomic samples using gene signature lists. For each 
+    signature, an enrichment score is first calculated for every sample with 
+    Bioconductor GSVA, and the uncertainty around each score is 
+    estimated through permutations of the samples. Values drawn from 
+    the sample-specific normal distributions are then pooled to fit 
+    a mixture of two normal distributions that represents the whole cohort. 
+    Each sample is finally tested against the distribution with the 
+    lower mean, and samples with a significantly higher score are assigned 
+    to the signature. Published gene signatures related to pancreatic ductal 
+    adenocarcinoma subtyping are also provided.
 Authors@R: c(person("Astrid", "Deschênes", email = "adeschen@hotmail.com",
     role=c("aut", "cre"), comment=c(ORCID = "0000-0001-7846-6749")), 
     person("Pascal", "Belleau", email = "pascal_belleau@hotmail.com",
@@ -30,6 +39,7 @@ Suggests:
     testthat (>= 3.0.0)
 biocViews: BiologicalQuestion,
     Classification, 
+    GeneSetEnrichment,
     Software
 VignetteBuilder: knitr
 URL: https://github.com/adeschen/splitTypeR
