@@ -1,3 +1,13 @@
+CHANGES IN VERSION 0.99.6
+-------------------------
+
+BUG FIXES
+
+    - runSubtypingBimodal() no longer prints the number of iterations of 
+    the mixtools::normalmixEM() function. A warning is now returned when 
+    the mixture model does not converge for a signature
+
+
 CHANGES IN VERSION 0.99.5
 -------------------------
 
