@@ -1,6 +1,12 @@
 ## The information is extracted from the DESCRIPTION file
 ## to keep the citation in sync with the package
 
+## When the package metadata is not provided (e.g. readCitationFile()
+## called without 'meta'), it is extracted from the installed package
+if (is.null(meta) || is.null(meta$Package)) {
+    meta <- utils::packageDescription("splitTypeR")
+}
+
 ## Retain only the authors (role "aut")
 authors <- eval(parse(text=meta$`Authors@R`))
 authors <- authors[vapply(authors$role, function(x) "aut" %in% x, 
