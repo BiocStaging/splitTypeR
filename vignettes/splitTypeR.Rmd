@@ -560,8 +560,9 @@ Tiriac et al. [@Tiriac2018].
 ```{r classificationTiriac, echo=TRUE}
 
 ## Assignments from Tiriac et al.
-tiriacAssign <- read.table("Moffitt_Tiriac_Assignation.txt", sep="\t",
-                                    header=TRUE)
+pathAssign <- system.file("extdata", "Moffitt_Tiriac_2018_Assignation.txt",
+                        package="splitTypeR")
+tiriacAssign <- read.table(pathAssign, sep="\t", header=TRUE)
 
 ## Assignments from the mixture model are extracted from the result
 ## By default, the samples are considered unclassified
