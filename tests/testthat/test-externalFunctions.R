@@ -401,7 +401,7 @@ test_that("getGeneSignatures() must return the expected signatures", {
     expect_equal(length(results[[expNames[5]]]), 231L)
     expect_equal(results[[expNames[5]]][1:5], 
             c("CYP26B1", "CD38", "RUNX3", "VIM", "VRK2"))
-    expect_equal(length(results[[expNames[6]]]), 334L)
+    expect_equal(length(results[[expNames[6]]]), 333L)
     expect_equal(results[[expNames[6]]][1:5], 
             c("ARX", "ARHGAP44", "MLXIPL", "KDM5D", "CPS1"))
 })

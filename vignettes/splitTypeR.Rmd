@@ -284,7 +284,7 @@ patient-derived organoids (PDOs) in Tiriac et al. [@Tiriac2018].
 * **Miyabayashi_Fast**: the fast signature (231 genes), updated from the 
 Ensembl IDs (GENCODE v48/org.Hs.eg.db), defined 
 for PDAC xenografts in Miyabayashi et al. [@Miyabayashi2020].
-* **Miyabayashi_Slow**: the slow signature (334 genes), updated from the 
+* **Miyabayashi_Slow**: the slow signature (333 genes), updated from the 
 Ensembl IDs (GENCODE v48/org.Hs.eg.db), defined 
 for PDAC xenografts in Miyabayashi et al. [@Miyabayashi2020].
 
