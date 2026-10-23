@@ -1,3 +1,22 @@
+CHANGES IN VERSION 0.99.4
+-------------------------
+
+NEW FEATURES
+
+    - New built-in signatures 'Miyabayashi_Fast' (231 genes) and 
+    'Miyabayashi_Slow' (333 genes) from Miyabayashi et al. (2020). The gene 
+    names have been updated from the Ensembl IDs (GENCODE v48 and 
+    org.Hs.eg.db)
+
+DOCUMENTATION
+
+    - The Description field of the DESCRIPTION file now describes the 
+    classification method
+
+    - The Lustgarten Foundation has been added as funder and 
+    'GeneSetEnrichment' has been added to the biocViews
+
+
 CHANGES IN VERSION 0.99.3
 -------------------------
 
