@@ -23,17 +23,29 @@ A function for replacement of the classification slot in a
 }
 \examples{
 
-## Load required library
-library(mixtools)
-
 ## Two demo signatures
-sign <- list("SignatureA"=c("EGFR", "CTTN", "ACTB"), 
+sign <- list("SignatureA"=c("EGFR", "CTTN", "ACTB"),
     "SignatureB"=c("ACTR2", "AKT1"))
-    
+
 ## Create a SplitTypeRdata object with the signatures
 demo <- new("SplitTypeRdata", signatures=sign)
 
-## TODO
+## Create the classification of 3 samples for each signature
+## Each entry contains the GSVA score of each sample and its
+## classification (the signature name or "unclassified")
+demoClass <- list()
+demoClass[["SignatureA"]] <- data.frame(GSVA_score=c(0.45, -0.32, 0.12),
+    classification=c("SignatureA", "unclassified", "unclassified"),
+    row.names=c("Sample_1", "Sample_2", "Sample_3"))
+demoClass[["SignatureB"]] <- data.frame(GSVA_score=c(-0.51, 0.38, 0.29),
+    classification=c("unclassified", "SignatureB", "SignatureB"),
+    row.names=c("Sample_1", "Sample_2", "Sample_3"))
+
+## Assign the classification to the object
+classification(demo) <- demoClass
+
+## Get the classification for the first signature
+classification(demo)[["SignatureA"]]
 
 }
 \author{
