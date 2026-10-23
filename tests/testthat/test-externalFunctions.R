@@ -368,7 +368,8 @@ test_that("runSubtypingBimodal() must return expected results", {
 test_that("getGeneSignaturesNames() must return the expected signature names", {
     
     expResults <- c("Tiriac_PDAC_PDO_Basal_like", 
-        "Tiriac_PDAC_PDO_Classical", "Moffitt_Basal_like", "Moffitt_Classical")
+        "Tiriac_PDAC_PDO_Classical", "Moffitt_Basal_like", "Moffitt_Classical",
+        "Miyabayashi_Fast", "Miyabayashi_Slow")
 
     results <- getGeneSignaturesNames()
 
@@ -382,7 +383,8 @@ test_that("getGeneSignaturesNames() must return the expected signature names", {
 test_that("getGeneSignatures() must return the expected signatures", {
     
     expNames <- c("Tiriac_PDAC_PDO_Basal_like",
-        "Tiriac_PDAC_PDO_Classical", "Moffitt_Basal_like", "Moffitt_Classical")
+        "Tiriac_PDAC_PDO_Classical", "Moffitt_Basal_like", "Moffitt_Classical",
+        "Miyabayashi_Fast", "Miyabayashi_Slow")
     results <- getGeneSignatures()
 
     expect_equal(names(results), expNames)
@@ -396,6 +398,12 @@ test_that("getGeneSignatures() must return the expected signatures", {
             c("ANO1", "ADORA2B", "S100A2", "CSF2", "ANXA1"))
     expect_equal(results[[expNames[1]]][21:24], 
             c("SPRR1B",  "BCAR3", "TTC9", "PTGES"))
+    expect_equal(length(results[[expNames[5]]]), 231L)
+    expect_equal(results[[expNames[5]]][1:5], 
+            c("CYP26B1", "CD38", "RUNX3", "VIM", "VRK2"))
+    expect_equal(length(results[[expNames[6]]]), 334L)
+    expect_equal(results[[expNames[6]]][1:5], 
+            c("ARX", "ARHGAP44", "MLXIPL", "KDM5D", "CPS1"))
 })
 
 test_that("getGeneSignatures() must return error when nameList is a number", {
