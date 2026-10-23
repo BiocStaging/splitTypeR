@@ -1,3 +1,42 @@
+CHANGES IN VERSION 0.99.3
+-------------------------
+
+SIGNIFICANT USER-VISIBLE CHANGES
+
+    - The built-in signatures have been renamed: 
+    '2018_Tiriac_PDAC_PDO_basal-like_signature' is now 
+    'Tiriac_PDAC_PDO_Basal_like' and 
+    '2018_Tiriac_PDAC_PDO_classical_signature' is now 
+    'Tiriac_PDAC_PDO_Classical'
+
+    - The signatures of the 'signaturesDemo' dataset have been renamed 
+    'Classical' and 'Basal-like'
+
+NEW FEATURES
+
+    - New built-in signatures 'Moffitt_Basal_like' and 'Moffitt_Classical' 
+    from Moffitt et al. (2015)
+
+    - New CITATION file; citation("splitTypeR") now returns the package 
+    citation
+
+DOCUMENTATION
+
+    - Add or complete the examples of the SplitTypeRdata setter functions
+
+    - Add titles, descriptions and sources to the help pages of the 
+    'signaturesDemo' and 'expNormalCountsDemo' datasets. The 
+    'expNormalCountsDemo' dataset is described as simulated data
+
+    - New inst/scripts/README.md describing how the files in inst/extdata 
+    were generated
+
+    - Vignette: new schematic figure for the classification step, new table 
+    describing the runSubtypingBimodal() parameters, display of the full 
+    mixture model and of the classification thresholds, and new scatter plot 
+    comparing the classification with Tiriac et al. (2018)
+
+
 CHANGES IN VERSION 0.99.2
 -------------------------
 
