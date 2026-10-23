@@ -113,6 +113,10 @@ runSubtypingBimodal <- function(geneLists, expectedCountsMatrixLog,
     ## Mixture of normal distributions step
     resMix <- normalMix(geneLists=geneLists, resultNorm=normResult)
     model(finalSaveData) <- resMix
+
+    ## Classification threshold of each signature
+    threshold(finalSaveData) <- calculateThreshold(geneLists=geneLists, 
+        modelMix=resMix)
     
     ## Classification step
     resClass <- sampleClassification(geneLists=geneLists, gsvaRes=resGSVA, 

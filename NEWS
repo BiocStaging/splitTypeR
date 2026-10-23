@@ -1,3 +1,19 @@
+CHANGES IN VERSION 0.99.2
+-------------------------
+
+NEW FEATURES
+
+    - New 'threshold' slot in the SplitTypeRdata class, with its 
+    threshold() getter and setter. The slot contains the classification 
+    threshold of each signature (the 95th percentile of the "low-mean" 
+    distribution) and is filled by runSubtypingBimodal()
+
+BUG FIXES
+
+    - The x-axis label of plotDensityWithUpscalingSamplesBimodal() is now 
+    "GSVA score" instead of "GSEA score"
+
+
 CHANGES IN VERSION 0.99.1
 -------------------------
 

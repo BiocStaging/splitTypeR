@@ -54,6 +54,12 @@ setClassUnion("MatrixOrNULL", members = c("matrix", "NULL"))
 #' for each signature. The \code{list} should be have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
+#' @slot threshold \code{NULL} or a \code{list} of the classification 
+#' thresholds for each signature. The threshold corresponds to the 95th 
+#' percentile of the "low-mean" distribution of the mixture model. The 
+#' \code{list} should be have one entry per signature. 
+#' Default: \code{NULL}.
+#' 
 #' @slot classification \code{NULL} or a \code{list} of the classification for 
 #' each signature. The \code{list} should be have one entry per signature. 
 #' Default: \code{NULL}.
@@ -75,6 +81,7 @@ setClass("SplitTypeRdata",
             standardDeviation="ListOrNULL",
             upscaling="ListOrNULL",
             model="ListOrNULL",
+            threshold="ListOrNULL",
             classification="ListOrNULL"
         ),
         prototype = list(
@@ -84,6 +91,7 @@ setClass("SplitTypeRdata",
             standardDeviation=NULL,
             upscaling=NULL,
             model=NULL,
+            threshold=NULL,
             classification=NULL
         )
 )
@@ -416,6 +424,61 @@ setGeneric("model", function(x)
 #' @export
 setMethod("model", "SplitTypeRdata", function(x) {
     return(x@model)
+})
+
+
+#' Generic function for getting the threshold slot in a class
+#' 
+#' @description A generic function for getting the threshold slot in a 
+#' class. The function is implemented for the \code{SplitTypeRdata} class.
+#' 
+#' @param x an object.
+#' 
+#' @return an object.
+#' 
+#' @examples
+#' 
+#' # Define a dummy class to show usage
+#' setClass("MyClass", slots = list(threshold="character"))
+#' 
+#' # Create an instance
+#' obj <- new("MyClass", threshold="123")
+#' 
+#' # Call the generic (assuming a method is implemented)
+#' # threshold(obj)
+#' 
+#' @author Astrid Deschênes
+#' @encoding UTF-8
+#' @export
+setGeneric("threshold", function(x) 
+    standardGeneric("threshold"))
+
+
+#' Getter for the threshold slot in a SplitTypeRdata class
+#' 
+#' @description A function for getting the threshold slot in a 
+#' \code{SplitTypeRdata} class. 
+#' 
+#' @param x a \code{SplitTypeRdata} object.
+#' 
+#' @return \code{NULL} or a \code{list} of the classification thresholds  
+#' for each signature. The threshold corresponds to the 95th percentile of 
+#' the "low-mean" distribution of the mixture model. The \code{list} should 
+#' be have one entry per signature. 
+#' 
+#' @examples
+#' 
+#' ## Create a SplitTypeRdata object
+#' splitData <- SplitTypeRdata()
+#' 
+#' ## Extract the threshold slot for the object
+#' threshold(splitData)
+#' 
+#' @author Astrid Deschênes
+#' @encoding UTF-8
+#' @export
+setMethod("threshold", "SplitTypeRdata", function(x) {
+    return(x@threshold)
 })
 
 
@@ -773,6 +836,73 @@ setMethod("model<-", "SplitTypeRdata", function(x, value) {
 })
 
 
+#' Generic function for replacement of threshold slot in a class
+#' 
+#' @description A generic function for replacement of threshold slot in a 
+#' S4 object.
+#' 
+#' @param x a S4 object.
+#' 
+#' @param value the new value to assign or update.
+#' 
+#' @return the modified S4 object when the new value is valid.
+#' 
+#' @examples
+#'  
+#' # Define a dummy class to show usage
+#' setClass("MyClass", slots = list(threshold="character"))
+#' 
+#' # Create an instance
+#' obj <- new("MyClass", threshold="123")
+#' 
+#' # Call the generic (assuming a method is implemented)
+#' # threshold(obj) <- "333"
+#' 
+#' @author Astrid Deschênes
+#' @encoding UTF-8
+#' @export
+setGeneric("threshold<-", function(x, value) 
+    standardGeneric("threshold<-"))
+
+
+#' Replacement of threshold slot in a \code{SplitTypeRdata} object
+#' 
+#' @description A function for replacement of the threshold slot in a 
+#' \code{SplitTypeRdata} class.
+#' 
+#' @param x a \code{SplitTypeRdata} object.
+#' 
+#' @param value \code{NULL} or a \code{list} of the classification thresholds 
+#' for each signature. The \code{list} should be have one entry per signature. 
+#' 
+#' @return the modified \code{SplitTypeRdata} object when the new value is 
+#' valid.
+#' 
+#' @examples
+#' 
+#' ## Two demo signatures
+#' sign <- list("SignatureA"=c("EGFR", "CTTN", "ACTB"), 
+#'     "SignatureB"=c("ACTR2", "AKT1"))
+#'     
+#' ## Create a SplitTypeRdata object with the signatures
+#' demo <- new("SplitTypeRdata", signatures=sign)
+#' 
+#' ## Assign a classification threshold to each signature
+#' threshold(demo) <- list("SignatureA"=0.12, "SignatureB"=-0.05)
+#' 
+#' @author Astrid Deschênes
+#' @encoding UTF-8
+#' @importFrom methods validObject
+#' @export
+setMethod("threshold<-", "SplitTypeRdata", function(x, value) {
+    x@threshold <- value
+    
+    # Validate and return the modified object
+    validObject(x) 
+    return(x)
+})
+
+
 #' Generic function for replacement of standardDeviation slot in a class
 #' 
 #' @description A generic function for replacement of standardDeviation slot 
@@ -1023,6 +1153,11 @@ setMethod("classification<-", "SplitTypeRdata", function(x, value) {
 #' for each signature. The \code{list} should be have one entry per signature. 
 #' Default: \code{NULL}.
 #' 
+#' @param threshold \code{NULL} or a \code{list} of the classification 
+#' thresholds for each signature. The \code{list} should be have one entry 
+#' per signature. 
+#' Default: \code{NULL}.
+#' 
 #' @param classification \code{NULL} or a \code{list} of the classification for 
 #' each signature. The \code{list} should be have one entry per signature. 
 #' Default: \code{NULL}.
@@ -1040,7 +1175,7 @@ setMethod("classification<-", "SplitTypeRdata", function(x, value) {
 #' newSplitData2 <- SplitTypeRdata(signatures=list("Signature1"=c("ABL1", 
 #'     "BLM", "BRCA1"), "Signature2"=c("COP1", "RAD50", "FANCD2", "TERF2")), 
 #'     gsvaResults=NULL, permutations=NULL,   
-#'     standardDeviation=NULL, upscaling=NULL, model=NULL, 
+#'     standardDeviation=NULL, upscaling=NULL, model=NULL, threshold=NULL,
 #'     classification=NULL)
 #' 
 #' @author Astrid Deschênes
@@ -1049,9 +1184,10 @@ setMethod("classification<-", "SplitTypeRdata", function(x, value) {
 #' @export
 SplitTypeRdata <- function(signatures=NULL, gsvaResults=NULL, 
     permutations=NULL, standardDeviation=NULL, upscaling=NULL, model=NULL, 
-    classification=NULL) {
+    threshold=NULL, classification=NULL) {
     
     new("SplitTypeRdata", signatures=signatures, gsvaResults=gsvaResults, 
         permutations=permutations, standardDeviation=standardDeviation,
-        upscaling=upscaling, model=model, classification=classification)
+        upscaling=upscaling, model=model, threshold=threshold, 
+        classification=classification)
 }

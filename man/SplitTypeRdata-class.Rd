@@ -37,6 +37,12 @@ Default: \code{NULL}.}
 for each signature. The \code{list} should be have one entry per signature. 
 Default: \code{NULL}.}
 
+\item{\code{threshold}}{\code{NULL} or a \code{list} of the classification 
+thresholds for each signature. The threshold corresponds to the 95th 
+percentile of the "low-mean" distribution of the mixture model. The 
+\code{list} should be have one entry per signature. 
+Default: \code{NULL}.}
+
 \item{\code{classification}}{\code{NULL} or a \code{list} of the classification for 
 each signature. The \code{list} should be have one entry per signature. 
 Default: \code{NULL}.}

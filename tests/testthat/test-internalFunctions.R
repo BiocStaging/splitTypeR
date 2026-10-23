@@ -298,6 +298,50 @@ test_that("normalMix() must generate a NA value when a distribution cannot be ca
 ### Tests sampleClassification() results
 #############################################################################
 
+test_that("calculateThreshold() must return the 95th percentile of the low-mean distribution", {
+    
+    gList <- list("SignatureA"=c("Gene1", "Gene2", "Gene3"), 
+                  "SignatureB"=c("Gene10", "Gene12"))
+    
+    ## Fix seed
+    set.seed(121)
+    
+    modelExp <- mixtools::normalmixEM(c(rnorm(50, mean=-0.4, sd=0.2), 
+                    rnorm(50, mean=0.4, sd=0.2)), k=2, verb=FALSE)
+    modelRes <- list("SignatureA"=modelExp, "SignatureB"=modelExp)
+    
+    results <- splitTypeR:::calculateThreshold(geneLists=gList, 
+        modelMix=modelRes)
+    
+    posMin <- which.min(modelExp$mu)
+    expected <- qnorm(p=0.95, mean=modelExp$mu[posMin], 
+                        sd=modelExp$sigma[posMin])
+    
+    expect_true(is.list(results))
+    expect_equal(names(results), c("SignatureA", "SignatureB"))
+    expect_equal(results$SignatureA, expected)
+    expect_equal(results$SignatureB, expected)
+})
+
+test_that("calculateThreshold() must return NA when mixture model is not present", {
+    
+    gList <- list("SignatureA"=c("Gene1", "Gene2", "Gene3"), 
+                  "SignatureB"=c("Gene10", "Gene12"))
+    
+    ## Fix seed
+    set.seed(121)
+    
+    modelExp <- mixtools::normalmixEM(c(rnorm(50, mean=-0.4, sd=0.2), 
+                    rnorm(50, mean=0.4, sd=0.2)), k=2, verb=FALSE)
+    modelRes <- list("SignatureA"=modelExp, "SignatureB"=NA)
+    
+    results <- splitTypeR:::calculateThreshold(geneLists=gList, 
+        modelMix=modelRes)
+    
+    expect_true(is.numeric(results$SignatureA))
+    expect_true(is.na(results$SignatureB))
+})
+
 test_that("sampleClassification() must return expected results", {
     
     ## Basal and classical gene list signatures

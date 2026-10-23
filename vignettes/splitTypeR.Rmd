@@ -488,6 +488,14 @@ classicalModel$lambda
 
 <br />
 
+```{r thresholdGetter, echo=TRUE}
+## Get the classification threshold of each signature
+## The threshold is the 95th percentile of the "low-mean" distribution
+threshold(result)
+```
+
+<br />
+
 ```{r classificationGetter, echo=TRUE}
 ## Get the final classification of the samples for the classical signature
 classification(result)[['Classical']]
@@ -627,14 +635,9 @@ gsva <- merge(gsva, assignation, by="Samples")
 gsva$Agreement <- ifelse(gsva$newAssignation == gsva$Moffitt,
     "Same classification", "Different classification")
 
-## Classification threshold of each signature: the 95th percentile of the
-## "low-mean" distribution of the mixture model
-getThreshold <- function(mixModel) {
-    posMin <- which.min(mixModel$mu)
-    qnorm(p=0.95, mean=mixModel$mu[posMin], sd=mixModel$sigma[posMin])
-}
-thresholdClassical <- getThreshold(model(result)[['Classical']])
-thresholdBasal <- getThreshold(model(result)[['Basal-like']])
+## Classification threshold of each signature
+thresholdClassical <- threshold(result)[['Classical']]
+thresholdBasal <- threshold(result)[['Basal-like']]
 
 ## Scatter plot of the GSVA scores with the classification thresholds
 ## The vertical dashed line is the classical threshold and the horizontal

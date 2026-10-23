@@ -16,6 +16,7 @@ SplitTypeRdata(
   standardDeviation = NULL,
   upscaling = NULL,
   model = NULL,
+  threshold = NULL,
   classification = NULL
 )
 }
@@ -46,6 +47,11 @@ Default: \code{NULL}.}
 
 \item{model}{\code{NULL} or a \code{list} of the mixture models calculated 
 for each signature. The \code{list} should be have one entry per signature. 
+Default: \code{NULL}.}
+
+\item{threshold}{\code{NULL} or a \code{list} of the classification 
+thresholds for each signature. The \code{list} should be have one entry 
+per signature. 
 Default: \code{NULL}.}
 
 \item{classification}{\code{NULL} or a \code{list} of the classification for 
@@ -96,7 +102,7 @@ newSplitData1 <- SplitTypeRdata()
 newSplitData2 <- SplitTypeRdata(signatures=list("Signature1"=c("ABL1", 
     "BLM", "BRCA1"), "Signature2"=c("COP1", "RAD50", "FANCD2", "TERF2")), 
     gsvaResults=NULL, permutations=NULL,   
-    standardDeviation=NULL, upscaling=NULL, model=NULL, 
+    standardDeviation=NULL, upscaling=NULL, model=NULL, threshold=NULL,
     classification=NULL)
 
 }

@@ -291,6 +291,69 @@ normalMix <- function(geneLists, resultNorm) {
     return(resModel)
 }
 
+#' @title Calculate the classification threshold of each signature
+#'
+#' @description This function calculates the classification threshold of 
+#' each signature using the mixture model of normal distributions. The 
+#' threshold corresponds to the 95th percentile of the sub-distribution with 
+#' the lower mean value (the alternative distribution). A sample with a 
+#' score above the threshold has a probability lower than 0.05 of being part 
+#' of the alternative distribution.
+#' 
+#' @param geneLists a \code{list} containing signature gene lists. 
+#' 
+#' @param modelMix a \code{list} containing one entry for each gene signature 
+#' present in the \code{geneLists} object. Each entry contains the mixtures 
+#' of two normal distributions for the signature calculated with sampled 
+#' values. The entry corresponds to the object returned by the 
+#' `mixtools::normalmixEM` function.
+#' 
+#' @returns a \code{list} containing one entry for each gene signature 
+#' present in the \code{geneLists} object. Each entry contains the 
+#' classification threshold of the signature. When the mixture 
+#' of normal distributions has not been calculated successfully, the \code{NA}
+#' value is returned.
+#' 
+#' @examples
+#'
+#' ## Required library
+#' library(mixtools)
+#' 
+#' ## Two demo signatures
+#' geneLists <- list("SignatureA"=c("EGFR", "CTTN", "ACTB"), 
+#'     "SignatureB"=c("ACTR2", "AKT1"))
+#' 
+#' ## Create a demo mixture model
+#' set.seed(121)
+#' modelExp <- normalmixEM(c(rnorm(50, mean=-0.4, sd=0.2), 
+#'     rnorm(50, mean=0.4, sd=0.2)), k=2, verb=FALSE)
+#' model <- list("SignatureA"=modelExp, "SignatureB"=modelExp)
+#' 
+#' ## Calculate the classification threshold of each signature
+#' splitTypeR:::calculateThreshold(geneLists=geneLists, modelMix=model)
+#' 
+#' @author Astrid Deschênes
+#' @importFrom stats qnorm
+#' @encoding UTF-8
+#' @keywords internal
+calculateThreshold <- function(geneLists, modelMix) {
+
+    ## Storage for the threshold of each signature
+    result <- list()
+    for (i in names(geneLists)) {
+        model <- modelMix[[i]]
+        if (!all(is.na(model))) {
+            posMin <- which.min(model$mu)
+            result[[i]] <- qnorm(p=0.95, mean=model$mu[posMin], 
+                                    sd=model$sigma[posMin], lower.tail=TRUE)
+        } else {
+            result[[i]] <- NA
+        }
+    }
+
+    return(result)
+}
+
 #' @title Assign a signature-specific classification to each sample
 #'
 #' @description This function assigns a signature-specific classification 
@@ -374,14 +437,14 @@ normalMix <- function(geneLists, resultNorm) {
 #' @keywords internal
 sampleClassification <- function(geneLists, gsvaRes, modelMix) {
 
+    ## Classification threshold of each signature
+    thresholds <- calculateThreshold(geneLists=geneLists, modelMix=modelMix)
+
     ## Storage for the results of the mixed model
     result <- list()
     for (i in names(geneLists)) {
-        model <- modelMix[[i]]
-        if (!all(is.na(model))) {
-            posMin <- which.min(model$mu)
-            q95Min <- qnorm(p=0.95, mean=model$mu[posMin], 
-                        sd=model$sigma[posMin], lower.tail=TRUE)
+        if (!is.na(thresholds[[i]])) {
+            q95Min <- thresholds[[i]]
             resultTable <- as.data.frame(gsvaRes[i,])
             colnames(resultTable) <- c("GSVA_score")
             resultTable$classification <- "unclassified"

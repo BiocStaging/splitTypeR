@@ -32,6 +32,9 @@ test_that("create a splitTypeRdata class with all default parameters should retu
     ## Test model
     expect_true(is.null(paramTest@model))
     
+    ## Test threshold
+    expect_true(is.null(paramTest@threshold))
+    
     ## Test classification
     expect_true(is.null(paramTest@classification))
 })
@@ -58,6 +61,9 @@ test_that("create a splitTypeRdata() function with all default parameters should
     
     ## Test model
     expect_true(is.null(paramTest@model))
+    
+    ## Test threshold
+    expect_true(is.null(paramTest@threshold))
     
     ## Test classification
     expect_true(is.null(paramTest@classification))
@@ -97,6 +103,12 @@ test_that("create a SplitTypeRdata class with integer for upscaling parameter sh
 test_that("create a SplitTypeRdata class with integer for model parameter should generate an error", {
     
     expect_error(new("SplitTypeRdata", model=33), 
+                 "got class \"numeric\", should be or extend class \"ListOrNULL\"")
+})
+
+test_that("create a SplitTypeRdata class with integer for threshold parameter should generate an error", {
+    
+    expect_error(new("SplitTypeRdata", threshold=33), 
                  "got class \"numeric\", should be or extend class \"ListOrNULL\"")
 })
 
@@ -193,6 +205,31 @@ test_that("create a SplitTypeRdata class with model setter and getter should ret
     expect_equal(model(paramTest), expResults)
 })
 
+
+test_that("create a SplitTypeRdata class with threshold setter and getter should return an object", {
+    
+    sign <- list("SignatureA"=c("Gene1", "Gene2", "Gene3"), 
+                 "SignatureB"=c("Gene10", "Gene12"))
+    
+    expResults <- list("SignatureA"=0.1234, "SignatureB"=-0.2345)
+    
+    paramTest <- new("SplitTypeRdata", signatures=sign, threshold=NULL)
+    
+    threshold(paramTest) <- expResults
+    
+    expect_equal(threshold(paramTest), expResults)
+    expect_error(threshold(paramTest) <- 33L)
+    expect_equal(threshold(paramTest), expResults)
+})
+
+test_that("create a SplitTypeRdata object with threshold parameter in SplitTypeRdata() should return an object", {
+    
+    expResults <- list("SignatureA"=0.1234, "SignatureB"=-0.2345)
+    
+    paramTest <- SplitTypeRdata(threshold=expResults)
+    
+    expect_equal(threshold(paramTest), expResults)
+})
 
 test_that("create a SplitTypeRdata class with standardDeviation setter and getter should return an object", {
     

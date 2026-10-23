@@ -1,6 +1,6 @@
 Package: splitTypeR
 Type: Package
-Version: 0.99.1
+Version: 0.99.2
 Date: 2026-10-22
 Title: Transcriptomic Classification using Mixture of Normal Distributions
 Description: This package enables subtyping, based on transcriptomic data, 
