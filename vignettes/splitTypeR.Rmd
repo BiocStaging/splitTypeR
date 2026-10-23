@@ -503,10 +503,10 @@ threshold(result)
 <br />
 
 ```{r classificationGetter, echo=TRUE}
-## Get the final classification of the samples for the classical signature
-classification(result)[['Classical']]
+## Get the final classification of the first samples 
+## for the classical signature
+head(classification(result)[['Classical']])
 ```
-
 
 <br />
 
