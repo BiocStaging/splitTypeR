@@ -460,18 +460,18 @@ permutations(result)[['Classical']][seq_len(5), seq_len(6)]
 <br />
 
 ```{r standardDeviationGetter, echo=TRUE}
-## Get the standard deviation for the GSVA scores for all samples in each 
-## signature 
+## Get the standard deviation of the GSVA scores for all samples for the 
+## classical signature
 ## The standard deviation is inferred from the permutation step
-standardDeviation(result)
+standardDeviation(result)$Classical
 ```
 
 <br />
 
 ```{r upscalingGetter, echo=TRUE}
-## Get the first 8 upscaling GSVA scores for the first 5 samples for the 
-## classical signature 
-upscaling(result)[['Classical']][seq_len(5), seq_len(8)]
+## Get the first 6 upscaling GSVA scores (columns) for the first 5 samples 
+## for the classical signature
+upscaling(result)[['Classical']][seq_len(5), seq_len(6)]
 ```
 
 <br />
