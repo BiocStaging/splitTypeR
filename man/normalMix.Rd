@@ -24,7 +24,8 @@ present in the \code{geneLists} object. Each entry contains the mixtures
 of two normal distributions for the signature calculated with sampled 
 values. The entry corresponds to the object returned by the 
 `mixtools::normalmixEM` function. When the mixturex of two normal 
-distributions cannot be calculated successfull, the \'NA\' value is present.
+distributions cannot be calculated successfully, the \'NA\' value 
+is present.
 }
 \description{
 This function constructs a comprehensive mixture of two normal 

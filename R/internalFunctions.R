@@ -215,7 +215,8 @@ extractFromNormalDist <- function(geneLists, gsvaRes, gsvaSD, nbValues) {
 #' of two normal distributions for the signature calculated with sampled 
 #' values. The entry corresponds to the object returned by the 
 #' `mixtools::normalmixEM` function. When the mixturex of two normal 
-#' distributions cannot be calculated successfull, the \'NA\' value is present. 
+#' distributions cannot be calculated successfully, the \'NA\' value 
+#' is present. 
 #' 
 #' @examples
 #'
