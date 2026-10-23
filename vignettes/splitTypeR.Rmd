@@ -132,7 +132,7 @@ complete demonstration on a published dataset.
 
 The following figure represents the statistical method employed to turn a noisy, 
 single-number enrichment score into a confident binary classification of 
-each sample. In summary, the method builds a confidence interval around the 
+each sample. In summary, the method estimates the uncertainty around each
 enrichment score, models the cohort as a mixture of two biological states, and 
 then statistically tests each sample against that mixture.
 
@@ -477,6 +477,13 @@ classicalModel <- model(result)[['Classical']]
 
 ## Get the two distribution means
 classicalModel$mu
+
+## Get the two distribution standard deviations
+classicalModel$sigma
+
+## Get the mixing proportions (the fraction of the values assigned to each
+## distribution)
+classicalModel$lambda
 ```
 
 <br />
