@@ -287,7 +287,7 @@ for PDAC xenografts in Miyabayashi et al. [@Miyabayashi2020].
 * **Miyabayashi_Slow**: the slow signature (334 genes), updated from the 
 Ensembl IDs (GENCODE v48/org.Hs.eg.db), defined 
 for PDAC xenografts in Miyabayashi et al. [@Miyabayashi2020].
-ß
+
 <br />
 
 ## Using your own signatures
