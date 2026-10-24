@@ -1,3 +1,15 @@
+CHANGES IN VERSION 0.99.8
+-------------------------
+
+BUG FIXES
+
+    - The CITATION file can now be read with utils::readCitationFile() 
+    even when the package metadata is not provided and the package is not 
+    installed. In that case, fixed citation information is used instead 
+    of the information from the installed package, which could be missing 
+    or outdated
+
+
 CHANGES IN VERSION 0.99.7
 -------------------------
 
